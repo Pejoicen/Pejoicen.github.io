@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Even - A super concise theme for Hugo</title>
+    <link>https://pejoicen.github.io/categories/</link>
+    <description>Recent content in Categories on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 15 Aug 2019 16:56:43 +0800</lastBuildDate>
+    
+	<atom:link href="https://pejoicen.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>软件</title>
+      <link>https://pejoicen.github.io/categories/%E8%BD%AF%E4%BB%B6/</link>
+      <pubDate>Thu, 15 Aug 2019 16:56:43 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/categories/%E8%BD%AF%E4%BB%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>website</title>
+      <link>https://pejoicen.github.io/categories/website/</link>
+      <pubDate>Wed, 14 Aug 2019 14:56:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/categories/website/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
