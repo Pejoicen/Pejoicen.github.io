@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Aug 2019 16:56:43 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Aug 2019 10:09:32 +0800</lastBuildDate>
     
 	<atom:link href="https://pejoicen.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>软件</title>
       <link>https://pejoicen.github.io/categories/%E8%BD%AF%E4%BB%B6/</link>
-      <pubDate>Thu, 15 Aug 2019 16:56:43 +0800</pubDate>
+      <pubDate>Tue, 20 Aug 2019 10:09:32 +0800</pubDate>
       
       <guid>https://pejoicen.github.io/categories/%E8%BD%AF%E4%BB%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://pejoicen.github.io/categories/python/</link>
+      <pubDate>Tue, 20 Aug 2019 10:02:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/categories/python/</guid>
       <description></description>
     </item>
     

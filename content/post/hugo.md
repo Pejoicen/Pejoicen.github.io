@@ -45,12 +45,12 @@ hugo new site blog
 然后hugo会自动生成这样一个目录结构：  
 
 |||
-|---------------|-----------------------------|  
-| ▸ archetypes  |default.md为模板             |  
-| ▸ content     |放的是你写的markdown文章     |  
-| ▸ layouts     |网站的模板文件               |  
-| ▸ static      |图片、css、js等资源          |  
-| ▸ config.toml |网站的配置文件               |  
+|---------------|-----------------------------|
+| ▸ archetypes  |default.md为模板             |
+| ▸ content     |放的是你写的markdown文章     |
+| ▸ layouts     |网站的模板文件               |
+| ▸ static      |图片、css、js等资源          |
+| ▸ config.toml |网站的配置文件               |
 
 # 进入生成的site目录，创建一个页面
 ```bash
@@ -144,3 +144,6 @@ baseURL = "http://pejoicen.gitee.io/blog"
 
 建立仓库名[用户名].github.io  
 Pejoicen.github.io  
+
+
+![域名解析](E:\我的坚果云\网站备份\hugo\blog\static\hugo\Snipaste_2019-08-19_23-20-45.png)
