@@ -7,6 +7,8 @@ weight: 50
 
 ---
 
+不知道这页怎么改，就先这样吧
+
 Hugo is a static site engine written in Go.
 
 

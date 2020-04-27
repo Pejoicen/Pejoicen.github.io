@@ -145,5 +145,26 @@ baseURL = "http://pejoicen.gitee.io/blog"
 建立仓库名[用户名].github.io  
 Pejoicen.github.io  
 
+域名解析设置：  
+blog.pejoicen.com  
+主机记录：blog  
+记录类型：** CNAME**  
+记录值：Pejoicen.github.io  
 
-![域名解析](E:\我的坚果云\网站备份\hugo\blog\static\hugo\Snipaste_2019-08-19_23-20-45.png)
+
+![域名解析](\hugo\Snipaste_2019-08-19_23-20-45.png)
+
+
+
+https://blog.csdn.net/qq_30682027/article/details/83536577
+1.4.1. Hugo中Markdown插入图片路径问题
+解决这个问题，主要是两个方面：
+
+第一、在config.toml中配置baseurl。作用是无论在本地还是发布出去，图片的路径都是相对于baseurl而言的。
+
+第二、在Markdown图片路径中，以static为根目录写全路径。
+
+示例：假设测试baseurl为http://localhost:1313/，图片位置：/static/img/hugo/123.png，那么在Markdown中写作![图片说明](/img/hugo/123.png)。这时，在浏览器就可以看到图片了
+ ———————————————— 
+版权声明：本文为CSDN博主「欢欢2776479680」的原创文章，遵循CC 4.0 by-sa版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_30682027/article/details/83536577
