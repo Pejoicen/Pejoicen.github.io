@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>VS中ANSI和Unicode转换 - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content=" " /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/ansi%E5%92%8Cunicode%E8%BD%AC%E6%8D%A2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="VS中ANSI和Unicode转换" />
+<meta property="og:description" content=" " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/ansi%E5%92%8Cunicode%E8%BD%AC%E6%8D%A2/" />
+<meta property="article:published_time" content="2020-04-27T10:09:32+08:00" />
+<meta property="article:modified_time" content="2020-04-27T10:09:32+08:00" />
+<meta itemprop="name" content="VS中ANSI和Unicode转换">
+<meta itemprop="description" content=" ">
+
+
+<meta itemprop="datePublished" content="2020-04-27T10:09:32&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-27T10:09:32&#43;08:00" />
+<meta itemprop="wordCount" content="636">
+
+
+
+<meta itemprop="keywords" content="C/C&#43;&#43;,VS," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="VS中ANSI和Unicode转换"/>
+<meta name="twitter:description" content=" "/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">VS中ANSI和Unicode转换</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-27 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%BD%AF%E4%BB%B6/"> 软件 </a>
+            </div>
+          <span class="more-meta"> 约 636 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#unicode-cstring转ansi-char数组">Unicode CString转ANSI char数组</a></li>
+<li><a href="#ansi转unicode">ANSI转Unicode</a></li>
+<li><a href="#字符串长度">字符串长度</a></li>
+<li><a href="#widechartomultibyte函数和multibytetowidechar函数">WideCharToMultiByte函数和MultiByteToWideChar函数</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>VS默认字符集为Unicode，之前的工程一直在用ANSI。在此整理ANSI和Unicode转换方法。</p>
+
+<p>包括：
+CString转ANSI char*
+ANSI char*转CString</p>
+
+<p>ANSI和Unicode转换</p>
+
+<h1 id="unicode-cstring转ansi-char数组">Unicode CString转ANSI char数组</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">CString</span> <span class="n">wStr</span><span class="p">;</span>	<span class="c1">// 待转换
+</span><span class="c1"></span><span class="n">wchar_t</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span>
+<span class="n">p1</span><span class="o">=</span><span class="n">wStr</span><span class="p">.</span><span class="n">GetBuffer</span><span class="p">(</span><span class="n">wStr</span><span class="p">.</span><span class="n">GetLength</span><span class="p">());</span>
+<span class="n">wStr</span><span class="p">.</span><span class="n">ReleaseBuffer</span><span class="p">();</span>
+
+<span class="c1">// Convert to a char*
+</span><span class="c1"></span><span class="n">size_t</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">wcslen</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">size_t</span> <span class="n">newsize1</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+<span class="n">size_t</span> <span class="n">convertedChars1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">c1</span><span class="p">[</span><span class="n">newsize1</span><span class="p">];</span>	<span class="c1">// 转换成的字符串
+</span><span class="c1"></span><span class="n">wcstombs_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">convertedChars1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">p1</span> <span class="p">,</span> <span class="n">_TRUNCATE</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">WChar2Char</span><span class="p">(</span><span class="n">CString</span> <span class="n">wStr</span><span class="p">,</span><span class="kt">char</span> <span class="o">*</span> <span class="n">Char</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">wchar_t</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span>
+	<span class="n">p1</span><span class="o">=</span><span class="n">wStr</span><span class="p">.</span><span class="n">GetBuffer</span><span class="p">(</span><span class="n">wStr</span><span class="p">.</span><span class="n">GetLength</span><span class="p">());</span>
+	<span class="n">wStr</span><span class="p">.</span><span class="n">ReleaseBuffer</span><span class="p">();</span>
+
+	<span class="c1">// Convert to a char*
+</span><span class="c1"></span>	<span class="n">size_t</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">wcslen</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">const</span> <span class="n">size_t</span> <span class="n">newsize1</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
+	<span class="n">size_t</span> <span class="n">convertedChars1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="c1">//char c1[newsize1];
+</span><span class="c1"></span>	<span class="c1">//wcstombs_s(&amp;convertedChars1, c1, s1, p1 , _TRUNCATE);
+</span><span class="c1"></span>	<span class="n">wcstombs_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">convertedChars1</span><span class="p">,</span> <span class="n">Char</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">p1</span> <span class="p">,</span> <span class="n">_TRUNCATE</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="ansi转unicode">ANSI转Unicode</h1>
+
+<p><strong>VC下的格式转换</strong></p>
+
+<p><strong>ANSI字符串转Unicode</strong>(windows下对应UTF-16编码)
+在vc工程选择unicode编译的情况下，如果是字符串常量可以直接使用L和_T or _TEXT宏，也可以使用wsprintf函数进行转换（需要引用Windows.h）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"> <span class="n">TCHAR</span> <span class="n">szW</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>  
+ <span class="c1">//字符串常量时
+</span><span class="c1"></span> <span class="n">swprintf</span><span class="p">(</span><span class="n">szW</span><span class="p">,</span><span class="sa">L</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="sa">L</span><span class="s">&#34;Unicode Str中文&#34;</span><span class="p">);</span>  
+ <span class="n">CString</span> <span class="n">name</span> <span class="o">=</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Report.txt&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">char</span> <span class="n">HeaderPatt</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">TCHAR</span> <span class="n">wChar</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>  
+<span class="n">wsprintfW</span><span class="p">(</span><span class="n">wChar</span><span class="p">,</span><span class="sa">L</span><span class="s">&#34;%S&#34;</span><span class="p">,</span><span class="n">HeaderPatt</span><span class="p">);</span>  	<span class="c1">// 大写的S
+</span><span class="c1"></span><span class="n">m_encodingDlg</span><span class="p">.</span><span class="n">m_HeaderPatt_Send</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">),</span><span class="n">wChar</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="字符串长度">字符串长度</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//unicode编码
+</span><span class="c1"></span><span class="n">CString</span> <span class="n">FilePath</span><span class="p">;</span>
+<span class="n">FilePath</span> <span class="o">=</span> <span class="s">&#34;C:\Users\Pejoicen\Desktop\HDR_jiemian_20200426_send_recv_tan\HDR_PcieDataTrans\Debug\sendConfig.dat&#34;</span>
+
+<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">FilePath</span><span class="p">.</span><span class="n">GetLength</span><span class="p">();</span> <span class="c1">// len = 99
+</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>//转成char数组后，长度为99+1.<br />
+查看内存中转换好的ANSI字符串内容</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0x01B3CDE0</td>
+<td>43 3a 5c 55 73 65 72 73 5c 50 65 6a 6f 69 63 65 6e 5c 44 65 73 6b 74 6f 70 5c 48 44 52 5f 6a 69</td>
+<td>C:\Users\Pejoicen\Desktop\HDR_ji</td>
+</tr>
+
+<tr>
+<td>0x01B3CE00</td>
+<td>65 6d 69 61 6e 5f 32 30 32 30 30 34 32 36 5f 73 65 6e 64 5f 72 65 63 76 5f 74 61 6e 5c 48 44 52</td>
+<td>emian_20200426_send_recv_tan\HDR</td>
+</tr>
+
+<tr>
+<td>0x01B3CE20</td>
+<td>5f 50 63 69 65 44 61 74 61 54 72 61 6e 73 5c 44 65 62 75 67 5c 73 65 6e 64 43 6f 6e 66 69 67 2e</td>
+<td>_PcieDataTrans\Debug\sendConfig.</td>
+</tr>
+
+<tr>
+<td>0x01B3CE40</td>
+<td>64 61 74 00</td>
+<td>dat.</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="widechartomultibyte函数和multibytetowidechar函数">WideCharToMultiByte函数和MultiByteToWideChar函数</h1>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c/c&#43;&#43;/">C/C&#43;&#43;</a>
+          <a href="/tags/vs/">VS</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/%E4%B8%B2%E5%8F%A3/">
+            <span class="next-text nav-default">Windows串口</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

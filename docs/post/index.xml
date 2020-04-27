@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+    <link>https://pejoicen.github.io/post/</link>
+    <description>Recent content in Posts on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Apr 2020 10:09:32 +0800</lastBuildDate>
+    
+	<atom:link href="https://pejoicen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>VS中ANSI和Unicode转换</title>
+      <link>https://pejoicen.github.io/post/ansi%E5%92%8Cunicode%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Mon, 27 Apr 2020 10:09:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/ansi%E5%92%8Cunicode%E8%BD%AC%E6%8D%A2/</guid>
+      <description>&lt;p&gt;VS默认字符集为Unicode，之前的工程一直在用ANSI。在此整理ANSI和Unicode转换方法。&lt;/p&gt;
+
+&lt;p&gt;包括：
+CString转ANSI char*
+ANSI char*转CString&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows串口</title>
+      <link>https://pejoicen.github.io/post/%E4%B8%B2%E5%8F%A3/</link>
+      <pubDate>Wed, 11 Mar 2020 14:12:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E4%B8%B2%E5%8F%A3/</guid>
+      <description>&lt;p&gt;整理Windows串口操作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>FRP&#43;Windows远程桌面</title>
+      <link>https://pejoicen.github.io/post/frp&#43;windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/</link>
+      <pubDate>Fri, 07 Feb 2020 08:46:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/frp&#43;windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/</guid>
+      <description>&lt;p&gt;服务器+FRP内网穿透实现连接Windows远程桌面&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3 tkinter</title>
+      <link>https://pejoicen.github.io/post/tkinter/</link>
+      <pubDate>Tue, 28 Jan 2020 20:16:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/tkinter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据越界问题总结</title>
+      <link>https://pejoicen.github.io/post/%E6%95%B0%E6%8D%AE%E8%B6%8A%E7%95%8C%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Tue, 22 Oct 2019 10:31:43 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E6%95%B0%E6%8D%AE%E8%B6%8A%E7%95%8C%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</guid>
+      <description>&lt;p&gt;数据越界问题总结&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3 常用语法</title>
+      <link>https://pejoicen.github.io/post/python%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Fri, 27 Sep 2019 20:46:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/python%E8%AF%AD%E6%B3%95/</guid>
+      <description>&lt;p&gt;整理Python3 常用语法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MFC鼠标移动到控件上显示提示信息</title>
+      <link>https://pejoicen.github.io/post/%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E5%88%B0%E6%8E%A7%E4%BB%B6%E4%B8%8A%E6%98%BE%E7%A4%BA%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Fri, 20 Sep 2019 14:19:43 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E5%88%B0%E6%8E%A7%E4%BB%B6%E4%B8%8A%E6%98%BE%E7%A4%BA%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF/</guid>
+      <description>&lt;p&gt;MFC程序中实现 鼠标移动到控件上显示提示信息 功能。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>队列实现</title>
+      <link>https://pejoicen.github.io/post/%E9%98%9F%E5%88%97%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Tue, 17 Sep 2019 21:46:43 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E9%98%9F%E5%88%97%E8%AE%BE%E8%AE%A1/</guid>
+      <description>&lt;p&gt;队列实现方式&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zynq GPIO</title>
+      <link>https://pejoicen.github.io/post/zynq-gpio/</link>
+      <pubDate>Thu, 22 Aug 2019 19:37:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq-gpio/</guid>
+      <description>&lt;p&gt;详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zynq中断</title>
+      <link>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</link>
+      <pubDate>Thu, 22 Aug 2019 19:37:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</guid>
+      <description>&lt;p&gt;整理Zynq中断&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>原子操作和事件</title>
+      <link>https://pejoicen.github.io/post/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%92%8C%E6%B6%88%E6%81%AF/</link>
+      <pubDate>Tue, 20 Aug 2019 14:23:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%92%8C%E6%B6%88%E6%81%AF/</guid>
+      <description>&lt;p&gt;整理Windows MFC编程中用到的原子操作和事件。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows的多线程编程</title>
+      <link>https://pejoicen.github.io/post/%E5%9C%A8windows%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Tue, 20 Aug 2019 10:09:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E5%9C%A8windows%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/</guid>
+      <description>&lt;p&gt;在Windows的多线程编程中，创建线程的函数主要有CreateThread，_beginthead(_beginthreadex)和AfxBeginThread，那么它们之间有什么联系与区别呢？当我需要创建一个线程时该用哪个函数呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CString、char[]数组和&#39;数&#39;之间的转换</title>
+      <link>https://pejoicen.github.io/post/cstringchar%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Tue, 20 Aug 2019 09:50:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/cstringchar%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/</guid>
+      <description>&lt;p&gt;整理CString、char[]和&amp;rdquo;数值&amp;rdquo;变量间的转换&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MFC窗口和线程间传递信息</title>
+      <link>https://pejoicen.github.io/post/mfc%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BA%BF%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Thu, 15 Aug 2019 16:56:43 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/mfc%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BA%BF%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E4%BF%A1%E6%81%AF/</guid>
+      <description>&lt;p&gt;MFC窗口和线程间传递信息的注意事项和方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://pejoicen.github.io/post/hugo/</link>
+      <pubDate>Wed, 14 Aug 2019 14:56:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/hugo/</guid>
+      <description>&lt;p&gt;使用hugo创建博客&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MFC学习</title>
+      <link>https://pejoicen.github.io/post/mfc%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Wed, 14 Aug 2019 10:10:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/mfc%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;VS2008 MFC学习&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Verilog 常用语法</title>
+      <link>https://pejoicen.github.io/post/verilog%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Sat, 01 Dec 2018 23:39:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/verilog%E8%AF%AD%E6%B3%95/</guid>
+      <description>&lt;p&gt;整理Verilog 常用语法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>USB测试记录</title>
+      <link>https://pejoicen.github.io/post/zynq7020usb%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Fri, 28 Sep 2018 20:28:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq7020usb%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/</guid>
+      <description>&lt;p&gt;使用petalinux测试USB功能。在MicroZus板卡教程基础上修改测试。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

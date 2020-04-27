@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Windows串口 - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="整理Windows串口操作。
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/%E4%B8%B2%E5%8F%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Windows串口" />
+<meta property="og:description" content="整理Windows串口操作。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/%E4%B8%B2%E5%8F%A3/" />
+<meta property="article:published_time" content="2020-03-11T14:12:10+08:00" />
+<meta property="article:modified_time" content="2020-03-11T14:12:10+08:00" />
+<meta itemprop="name" content="Windows串口">
+<meta itemprop="description" content="整理Windows串口操作。">
+
+
+<meta itemprop="datePublished" content="2020-03-11T14:12:10&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-11T14:12:10&#43;08:00" />
+<meta itemprop="wordCount" content="9111">
+
+
+
+<meta itemprop="keywords" content="串口,Windows,C/C&#43;&#43;," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Windows串口"/>
+<meta name="twitter:description" content="整理Windows串口操作。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Windows串口</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-03-11 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%BD%AF%E4%BB%B6/"> 软件 </a>
+            </div>
+          <span class="more-meta"> 约 9111 字 </span>
+          <span class="more-meta"> 预计阅读 19 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#串口">串口</a>
+<ul>
+<li><a href="#1-打开串口">（1）打开串口</a></li>
+<li><a href="#2-配置串口">（2）配置串口</a></li>
+<li><a href="#3-读写串口">（3）读写串口</a>
+<ul>
+<li><a href="#异步读串口的示例代码">异步读串口的示例代码：</a></li>
+<li><a href="#异步写串口的示例代码">异步写串口的示例代码：</a></li>
+</ul></li>
+<li><a href="#4-关闭串口">（4）关闭串口</a></li>
+<li><a href="#串口编程的一个实例">串口编程的一个实例</a>
+<ul>
+<li><a href="#例程1-同步模式">例程1（同步模式）</a></li>
+<li><a href="#例程2-异步模式">例程2（异步模式）</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#问题-经验总结">问题、经验总结：</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>整理Windows串口操作。</p>
+
+<h1 id="串口">串口</h1>
+
+<p>串口的操作可以有两种操作方式：同步操作方式和重叠操作方式（又称为异步操作方式）。
+同步操作时，API函数会阻塞直到操作完成以后才能返回（在多线程方式中，虽然不会阻塞主线程，但是仍然会阻塞监听线程）；
+而重叠操作方式，API函数会立即返回，操作在后台进行，避免线程的阻塞。</p>
+
+<p>无论那种操作方式，一般都通过四个步骤来完成：
+（1） 打开串口
+（2） 配置串口
+（3） 读写串口
+（4） 关闭串口</p>
+
+<h2 id="1-打开串口">（1）打开串口</h2>
+
+<p>　　Win32系统把文件的概念进行了扩展。无论是文件、通信设备、命名管道、邮件槽、磁盘、还是控制台，都是用API函数CreateFile来打开或创建的。该函数的原型为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 多字符集为CreatFileA\Unicode为CreateFileW，添加WinBase.h后，会自动识别
+</span><span class="c1"></span><span class="n">HANDLE</span> <span class="nf">CreateFile</span><span class="p">(</span>
+  <span class="n">LPCSTR</span>                <span class="n">lpFileName</span><span class="p">,</span>
+  <span class="n">DWORD</span>                 <span class="n">dwDesiredAccess</span><span class="p">,</span>
+  <span class="n">DWORD</span>                 <span class="n">dwShareMode</span><span class="p">,</span>
+  <span class="n">LPSECURITY_ATTRIBUTES</span> <span class="n">lpSecurityAttributes</span><span class="p">,</span>
+  <span class="n">DWORD</span>                 <span class="n">dwCreationDisposition</span><span class="p">,</span>
+  <span class="n">DWORD</span>                 <span class="n">dwFlagsAndAttributes</span><span class="p">,</span>
+  <span class="n">HANDLE</span>                <span class="n">hTemplateFile</span>
+<span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>lpFileName:             将要打开的串口逻辑名，如“COM1”；</li>
+<li>dwDesiredAccess:        指定串口访问的类型，可以是读取、写入或二者并列；</li>
+<li>dwShareMode:            指定共享属性，由于串口不能共享，该参数必须置为0；</li>
+<li>lpSecurityAttributes:   引用安全性属性结构，缺省值为NULL；</li>
+<li>dwCreationDisposition:  创建标志，对串口操作该参数必须置为OPEN_EXISTING；</li>
+<li>dwFlagsAndAttributes:   属性描述，用于指定该串口是否进行异步操作，该值为FILE_FLAG_OVERLAPPED，表示使用异步的I/O；该值为0，表示同步I/O操作；</li>
+<li>hTemplateFile:          对串口而言该参数必须置为NULL；</li>
+</ul>
+
+<p><strong>同步I/O方式打开串口的示例代码：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">HANDLE</span> <span class="n">hCom</span><span class="p">;</span>  <span class="c1">//全局变量，串口句柄
+</span><span class="c1"></span><span class="n">hCom</span><span class="o">=</span><span class="n">CreateFile</span><span class="p">(</span>
+    <span class="s">&#34;COM1&#34;</span><span class="p">,</span>                     <span class="c1">//COM1口
+</span><span class="c1"></span>    <span class="n">GENERIC_READ</span><span class="o">|</span><span class="n">GENERIC_WRITE</span><span class="p">,</span> <span class="c1">//允许读和写
+</span><span class="c1"></span>    <span class="mi">0</span><span class="p">,</span>                          <span class="c1">//独占方式
+</span><span class="c1"></span>    <span class="nb">NULL</span><span class="p">,</span>
+    <span class="n">OPEN_EXISTING</span><span class="p">,</span>              <span class="c1">//打开而不是创建
+</span><span class="c1"></span>    <span class="mi">0</span><span class="p">,</span>                          <span class="c1">//同步方式
+</span><span class="c1"></span>    <span class="nb">NULL</span>
+<span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="n">hCom</span><span class="o">==</span><span class="p">(</span><span class="n">HANDLE</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AfxMessageBox</span><span class="p">(</span><span class="s">&#34;打开COM失败!&#34;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>重叠I/O打开串口的示例代码：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">HANDLE</span> <span class="n">hCom</span><span class="p">;</span>  <span class="c1">//全局变量，串口句柄
+</span><span class="c1"></span><span class="n">hCom</span> <span class="o">=</span><span class="n">CreateFile</span><span class="p">(</span>
+    <span class="s">&#34;COM1&#34;</span><span class="p">,</span>                                     <span class="c1">//COM1口
+</span><span class="c1"></span>    <span class="n">GENERIC_READ</span><span class="o">|</span><span class="n">GENERIC_WRITE</span><span class="p">,</span>                 <span class="c1">//允许读和写
+</span><span class="c1"></span>    <span class="mi">0</span><span class="p">,</span>                                          <span class="c1">//独占方式
+</span><span class="c1"></span>    <span class="nb">NULL</span><span class="p">,</span>                           
+    <span class="n">OPEN_EXISTING</span><span class="p">,</span>                              <span class="c1">//打开而不是创建
+</span><span class="c1"></span>    <span class="n">FILE_ATTRIBUTE_NORMAL</span><span class="o">|</span><span class="n">FILE_FLAG_OVERLAPPED</span><span class="p">,</span> <span class="c1">//重叠方式
+</span><span class="c1"></span>    <span class="nb">NULL</span>
+<span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="n">hCom</span> <span class="o">==</span><span class="n">INVALID_HANDLE_VALUE</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AfxMessageBox</span><span class="p">(</span><span class="s">&#34;打开COM失败!&#34;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="2-配置串口">（2）配置串口</h2>
+
+<p>　　在打开通讯设备句柄后，常常需要对串口进行一些初始化配置工作。<strong>使用DCB结构</strong>。DCB结构包含了诸如波特率、数据位数、奇偶校验和停止位数等信息。在查询或配置串口的属性时，都要用DCB结构来作为缓冲区。</p>
+
+<p>　　一般用CreateFile打开串口后，可以调用GetCommState函数来获取串口的初始配置。要修改串口的配置，应该先修改DCB结构，然后再调用SetCommState函数设置串口。</p>
+
+<p>DCB结构包含了串口的各项参数设置，定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_DCB</span> <span class="p">{</span>
+    <span class="n">DWORD</span> <span class="n">DCBlength</span><span class="p">;</span>            <span class="cm">/* sizeof(DCB)                          */</span>
+    <span class="n">DWORD</span> <span class="n">BaudRate</span><span class="p">;</span>             <span class="cm">/* Baudrate at which running            */</span>      <span class="c1">// 波特率
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fBinary</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>           <span class="cm">/* Binary Mode (skip EOF check)         */</span>
+    <span class="n">DWORD</span> <span class="nl">fParity</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>           <span class="cm">/* Enable parity checking               */</span>      <span class="c1">// 指定奇偶校验使能。若此成员为1，允许奇偶校验检查
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fOutxCtsFlow</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>       <span class="cm">/* CTS handshaking on output            */</span>
+    <span class="n">DWORD</span> <span class="nl">fOutxDsrFlow</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>       <span class="cm">/* DSR handshaking on output            */</span>
+    <span class="n">DWORD</span> <span class="nl">fDtrControl</span><span class="p">:</span><span class="mi">2</span><span class="p">;</span>        <span class="cm">/* DTR Flow control                     */</span>
+    <span class="n">DWORD</span> <span class="nl">fDsrSensitivity</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>    <span class="cm">/* DSR Sensitivity                      */</span>
+    <span class="n">DWORD</span> <span class="nl">fTXContinueOnXoff</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* Continue TX when Xoff sent           */</span>
+    <span class="n">DWORD</span> <span class="nl">fOutX</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>             <span class="cm">/* Enable output X-ON/X-OFF             */</span>
+    <span class="n">DWORD</span> <span class="nl">fInX</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>              <span class="cm">/* Enable input X-ON/X-OFF              */</span>
+    <span class="n">DWORD</span> <span class="nl">fErrorChar</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>        <span class="cm">/* Enable Err Replacement               */</span>
+    <span class="n">DWORD</span> <span class="nl">fNull</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>             <span class="cm">/* Enable Null stripping                */</span>
+    <span class="n">DWORD</span> <span class="nl">fRtsControl</span><span class="p">:</span><span class="mi">2</span><span class="p">;</span>        <span class="cm">/* Rts Flow control                     */</span>
+    <span class="n">DWORD</span> <span class="nl">fAbortOnError</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>      <span class="cm">/* Abort all reads and writes on Error  */</span>
+    <span class="n">DWORD</span> <span class="nl">fDummy2</span><span class="p">:</span><span class="mi">17</span><span class="p">;</span>           <span class="cm">/* Reserved                             */</span>
+    <span class="n">WORD</span> <span class="n">wReserved</span><span class="p">;</span>             <span class="cm">/* Not currently used                   */</span>
+    <span class="n">WORD</span> <span class="n">XonLim</span><span class="p">;</span>                <span class="cm">/* Transmit X-ON threshold              */</span>
+    <span class="n">WORD</span> <span class="n">XoffLim</span><span class="p">;</span>               <span class="cm">/* Transmit X-OFF threshold             */</span>
+    <span class="n">BYTE</span> <span class="n">ByteSize</span><span class="p">;</span>              <span class="cm">/* Number of bits/byte, 4-8             */</span>      <span class="c1">// 字节数
+</span><span class="c1"></span>    <span class="n">BYTE</span> <span class="n">Parity</span><span class="p">;</span>                <span class="cm">/* 0-4=None,Odd,Even,Mark,Space         */</span>      <span class="c1">// 奇偶校验
+</span><span class="c1"></span>    <span class="n">BYTE</span> <span class="n">StopBits</span><span class="p">;</span>              <span class="cm">/* 0,1,2 = 1, 1.5, 2                    */</span>      <span class="c1">// 停止位
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="n">XonChar</span><span class="p">;</span>               <span class="cm">/* Tx and Rx X-ON character             */</span>
+    <span class="kt">char</span> <span class="n">XoffChar</span><span class="p">;</span>              <span class="cm">/* Tx and Rx X-OFF character            */</span>
+    <span class="kt">char</span> <span class="n">ErrorChar</span><span class="p">;</span>             <span class="cm">/* Error replacement char               */</span>
+    <span class="kt">char</span> <span class="n">EofChar</span><span class="p">;</span>               <span class="cm">/* End of Input character               */</span>
+    <span class="kt">char</span> <span class="n">EvtChar</span><span class="p">;</span>               <span class="cm">/* Received Event character             */</span>
+    <span class="n">WORD</span> <span class="n">wReserved1</span><span class="p">;</span>            <span class="cm">/* Fill for now.                        */</span>
+<span class="p">}</span> <span class="n">DCB</span><span class="p">,</span> <span class="o">*</span><span class="n">LPDCB</span><span class="p">;</span>
+  
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>GetCommState函数可以获得COM口的设备控制块，从而获得相关参数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">BOOL</span> <span class="nf">GetCommState</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span> <span class="c1">//标识通讯端口的句柄
+</span><span class="c1"></span>    <span class="n">LPDCB</span> <span class="n">lpDCB</span> <span class="c1">//指向一个设备控制块（DCB结构）的指针
+</span><span class="c1"></span><span class="p">);</span>  
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>SetCommState函数设置COM口的设备控制块：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">BOOL</span> <span class="nf">SetCommState</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>
+    <span class="n">LPDCB</span> <span class="n">lpDCB</span>
+<span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>　　除了在BCD中的设置外，程序一般还需要设置 <strong>I/O缓冲区的大小和超时</strong> 。Windows用I/O缓冲区来暂存串口输入和输出的数据。如果通信的速率较高，则应该设置较大的缓冲区。调用SetupComm函数可以设置串行口的输入和输出缓冲区的大小。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">SetupComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1024</span><span class="p">);</span> <span class="c1">// 输入缓冲区和输出缓冲区的大小都是1024
+</span><span class="c1">// 原型
+</span><span class="c1"></span><span class="n">BOOL</span> <span class="nf">SetupComm</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>       <span class="c1">// 通信设备的句柄
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">dwInQueue</span><span class="p">,</span>    <span class="c1">// 输入缓冲区的大小（字节数）
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">dwOutQueue</span>    <span class="c1">// 输出缓冲区的大小（字节数）
+</span><span class="c1"></span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>　　在用ReadFile和WriteFile读写串行口时，需要考虑超时问题。超时的作用是在指定的时间内没有读入或发送指定数量的字符，ReadFile或WriteFile的操作仍然会结束。<br />
+　　要查询当前的超时设置应调用<strong>GetCommTimeouts函数</strong>，该函数会填充一个COMMTIMEOUTS结构。调用SetCommTimeouts可以用某一个COMMTIMEOUTS结构的内容来设置超时。<br />
+　　<strong>读写串口的超时有两种：间隔超时和总超时。</strong>间隔超时是指在接收时两个字符之间的最大时延。总超时是指读写操作总共花费的最大时间。写操作只支持总超时，而读操作两种超时均支持。用COMMTIMEOUTS结构可以规定读写操作的超时。COMMTIMEOUTS结构的定义为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_COMMTIMEOUTS</span> <span class="p">{</span>  
+    <span class="n">DWORD</span> <span class="n">ReadIntervalTimeout</span><span class="p">;</span>          <span class="c1">// 读间隔超时
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">ReadTotalTimeoutMultiplier</span><span class="p">;</span>   <span class="c1">// 读时间系数
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">ReadTotalTimeoutConstant</span><span class="p">;</span>     <span class="c1">// 读时间常量
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">WriteTotalTimeoutMultiplier</span><span class="p">;</span>  <span class="c1">// 写时间系数
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">WriteTotalTimeoutConstant</span><span class="p">;</span>    <span class="c1">// 写时间常量
+</span><span class="c1"></span><span class="p">}</span> <span class="n">COMMTIMEOUTS</span><span class="p">,</span><span class="o">*</span><span class="n">LPCOMMTIMEOUTS</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>COMMTIMEOUTS结构的成员都以毫秒为单位。总超时的计算公式是：<br />
+&gt; 总超时 ＝ 时间系数 × 要求读/写的字符数 ＋ 时间常量<br />
+例如，要读入10个字符，那么读操作的总超时的计算公式为：<br />
+&gt; 读总超时 ＝ ReadTotalTimeoutMultiplier × 10 ＋ ReadTotalTimeoutConstant<br />
+可以看出：间隔超时和总超时的设置是不相关的，这可以方便通信程序灵活地设置各种超时。</p>
+
+<p>　　如果所有写超时参数均为0，那么就不使用写超时。如果ReadIntervalTimeout为0，那么就不使用读间隔超时。如果ReadTotalTimeoutMultiplier 和 ReadTotalTimeoutConstant都为0，则不使用读总超时。如果读间隔超时被设置成MAXDWORD并且读时间系数和读时间常量都为0，那么在读一次输入缓冲区的内容后读操作就立即返回，而不管是否读入了要求的字符。<br />
+　　在用重叠(异步)方式读写串口时，虽然ReadFile和WriteFile在完成操作以前就可能返回，但超时仍然是起作用的。在这种情况下，超时规定的是操作的完成时间，而不是ReadFile和WriteFile的返回时间。示例代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">COMMTIMEOUTS</span> <span class="n">TimeOuts</span><span class="p">;</span>
+<span class="c1">//设定读超时
+</span><span class="c1"></span><span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadIntervalTimeout</span><span class="o">=</span><span class="mi">1000</span><span class="p">;</span>
+<span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadTotalTimeoutMultiplier</span><span class="o">=</span><span class="mi">500</span><span class="p">;</span>
+<span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadTotalTimeoutConstant</span><span class="o">=</span><span class="mi">5000</span><span class="p">;</span>
+<span class="c1">//设定写超时
+</span><span class="c1"></span><span class="n">TimeOuts</span><span class="p">.</span><span class="n">WriteTotalTimeoutMultiplier</span><span class="o">=</span><span class="mi">500</span><span class="p">;</span>
+<span class="n">TimeOuts</span><span class="p">.</span><span class="n">WriteTotalTimeoutConstant</span><span class="o">=</span><span class="mi">2000</span><span class="p">;</span>
+<span class="n">SetCommTimeouts</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">TimeOuts</span><span class="p">);</span> <span class="c1">//设置超时
+</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在读写串口之前，还要用PurgeComm()函数清空缓冲区，该函数原型：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">BOOL</span> <span class="nf">PurgeComm</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>   <span class="c1">// 串口句柄
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">dwFlags</span>   <span class="c1">// 需要完成的操作
+</span><span class="c1"></span><span class="p">);</span> 
+
+<span class="c1">// 参数dwFlags指定要完成的操作，可以是下列值的组合： 
+</span><span class="c1"></span><span class="n">PURGE_TXABORT</span>   <span class="c1">// 中断所有写操作并立即返回，即使写操作还没有完成。
+</span><span class="c1"></span><span class="n">PURGE_RXABORT</span>   <span class="c1">// 中断所有读操作并立即返回，即使读操作还没有完成。
+</span><span class="c1"></span><span class="n">PURGE_TXCLEAR</span>   <span class="c1">// 清除输出缓冲区
+</span><span class="c1"></span><span class="n">PURGE_RXCLEAR</span>   <span class="c1">// 清除输入缓冲区
+</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>打开串口的操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">HANDLE</span> <span class="n">hCom</span><span class="p">;</span>                        <span class="c1">//全局变量，串口句柄
+</span><span class="c1"></span>
+<span class="c1">// 同步模式
+</span><span class="c1"></span><span class="n">hCom</span> <span class="o">=</span> <span class="n">CreateFile</span><span class="p">(</span>
+    <span class="n">SerialPortName</span><span class="p">,</span>                 <span class="c1">//串口名 \\.\COOM1 &#34;\\\\.\\COM1&#34;
+</span><span class="c1"></span>    <span class="n">GENERIC_READ</span> <span class="o">|</span> <span class="n">GENERIC_WRITE</span><span class="p">,</span>   <span class="c1">//支持读写
+</span><span class="c1"></span>    <span class="mi">0</span><span class="p">,</span>                              <span class="c1">//独占方式，串口不支持共享
+</span><span class="c1"></span>    <span class="nb">NULL</span><span class="p">,</span>                           <span class="c1">//安全属性指针，默认值为NULL
+</span><span class="c1"></span>    <span class="n">OPEN_EXISTING</span><span class="p">,</span>                  <span class="c1">//打开现有的串口文件
+</span><span class="c1"></span>    <span class="mi">0</span><span class="p">,</span>                              <span class="c1">//0：同步方式，FILE_FLAG_OVERLAPPED：异步方式 
+</span><span class="c1"></span>    <span class="nb">NULL</span>                            <span class="c1">//用于复制文件句柄，默认值为NULL，对串口而言该参数必须置为NULL
+</span><span class="c1"></span><span class="p">);</span>
+
+
+<span class="k">if</span> <span class="p">(</span><span class="n">hCom</span> <span class="o">==</span> <span class="n">INVALID_HANDLE_VALUE</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//配置缓冲区大小 
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">SetupComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">DCB</span> <span class="n">dcb</span><span class="p">;</span>
+<span class="n">GetCommState</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dcb</span><span class="p">);</span>    <span class="c1">// 获取当前配置
+</span><span class="c1">//dcb.DCBlength = sizeof(dcb);
+</span><span class="c1"></span><span class="n">dcb</span><span class="p">.</span><span class="n">BaudRate</span><span class="o">=</span><span class="mi">9600</span><span class="p">;</span>          <span class="c1">// 波特率为9600
+</span><span class="c1"></span><span class="n">dcb</span><span class="p">.</span><span class="n">ByteSize</span><span class="o">=</span><span class="mi">8</span><span class="p">;</span>             <span class="c1">// 每个字节有8位
+</span><span class="c1"></span><span class="n">dcb</span><span class="p">.</span><span class="n">Parity</span><span class="o">=</span><span class="n">NOPARITY</span><span class="p">;</span>        <span class="c1">// 无奇偶校验位
+</span><span class="c1"></span><span class="n">dcb</span><span class="p">.</span><span class="n">StopBits</span><span class="o">=</span><span class="n">TWOSTOPBITS</span><span class="p">;</span>   <span class="c1">// 两个停止位
+</span><span class="c1"></span><span class="n">SetCommState</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dcb</span><span class="p">);</span>    <span class="c1">// 配置参数
+</span><span class="c1"></span>
+<span class="c1">// 超时处理,单位：毫秒
+</span><span class="c1">// 总超时＝时间系数×读或写的字符数＋时间常量
+</span><span class="c1"></span><span class="n">COMMTIMEOUTS</span> <span class="n">TimeOuts</span><span class="p">;</span>
+<span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadIntervalTimeout</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>		<span class="c1">//读间隔超时
+</span><span class="c1"></span><span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadTotalTimeoutMultiplier</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>	<span class="c1">//读时间系数
+</span><span class="c1"></span><span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadTotalTimeoutConstant</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">;</span>	<span class="c1">//读时间常量
+</span><span class="c1"></span><span class="n">TimeOuts</span><span class="p">.</span><span class="n">WriteTotalTimeoutMultiplier</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span> <span class="c1">// 写时间系数
+</span><span class="c1"></span><span class="n">TimeOuts</span><span class="p">.</span><span class="n">WriteTotalTimeoutConstant</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>	<span class="c1">//写时间常量
+</span><span class="c1"></span><span class="n">SetCommTimeouts</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">TimeOuts</span><span class="p">);</span>
+
+<span class="n">PurgeComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">PURGE_TXCLEAR</span><span class="o">|</span><span class="n">PURGE_RXCLEAR</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="3-读写串口">（3）读写串口</h2>
+
+<p>我们使用ReadFile和WriteFile读写串口，下面是两个函数的声明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">BOOL</span> <span class="nf">ReadFile</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>               <span class="c1">// 串口的句柄
+</span><span class="c1"></span>    <span class="n">LPVOID</span> <span class="n">lpBuffer</span><span class="p">,</span>            <span class="c1">// 读入的数据存储的地址，即读入的数据将存储在以该指针的值为首地址的一片内存区
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">nNumberOfBytesToRead</span><span class="p">,</span> <span class="c1">// 要读入的数据的字节数
+</span><span class="c1"></span>    <span class="n">LPDWORD</span> <span class="n">lpNumberOfBytesRead</span><span class="p">,</span><span class="c1">// 指向一个DWORD数值，该数值返回读操作实际读入的字节数
+</span><span class="c1"></span>    <span class="n">LPOVERLAPPED</span> <span class="n">lpOverlapped</span>   <span class="c1">// 重叠操作时，该参数指向一个OVERLAPPED结构，同步操作时，该参数为NULL。
+</span><span class="c1"></span><span class="p">);</span> 
+   
+   
+<span class="n">BOOL</span> <span class="nf">WriteFile</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>                   <span class="c1">// 串口的句柄
+</span><span class="c1"></span>    <span class="n">LPCVOID</span> <span class="n">lpBuffer</span><span class="p">,</span>               <span class="c1">// 写入的数据存储的地址，即以该指针的值为首地址的nNumberOfBytesToWrite个字节的数据将要写入串口的发送数据缓冲区。
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">nNumberOfBytesToWrite</span><span class="p">,</span>    <span class="c1">// 要写入的数据的字节数
+</span><span class="c1"></span>    <span class="n">LPDWORD</span> <span class="n">lpNumberOfBytesWritten</span><span class="p">,</span> <span class="c1">// 指向指向一个DWORD数值，该数值返回实际写入的字节数
+</span><span class="c1"></span>    <span class="n">LPOVERLAPPED</span> <span class="n">lpOverlapped</span>       <span class="c1">// 重叠操作时，该参数指向一个OVERLAPPED结构；同步操作时，该参数为NULL。
+</span><span class="c1"></span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>　　在用ReadFile和WriteFile读写串口时，既可以同步执行，也可以重叠(异步)执行。在同步执行时，函数直到操作完成后才返回。这意味着同步执行时线程会被阻塞，从而导致效率下降。在重叠执行时，即使操作还未完成，这两个函数也会立即返回，费时的I/O操作在后台进行。
+　　ReadFile和WriteFile函数是同步还是异步由CreateFile函数决定，如果在调用CreateFile创建句柄时指定了FILE_FLAG_OVERLAPPED标志，那么调用ReadFile和WriteFile对该句柄进行的操作就应该是重叠的；如果未指定重叠标志，则读写操作应该是同步的。ReadFile和WriteFile函数的同步或者异步应该和CreateFile函数相一致。
+　　ReadFile函数只要在串口输入缓冲区中读入指定数量的字符，就算完成操作。而WriteFile函数不但要把指定数量的字符拷入到输出缓冲区，而且要等这些字符从串行口送出去后才算完成操作。
+　　如果操作成功，这两个函数都返回TRUE。需要注意的是，当ReadFile和WriteFile返回FALSE时，不一定就是操作失败，线程应该调用GetLastError函数分析返回的结果。例如，在重叠操作时如果操作还未完成函数就返回，那么函数就返回FALSE，而且GetLastError函数返回ERROR_IO_PENDING。这说明重叠操作还未完成。</p>
+
+<p>同步方式读写串口比较简单，下面先例举同步方式读写串口的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//同步读串口
+</span><span class="c1"></span>
+<span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+<span class="n">DWORD</span> <span class="n">wCount</span><span class="p">;</span><span class="c1">//读取的字节数
+</span><span class="c1"></span><span class="n">BOOL</span> <span class="n">bReadStat</span><span class="p">;</span>
+<span class="n">bReadStat</span><span class="o">=</span><span class="n">ReadFile</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">str</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="o">&amp;</span><span class="n">wCount</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bReadStat</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AfxMessageBox</span><span class="p">(</span><span class="s">&#34;读串口失败!&#34;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+
+<span class="c1">//同步写串口
+</span><span class="c1"></span>
+<span class="kt">char</span> <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+<span class="n">DWORD</span> <span class="n">dwBytesWrite</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span>
+<span class="n">COMSTAT</span> <span class="n">ComStat</span><span class="p">;</span>
+<span class="n">DWORD</span> <span class="n">dwErrorFlags</span><span class="p">;</span>
+<span class="n">BOOL</span> <span class="n">bWriteStat</span><span class="p">;</span>
+<span class="n">ClearCommError</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dwErrorFlags</span><span class="p">,</span><span class="o">&amp;</span><span class="n">ComStat</span><span class="p">);</span>
+<span class="n">bWriteStat</span><span class="o">=</span><span class="n">WriteFile</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">lpOutBuffer</span><span class="p">,</span><span class="n">dwBytesWrite</span><span class="p">,</span><span class="o">&amp;</span> <span class="n">dwBytesWrite</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bWriteStat</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AfxMessageBox</span><span class="p">(</span><span class="s">&#34;写串口失败!&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">PurgeComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span> <span class="n">PURGE_TXABORT</span><span class="o">|</span>
+<span class="n">PURGE_RXABORT</span><span class="o">|</span><span class="n">PURGE_TXCLEAR</span><span class="o">|</span><span class="n">PURGE_RXCLEAR</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>在重叠操作时,操作还未完成函数就返回。
+　　重叠I/O非常灵活，它也可以实现阻塞（例如我们可以设置一定要读取到一个数据才能进行到下一步操作）。有两种方法可以等待操作完成：一种方法是用象WaitForSingleObject这样的等待函数来等待OVERLAPPED结构的hEvent成员；另一种方法是调用GetOverlappedResult函数等待，后面将演示说明。
+下面我们先简单说一下OVERLAPPED结构和GetOverlappedResult函数：</p>
+
+<p>OVERLAPPED结构包含了重叠I/O的一些信息，定义如下：
+typedef struct _OVERLAPPED {
+    DWORD  Internal;
+    DWORD  InternalHigh;
+    DWORD  Offset;
+    DWORD  OffsetHigh;
+    HANDLE hEvent;
+} OVERLAPPED;</p>
+
+<p>　　在使用ReadFile和WriteFile重叠操作时，线程需要创建OVERLAPPED结构以供这两个函数使用。线程通过OVERLAPPED结构获得当前的操作状态，该结构最重要的成员是hEvent。hEvent是读写事件。当串口使用异步通讯时，函数返回时操作可能还没有完成，程序可以通过检查该事件得知是否读写完毕。
+　　当调用ReadFile, WriteFile 函数的时候，该成员会自动被置为无信号状态；当重叠操作完成后，该成员变量会自动被置为有信号状态。</p>
+
+<p>GetOverlappedResult函数
+BOOL GetOverlappedResult(
+    HANDLE hFile,                       // 串口的句柄
+    LPOVERLAPPED lpOverlapped,          // 指向重叠操作开始时指定的OVERLAPPED结构
+    LPDWORD lpNumberOfBytesTransferred, // 指向一个32位变量，该变量的值返回实际读写操作传输的字节数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// 该参数用于指定函数是否一直等到重叠操作结束。
+// 如果该参数为TRUE，函数直到操作结束才返回。
+// 如果该参数为FALSE，函数直接返回，这时如果操作没有完成，
+// 通过调用GetLastError()函数会返回ERROR_IO_INCOMPLETE。
+BOOL bWait  </pre></td></tr></table>
+</div>
+</div>
+<p>);</p>
+
+<p>该函数返回重叠操作的结果，用来判断异步操作是否完成，它是通过判断OVERLAPPED结构中的hEvent是否被置位来实现的。</p>
+
+<h3 id="异步读串口的示例代码">异步读串口的示例代码：</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">char</span> <span class="n">lpInBuffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+<span class="n">DWORD</span> <span class="n">dwBytesRead</span><span class="o">=</span><span class="mi">1024</span><span class="p">;</span>
+<span class="n">COMSTAT</span> <span class="n">ComStat</span><span class="p">;</span>        <span class="c1">// 通讯状态
+</span><span class="c1"></span><span class="n">DWORD</span> <span class="n">dwErrorFlags</span><span class="p">;</span>     <span class="c1">// 错误标志
+</span><span class="c1"></span><span class="n">OVERLAPPED</span> <span class="n">m_osRead</span><span class="p">;</span>    <span class="c1">// 异步输入输出结构体
+</span><span class="c1"></span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_osRead</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">OVERLAPPED</span><span class="p">));</span>
+<span class="n">m_osRead</span><span class="p">.</span><span class="n">hEvent</span><span class="o">=</span><span class="n">CreateEvent</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">TRUE</span><span class="p">,</span><span class="n">FALSE</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="n">ClearCommError</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dwErrorFlags</span><span class="p">,</span><span class="o">&amp;</span><span class="n">ComStat</span><span class="p">);</span>    <span class="c1">//清除通讯错误，获得设备当前状态
+</span><span class="c1"></span><span class="n">dwBytesRead</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">dwBytesRead</span><span class="p">,(</span><span class="n">DWORD</span><span class="p">)</span><span class="n">ComStat</span><span class="p">.</span><span class="n">cbInQue</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dwBytesRead</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+    
+<span class="n">BOOL</span> <span class="n">bReadStatus</span><span class="p">;</span>
+<span class="n">bReadStatus</span><span class="o">=</span><span class="n">ReadFile</span><span class="p">(</span>
+    <span class="n">hCom</span><span class="p">,</span>           <span class="c1">// 串口句柄
+</span><span class="c1"></span>    <span class="n">lpInBuffer</span><span class="p">,</span>     <span class="c1">// 数据首地址
+</span><span class="c1"></span>    <span class="n">dwBytesRead</span><span class="p">,</span>    <span class="c1">// 要读取的数据最大字节数
+</span><span class="c1"></span>    <span class="o">&amp;</span><span class="n">dwBytesRead</span><span class="p">,</span>   <span class="c1">// DWORD*,用来接收返回成功读取的数据字节数
+</span><span class="c1"></span>    <span class="o">&amp;</span><span class="n">m_osRead</span>       <span class="c1">// NULL为同步发送，OVERLAPPED*为异步发送
+</span><span class="c1"></span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bReadStatus</span><span class="p">)</span> <span class="c1">//如果ReadFile函数返回FALSE
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">GetLastError</span><span class="p">()</span><span class="o">==</span><span class="n">ERROR_IO_PENDING</span><span class="p">)</span>    <span class="c1">//GetLastError()函数返回ERROR_IO_PENDING,表明串口正在进行读操作 
+</span><span class="c1"></span>    <span class="p">{</span>
+        <span class="n">WaitForSingleObject</span><span class="p">(</span><span class="n">m_osRead</span><span class="p">.</span><span class="n">hEvent</span><span class="p">,</span><span class="mi">2000</span><span class="p">);</span>
+        <span class="c1">//使用WaitForSingleObject函数等待，直到读操作完成或延时已达到2秒钟
+</span><span class="c1"></span>        <span class="c1">//当串口读操作进行完毕后，m_osRead的hEvent事件会变为有信号
+</span><span class="c1"></span>        <span class="n">PurgeComm</span><span class="p">(</span>
+                <span class="n">hCom</span><span class="p">,</span> 
+                <span class="n">PURGE_TXABORT</span><span class="o">|</span><span class="n">PURGE_RXABORT</span><span class="o">|</span><span class="n">PURGE_TXCLEAR</span><span class="o">|</span><span class="n">PURGE_RXCLEAR</span>
+            <span class="p">);</span>
+        <span class="k">return</span> <span class="n">dwBytesRead</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">PurgeComm</span><span class="p">(</span>
+    <span class="n">hCom</span><span class="p">,</span> 
+    <span class="n">PURGE_TXABORT</span><span class="o">|</span><span class="n">PURGE_RXABORT</span><span class="o">|</span><span class="n">PURGE_TXCLEAR</span><span class="o">|</span><span class="n">PURGE_RXCLEAR</span>
+<span class="p">);</span>
+
+<span class="k">return</span> <span class="n">dwBytesRead</span><span class="p">;</span>
+<span class="p">);</span> 
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>对以上代码再作简要说明：在使用ReadFile 函数进行读操作前，应先使用ClearCommError函数清除错误。ClearCommError函数的原型如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">BOOL</span> <span class="nf">ClearCommError</span><span class="p">(</span>
+        <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>       <span class="c1">// 串口句柄
+</span><span class="c1"></span>        <span class="n">LPDWORD</span> <span class="n">lpErrors</span><span class="p">,</span>   <span class="c1">// 指向接收错误码的变量
+</span><span class="c1"></span>        <span class="n">LPCOMSTAT</span> <span class="n">lpStat</span>    <span class="c1">// 指向通讯状态缓冲区
+</span><span class="c1"></span>    <span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>该函数获得通信错误并报告串口的当前状态，同时，该函数清除串口的错误标志以便继续输入、输出操作。
+参数lpStat指向一个COMSTAT结构，该结构返回串口状态信息。 COMSTAT结构 COMSTAT结构包含串口的信息，结构定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_COMSTAT</span> <span class="p">{</span> <span class="c1">// cst 
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fCtsHold</span>  <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// Tx waiting for CTS signal
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fDsrHold</span>  <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// Tx waiting for DSR signal
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fRlsdHold</span> <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// Tx waiting for RLSD signal
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fXoffHold</span> <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// Tx waiting, XOFF char rec&#39;&#39;d
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fXoffSent</span> <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// Tx waiting, XOFF char sent
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fEof</span>      <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// EOF character sent
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fTxim</span>     <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// character waiting for Tx
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="nl">fReserved</span> <span class="p">:</span> <span class="mi">25</span><span class="p">;</span>   <span class="c1">// reserved
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">cbInQue</span><span class="p">;</span>          <span class="c1">// bytes in input buffer
+</span><span class="c1"></span>    <span class="n">DWORD</span> <span class="n">cbOutQue</span><span class="p">;</span>         <span class="c1">// bytes in output buffer
+</span><span class="c1"></span><span class="p">}</span> <span class="n">COMSTAT</span><span class="p">,</span> <span class="o">*</span><span class="n">LPCOMSTAT</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>本文只用到了cbInQue成员变量，该成员变量的值代表输入缓冲区的字节数。</p>
+
+<p>最后用PurgeComm函数清空串口的输入输出缓冲区。
+这段代码用WaitForSingleObject函数来等待OVERLAPPED结构的hEvent成员，下面我们再演示一段调用GetOverlappedResult函数等待的异步读串口示例代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">char</span> <span class="n">lpInBuffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+<span class="n">DWORD</span> <span class="n">dwBytesRead</span><span class="o">=</span><span class="mi">1024</span><span class="p">;</span>
+<span class="n">BOOL</span> <span class="n">bReadStatus</span><span class="p">;</span>
+<span class="n">DWORD</span> <span class="n">dwErrorFlags</span><span class="p">;</span>
+<span class="n">COMSTAT</span> <span class="n">ComStat</span><span class="p">;</span>
+<span class="n">OVERLAPPED</span> <span class="n">m_osRead</span><span class="p">;</span>
+
+<span class="n">ClearCommError</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dwErrorFlags</span><span class="p">,</span><span class="o">&amp;</span><span class="n">ComStat</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ComStat</span><span class="p">.</span><span class="n">cbInQue</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">dwBytesRead</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">dwBytesRead</span><span class="p">,(</span><span class="n">DWORD</span><span class="p">)</span><span class="n">ComStat</span><span class="p">.</span><span class="n">cbInQue</span><span class="p">);</span>
+<span class="n">bReadStatus</span><span class="o">=</span><span class="n">ReadFile</span><span class="p">(</span>
+    <span class="n">hCom</span><span class="p">,</span> 
+    <span class="n">lpInBuffer</span><span class="p">,</span>
+    <span class="n">dwBytesRead</span><span class="p">,</span>
+    <span class="o">&amp;</span><span class="n">dwBytesRead</span><span class="p">,</span>
+    <span class="o">&amp;</span><span class="n">m_osRead</span>
+<span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bReadStatus</span><span class="p">)</span> <span class="c1">//如果ReadFile函数返回FALSE
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">GetLastError</span><span class="p">()</span><span class="o">==</span><span class="n">ERROR_IO_PENDING</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">GetOverlappedResult</span><span class="p">(</span>
+            <span class="n">hCom</span><span class="p">,</span>
+            <span class="o">&amp;</span><span class="n">m_osRead</span><span class="p">,</span>
+            <span class="o">&amp;</span><span class="n">dwBytesRead</span><span class="p">,</span>
+            <span class="n">TRUE</span>    <span class="c1">// GetOverlappedResult函数的最后一个参数设为TRUE，函数会一直等待，直到读操作完成或由于错误而返回。
+</span><span class="c1"></span>        <span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">dwBytesRead</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">dwBytesRead</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="异步写串口的示例代码">异步写串口的示例代码：</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+<span class="n">DWORD</span> <span class="n">dwBytesWritten</span><span class="o">=</span><span class="mi">1024</span><span class="p">;</span>
+<span class="n">DWORD</span> <span class="n">dwErrorFlags</span><span class="p">;</span>
+<span class="n">COMSTAT</span> <span class="n">ComStat</span><span class="p">;</span>
+<span class="n">OVERLAPPED</span> <span class="n">m_osWrite</span><span class="p">;</span>
+<span class="n">BOOL</span> <span class="n">bWriteStat</span><span class="p">;</span>
+
+<span class="n">bWriteStat</span><span class="o">=</span><span class="n">WriteFile</span><span class="p">(</span>
+    <span class="n">hCom</span><span class="p">,</span>
+    <span class="n">buffer</span><span class="p">,</span>
+    <span class="n">dwBytesWritten</span><span class="p">,</span>
+    <span class="o">&amp;</span><span class="n">dwBytesWritten</span><span class="p">,</span>
+    <span class="o">&amp;</span><span class="n">m_osWrite</span>
+<span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bWriteStat</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">GetLastError</span><span class="p">()</span><span class="o">==</span><span class="n">ERROR_IO_PENDING</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">WaitForSingleObject</span><span class="p">(</span><span class="n">m_osWrite</span><span class="p">.</span><span class="n">hEvent</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">dwBytesWritten</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">dwBytesWritten</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="4-关闭串口">（4）关闭串口</h2>
+
+<p>　　利用API函数关闭串口非常简单，只需使用CreateFile函数返回的句柄作为参数调用CloseHandle即可：</p>
+
+<p>BOOL CloseHandle(
+    HANDLE hObject; //handle to object to close
+);</p>
+
+<h2 id="串口编程的一个实例">串口编程的一个实例</h2>
+
+<p>　　为了让您更好地理解串口编程,下面我们分别编写两个例程（见附带的源码部分）,这两个例程都实现了工控机与百特显示仪表通过RS485接口进行的串口通信。其中第一个例程采用同步串口操作,第二个例程采用异步串口操作。
+　　我们只介绍软件部分，RS485接口接线方法不作介绍，感兴趣的读者可以查阅相关资料。</p>
+
+<h3 id="例程1-同步模式">例程1（同步模式）</h3>
+
+<p>　　打开VC++6.0，新建基于对话框的工程RS485Comm，在主对话框窗口IDD_RS485COMM_DIALOG上添加两个按钮，ID分别为IDC_SEND和IDC_RECEIVE，标题分别为“发送”和“接收”；添加一个静态文本框IDC_DISP，用于显示串口接收到的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="err">在</span><span class="n">RS485CommDlg</span><span class="p">.</span><span class="n">cpp文件中添加全局变量</span><span class="err">：</span>
+
+    <span class="n">HANDLE</span> <span class="n">hCom</span><span class="p">;</span>  <span class="c1">//全局变量，串口句柄
+</span><span class="c1"></span>
+<span class="err">在</span><span class="n">RS485CommDlg</span><span class="p">.</span><span class="n">cpp文件中的OnInitDialog</span><span class="p">()</span><span class="err">函数添加如下代码：</span>  
+    <span class="c1">// TODO: Add extra initialization here
+</span><span class="c1"></span>    <span class="n">hCom</span><span class="o">=</span><span class="n">CreateFile</span><span class="p">(</span>
+        <span class="s">&#34;COM1&#34;</span><span class="p">,</span>                     <span class="c1">//COM1口
+</span><span class="c1"></span>        <span class="n">GENERIC_READ</span><span class="o">|</span><span class="n">GENERIC_WRITE</span><span class="p">,</span> <span class="c1">//允许读和写
+</span><span class="c1"></span>        <span class="mi">0</span><span class="p">,</span>                          <span class="c1">//独占方式
+</span><span class="c1"></span>        <span class="nb">NULL</span><span class="p">,</span>           
+        <span class="n">OPEN_EXISTING</span><span class="p">,</span>              <span class="c1">//打开而不是创建
+</span><span class="c1"></span>        <span class="mi">0</span><span class="p">,</span>                          <span class="c1">//同步方式
+</span><span class="c1"></span>        <span class="nb">NULL</span>
+    <span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">hCom</span><span class="o">==</span><span class="p">(</span><span class="n">HANDLE</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">AfxMessageBox</span><span class="p">(</span><span class="s">&#34;打开COM失败!&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">SetupComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span> <span class="c1">//输入缓冲区和输出缓冲区的大小都是100
+</span><span class="c1"></span>    
+    <span class="n">COMMTIMEOUTS</span> <span class="n">TimeOuts</span><span class="p">;</span>
+    <span class="c1">//设定读超时
+</span><span class="c1"></span>    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadIntervalTimeout</span><span class="o">=</span><span class="n">MAXDWORD</span><span class="p">;</span>
+    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadTotalTimeoutMultiplier</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadTotalTimeoutConstant</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="c1">//在读一次输入缓冲区的内容后读操作就立即返回，而不管是否读入了要求的字符。
+</span><span class="c1"></span>    <span class="c1">//设定写超时
+</span><span class="c1"></span>    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">WriteTotalTimeoutMultiplier</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span>
+    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">WriteTotalTimeoutConstant</span><span class="o">=</span><span class="mi">500</span><span class="p">;</span>
+    <span class="n">SetCommTimeouts</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">TimeOuts</span><span class="p">);</span> <span class="c1">//设置超时
+</span><span class="c1"></span>    
+    <span class="n">DCB</span> <span class="n">dcb</span><span class="p">;</span>
+    <span class="n">GetCommState</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dcb</span><span class="p">);</span>
+    <span class="n">dcb</span><span class="p">.</span><span class="n">BaudRate</span><span class="o">=</span><span class="mi">9600</span><span class="p">;</span>         <span class="c1">//波特率为9600
+</span><span class="c1"></span>    <span class="n">dcb</span><span class="p">.</span><span class="n">ByteSize</span><span class="o">=</span><span class="mi">8</span><span class="p">;</span>            <span class="c1">//每个字节有8位
+</span><span class="c1"></span>    <span class="n">dcb</span><span class="p">.</span><span class="n">Parity</span><span class="o">=</span><span class="n">NOPARITY</span><span class="p">;</span>       <span class="c1">//无奇偶校验位
+</span><span class="c1"></span>    <span class="n">dcb</span><span class="p">.</span><span class="n">StopBits</span><span class="o">=</span><span class="n">TWOSTOPBITS</span><span class="p">;</span>  <span class="c1">//两个停止位
+</span><span class="c1"></span>    <span class="n">SetCommState</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dcb</span><span class="p">);</span>
+    
+    <span class="n">PurgeComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">PURGE_TXCLEAR</span><span class="o">|</span><span class="n">PURGE_RXCLEAR</span><span class="p">);</span>
+
+<span class="err">分别双击</span><span class="n">IDC_SEND按钮和IDC_RECEIVE按钮</span><span class="err">，添加两个按钮的响应函数：</span> 
+    <span class="kt">void</span> <span class="n">CRS485CommDlg</span><span class="o">::</span><span class="n">OnSend</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO: Add your control notification handler code here
+</span><span class="c1"></span>        <span class="c1">// 在此需要简单介绍百特公司XMA5000的通讯协议：
+</span><span class="c1"></span>        <span class="c1">//该仪表RS485通讯采用主机广播方式通讯。
+</span><span class="c1"></span>        <span class="c1">//串行半双工，帧11位，1个起始位(0)，8个数据位，2个停止位(1)
+</span><span class="c1"></span>        <span class="c1">//如：读仪表显示的瞬时值，主机发送：DC1 AAA BB ETX
+</span><span class="c1"></span>        <span class="c1">//其中：DC1是标准ASCII码的一个控制符号，码值为11H(十进制的17)
+</span><span class="c1"></span>        <span class="c1">//在XMA5000的通讯协议中，DC1表示读瞬时值
+</span><span class="c1"></span>        <span class="c1">//AAA是从机地址码，也就是XMA5000显示仪表的通讯地址
+</span><span class="c1"></span>        <span class="c1">//BB为通道号，读瞬时值时该值为01
+</span><span class="c1"></span>        <span class="c1">//ETX也是标准ASCII码的一个控制符号，码值为03H
+</span><span class="c1"></span>        <span class="c1">//在XMA5000的通讯协议中，ETX表示主机结束符
+</span><span class="c1"></span>        
+        <span class="kt">char</span> <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">lpOutBuffer</span><span class="p">,</span><span class="err">&#39;&#39;</span><span class="o">/</span><span class="mi">0</span><span class="err">&#39;&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span> <span class="c1">//前7个字节先清零
+</span><span class="c1"></span>        <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;&#39;</span><span class="o">/</span><span class="n">x11</span><span class="err">&#39;&#39;</span><span class="p">;</span>  <span class="c1">//发送缓冲区的第1个字节为DC1
+</span><span class="c1"></span>        <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;0&#39;</span><span class="err">&#39;</span><span class="p">;</span>  <span class="c1">//第2个字节为字符0(30H)
+</span><span class="c1"></span>        <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;0&#39;</span><span class="err">&#39;</span><span class="p">;</span> <span class="c1">//第3个字节为字符0(30H)
+</span><span class="c1"></span>        <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;1&#39;</span><span class="err">&#39;</span><span class="p">;</span> <span class="c1">// 第4个字节为字符1(31H)
+</span><span class="c1"></span>        <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;0&#39;</span><span class="err">&#39;</span><span class="p">;</span> <span class="c1">//第5个字节为字符0(30H)
+</span><span class="c1"></span>        <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;1&#39;</span><span class="err">&#39;</span><span class="p">;</span> <span class="c1">//第6个字节为字符1(31H)
+</span><span class="c1"></span>        <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;&#39;</span><span class="o">/</span><span class="n">x03</span><span class="err">&#39;&#39;</span><span class="p">;</span> <span class="c1">//第7个字节为字符ETX
+</span><span class="c1"></span>        <span class="c1">//从该段代码可以看出，仪表的通讯地址为001 
+</span><span class="c1"></span>        <span class="n">DWORD</span> <span class="n">dwBytesWrite</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span>
+        <span class="n">COMSTAT</span> <span class="n">ComStat</span><span class="p">;</span>
+        <span class="n">DWORD</span> <span class="n">dwErrorFlags</span><span class="p">;</span>
+        <span class="n">BOOL</span> <span class="n">bWriteStat</span><span class="p">;</span>
+        <span class="n">ClearCommError</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dwErrorFlags</span><span class="p">,</span><span class="o">&amp;</span><span class="n">ComStat</span><span class="p">);</span>
+        <span class="n">bWriteStat</span><span class="o">=</span><span class="n">WriteFile</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">lpOutBuffer</span><span class="p">,</span><span class="n">dwBytesWrite</span><span class="p">,</span><span class="o">&amp;</span> <span class="n">dwBytesWrite</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bWriteStat</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">AfxMessageBox</span><span class="p">(</span><span class="s">&#34;写串口失败!&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+    <span class="p">}</span>
+    
+    <span class="kt">void</span> <span class="n">CRS485CommDlg</span><span class="o">::</span><span class="n">OnReceive</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO: Add your control notification handler code here
+</span><span class="c1"></span>        
+        <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="err">&#39;&#39;</span><span class="o">/</span><span class="mi">0</span><span class="err">&#39;&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+        <span class="n">DWORD</span> <span class="n">wCount</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span><span class="c1">//读取的字节数
+</span><span class="c1"></span>        <span class="n">BOOL</span> <span class="n">bReadStat</span><span class="p">;</span>
+        <span class="n">bReadStat</span><span class="o">=</span><span class="n">ReadFile</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">str</span><span class="p">,</span><span class="n">wCount</span><span class="p">,</span><span class="o">&amp;</span><span class="n">wCount</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bReadStat</span><span class="p">)</span>
+            <span class="n">AfxMessageBox</span><span class="p">(</span><span class="s">&#34;读串口失败!&#34;</span><span class="p">);</span>
+        <span class="n">PurgeComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span> <span class="n">PURGE_TXABORT</span><span class="o">|</span>
+        <span class="n">PURGE_RXABORT</span><span class="o">|</span><span class="n">PURGE_TXCLEAR</span><span class="o">|</span><span class="n">PURGE_RXCLEAR</span><span class="p">);</span>
+        <span class="n">m_disp</span><span class="o">=</span><span class="n">str</span><span class="p">;</span>
+        <span class="n">UpdateData</span><span class="p">(</span><span class="n">FALSE</span><span class="p">);</span>
+    
+    <span class="p">}</span>
+    
+    <span class="err">您可以观察返回的字符串，其中有和仪表显示值相同的部分，您可以进行相应的字符串操作取出仪表的显示值。</span>
+    <span class="err">打开</span><span class="n">ClassWizard</span><span class="p">,</span><span class="err">为静态文本框</span><span class="n">IDC_DISP添加CString类型变量m_disp</span><span class="err">，同时添加</span><span class="n">WM_CLOSE的相应函数</span><span class="err">：</span> 
+    <span class="kt">void</span> <span class="n">CRS485CommDlg</span><span class="o">::</span><span class="n">OnClose</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO: Add your message handler code here and/or call default
+</span><span class="c1"></span>        <span class="n">CloseHandle</span><span class="p">(</span><span class="n">hCom</span><span class="p">);</span> <span class="c1">//程序退出时关闭串口
+</span><span class="c1"></span>        <span class="n">CDialog</span><span class="o">::</span><span class="n">OnClose</span><span class="p">();</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>程序的相应部分已经在代码内部作了详细介绍。连接好硬件部分，编译运行程序，细心体会串口同步操作部分。</p>
+
+<h3 id="例程2-异步模式">例程2（异步模式）</h3>
+
+<p>　　打开VC++6.0，新建基于对话框的工程RS485Comm，在主对话框窗口IDD_RS485COMM_DIALOG上添加两个按钮，ID分别为IDC_SEND和IDC_RECEIVE，标题分别为“发送”和“接收”；添加一个静态文本框IDC_DISP，用于显示串口接收到的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="err">在</span><span class="n">RS485CommDlg</span><span class="p">.</span><span class="n">cpp文件中添加全局变量</span><span class="err">：</span>
+    <span class="n">HANDLE</span> <span class="n">hCom</span><span class="p">;</span> <span class="c1">//全局变量，
+</span><span class="c1"></span><span class="err">串口句柄在</span><span class="n">RS485CommDlg</span><span class="p">.</span><span class="n">cpp文件中的OnInitDialog</span><span class="p">()</span><span class="err">函数添加如下代码：</span>
+
+    <span class="n">hCom</span><span class="o">=</span><span class="n">CreateFile</span><span class="p">(</span>
+        <span class="s">&#34;COM1&#34;</span><span class="p">,</span><span class="c1">//COM1口
+</span><span class="c1"></span>        <span class="n">GENERIC_READ</span><span class="o">|</span><span class="n">GENERIC_WRITE</span><span class="p">,</span> <span class="c1">//允许读和写
+</span><span class="c1"></span>        <span class="mi">0</span><span class="p">,</span> <span class="c1">//独占方式
+</span><span class="c1"></span>        <span class="nb">NULL</span><span class="p">,</span>
+        <span class="n">OPEN_EXISTING</span><span class="p">,</span> <span class="c1">//打开而不是创建
+</span><span class="c1"></span>        <span class="n">FILE_ATTRIBUTE_NORMAL</span><span class="o">|</span><span class="n">FILE_FLAG_OVERLAPPED</span><span class="p">,</span> <span class="c1">//重叠方式
+</span><span class="c1"></span>        <span class="nb">NULL</span>
+    <span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">hCom</span><span class="o">==</span><span class="p">(</span><span class="n">HANDLE</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">AfxMessageBox</span><span class="p">(</span><span class="s">&#34;打开COM失败!&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">SetupComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span> <span class="c1">//输入缓冲区和输出缓冲区的大小都是100
+</span><span class="c1"></span>
+    <span class="n">COMMTIMEOUTS</span> <span class="n">TimeOuts</span><span class="p">;</span>
+    <span class="c1">//设定读超时
+</span><span class="c1"></span>    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadIntervalTimeout</span><span class="o">=</span><span class="n">MAXDWORD</span><span class="p">;</span>
+    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadTotalTimeoutMultiplier</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">ReadTotalTimeoutConstant</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="c1">//在读一次输入缓冲区的内容后读操作就立即返回，
+</span><span class="c1"></span>    <span class="c1">//而不管是否读入了要求的字符。
+</span><span class="c1"></span>    
+    
+    <span class="c1">//设定写超时
+</span><span class="c1"></span>    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">WriteTotalTimeoutMultiplier</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span>
+    <span class="n">TimeOuts</span><span class="p">.</span><span class="n">WriteTotalTimeoutConstant</span><span class="o">=</span><span class="mi">500</span><span class="p">;</span>
+    <span class="n">SetCommTimeouts</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">TimeOuts</span><span class="p">);</span> <span class="c1">//设置超时
+</span><span class="c1"></span>    
+    <span class="n">DCB</span> <span class="n">dcb</span><span class="p">;</span>
+    <span class="n">GetCommState</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dcb</span><span class="p">);</span>
+    <span class="n">dcb</span><span class="p">.</span><span class="n">BaudRate</span><span class="o">=</span><span class="mi">9600</span><span class="p">;</span> <span class="c1">//波特率为9600
+</span><span class="c1"></span>    <span class="n">dcb</span><span class="p">.</span><span class="n">ByteSize</span><span class="o">=</span><span class="mi">8</span><span class="p">;</span> <span class="c1">//每个字节有8位
+</span><span class="c1"></span>    <span class="n">dcb</span><span class="p">.</span><span class="n">Parity</span><span class="o">=</span><span class="n">NOPARITY</span><span class="p">;</span> <span class="c1">//无奇偶校验位
+</span><span class="c1"></span>    <span class="n">dcb</span><span class="p">.</span><span class="n">StopBits</span><span class="o">=</span><span class="n">TWOSTOPBITS</span><span class="p">;</span> <span class="c1">//两个停止位
+</span><span class="c1"></span>    <span class="n">SetCommState</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dcb</span><span class="p">);</span>
+    
+    <span class="n">PurgeComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">PURGE_TXCLEAR</span><span class="o">|</span><span class="n">PURGE_RXCLEAR</span><span class="p">);</span>
+
+<span class="err">分别双击</span><span class="n">IDC_SEND按钮和IDC_RECEIVE按钮</span><span class="err">，添加两个按钮的响应函数：</span> 
+<span class="kt">void</span> <span class="n">CRS485CommDlg</span><span class="o">::</span><span class="n">OnSend</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// TODO: Add your control notification handler code here
+</span><span class="c1"></span>    <span class="n">OVERLAPPED</span> <span class="n">m_osWrite</span><span class="p">;</span>
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_osWrite</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">OVERLAPPED</span><span class="p">));</span>
+    <span class="n">m_osWrite</span><span class="p">.</span><span class="n">hEvent</span><span class="o">=</span><span class="n">CreateEvent</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">TRUE</span><span class="p">,</span><span class="n">FALSE</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+    
+    
+    <span class="kt">char</span> <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">lpOutBuffer</span><span class="p">,</span><span class="err">&#39;&#39;</span><span class="o">/</span><span class="mi">0</span><span class="err">&#39;&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+    <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;&#39;</span><span class="o">/</span><span class="n">x11</span><span class="err">&#39;&#39;</span><span class="p">;</span>
+    <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;0&#39;</span><span class="err">&#39;</span><span class="p">;</span>
+    <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;0&#39;</span><span class="err">&#39;</span><span class="p">;</span>
+    <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;1&#39;</span><span class="err">&#39;</span><span class="p">;</span>
+    <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;0&#39;</span><span class="err">&#39;</span><span class="p">;</span>
+    <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;</span><span class="sc">&#39;1&#39;</span><span class="err">&#39;</span><span class="p">;</span>
+    <span class="n">lpOutBuffer</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="err">&#39;&#39;</span><span class="o">/</span><span class="n">x03</span><span class="err">&#39;&#39;</span><span class="p">;</span>
+    
+    <span class="n">DWORD</span> <span class="n">dwBytesWrite</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span>
+    <span class="n">COMSTAT</span> <span class="n">ComStat</span><span class="p">;</span>
+    <span class="n">DWORD</span> <span class="n">dwErrorFlags</span><span class="p">;</span>
+    <span class="n">BOOL</span> <span class="n">bWriteStat</span><span class="p">;</span>
+    <span class="n">ClearCommError</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dwErrorFlags</span><span class="p">,</span><span class="o">&amp;</span><span class="n">ComStat</span><span class="p">);</span>
+    <span class="n">bWriteStat</span><span class="o">=</span><span class="n">WriteFile</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">lpOutBuffer</span><span class="p">,</span>
+    <span class="n">dwBytesWrite</span><span class="p">,</span><span class="o">&amp;</span> <span class="n">dwBytesWrite</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m_osWrite</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bWriteStat</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">GetLastError</span><span class="p">()</span><span class="o">==</span><span class="n">ERROR_IO_PENDING</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">WaitForSingleObject</span><span class="p">(</span><span class="n">m_osWrite</span><span class="p">.</span><span class="n">hEvent</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">CRS485CommDlg</span><span class="o">::</span><span class="n">OnReceive</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// TODO: Add your control notification handler code here
+</span><span class="c1"></span>    <span class="n">OVERLAPPED</span> <span class="n">m_osRead</span><span class="p">;</span>
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_osRead</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">OVERLAPPED</span><span class="p">));</span>
+    <span class="n">m_osRead</span><span class="p">.</span><span class="n">hEvent</span><span class="o">=</span><span class="n">CreateEvent</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">TRUE</span><span class="p">,</span><span class="n">FALSE</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+    
+    <span class="n">COMSTAT</span> <span class="n">ComStat</span><span class="p">;</span>
+    <span class="n">DWORD</span> <span class="n">dwErrorFlags</span><span class="p">;</span>
+    
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="err">&#39;&#39;</span><span class="o">/</span><span class="mi">0</span><span class="err">&#39;&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+    <span class="n">DWORD</span> <span class="n">dwBytesRead</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span><span class="c1">//读取的字节数
+</span><span class="c1"></span>    <span class="n">BOOL</span> <span class="n">bReadStat</span><span class="p">;</span>
+    
+    <span class="n">ClearCommError</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dwErrorFlags</span><span class="p">,</span><span class="o">&amp;</span><span class="n">ComStat</span><span class="p">);</span>
+    <span class="n">dwBytesRead</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">dwBytesRead</span><span class="p">,</span> <span class="p">(</span><span class="n">DWORD</span><span class="p">)</span><span class="n">ComStat</span><span class="p">.</span><span class="n">cbInQue</span><span class="p">);</span>
+    <span class="n">bReadStat</span><span class="o">=</span><span class="n">ReadFile</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span><span class="n">str</span><span class="p">,</span>
+    <span class="n">dwBytesRead</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dwBytesRead</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m_osRead</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bReadStat</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">GetLastError</span><span class="p">()</span><span class="o">==</span><span class="n">ERROR_IO_PENDING</span><span class="p">)</span> <span class="c1">//GetLastError()函数返回ERROR_IO_PENDING,表明串口正在进行读操作
+</span><span class="c1"></span>        <span class="p">{</span>
+            <span class="n">WaitForSingleObject</span><span class="p">(</span><span class="n">m_osRead</span><span class="p">.</span><span class="n">hEvent</span><span class="p">,</span><span class="mi">2000</span><span class="p">);</span>
+                <span class="c1">//使用WaitForSingleObject函数等待，直到读操作完成或延时已达到2秒钟
+</span><span class="c1"></span>                <span class="c1">//当串口读操作进行完毕后，m_osRead的hEvent事件会变为有信号
+</span><span class="c1"></span>        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">PurgeComm</span><span class="p">(</span><span class="n">hCom</span><span class="p">,</span> <span class="n">PURGE_TXABORT</span><span class="o">|</span><span class="n">PURGE_RXABORT</span><span class="o">|</span><span class="n">PURGE_TXCLEAR</span><span class="o">|</span><span class="n">PURGE_RXCLEAR</span><span class="p">);</span>
+    <span class="n">m_disp</span><span class="o">=</span><span class="n">str</span><span class="p">;</span>
+    <span class="n">UpdateData</span><span class="p">(</span><span class="n">FALSE</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="err">打开</span><span class="n">ClassWizard</span><span class="p">,</span><span class="err">为静态文本框</span><span class="n">IDC_DISP添加CString类型变量m_disp</span><span class="err">，同时添加</span><span class="n">WM_CLOSE的相应函数</span><span class="err">：</span> 
+<span class="kt">void</span> <span class="n">CRS485CommDlg</span><span class="o">::</span><span class="n">OnClose</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// TODO: Add your message handler code here and/or call default
+</span><span class="c1"></span>    <span class="n">CloseHandle</span><span class="p">(</span><span class="n">hCom</span><span class="p">);</span> <span class="c1">//程序退出时关闭串口
+</span><span class="c1"></span>    <span class="n">CDialog</span><span class="o">::</span><span class="n">OnClose</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="问题-经验总结">问题、经验总结：</h1>
+
+<p>上位机通过串口发送指令，板卡返回寄存器内容。串口使用使用同步模式。发现上位机接收到的寄存器值有时候不正确；接收数据经常出现接收数据长度小于预期值的问题，有时长度甚至为0。</p>
+
+<p>将读间隔时间由15改为25后，明显好转。但是并未完全解决，出现问题的时间间隔变得很长。
+继续增加读间隔时间不会有什么变化。现在已经增加到500，读时间常量已经增加到2000.还是有错？？？</p>
+
+<p>两个实验：
+① 使用串口助手向板卡发送指令，发现板卡响应指令个数正确。从数据量上看并未有数据丢失；基本可以排除板卡的问题；
+② 上位机发送数据，在USB转串口上用一根线自环。发现接收数据量也没有问题。</p>
+
+<p>怀疑：
+① 现在怀疑是上位机发送数据的时候，writefile函数已经执行完了，但是串口并没有把数据发送出去。</p>
+
+<p>另一个是经验：</p>
+
+<ol>
+<li>串口接收数据，比较耗时，发送1000次可能只需要0.281s，但是接收同样的次数，需要1.6s左右。</li>
+<li>同时不同的USB转串口模块，读数据的时间不一致。并不是波特率越高时间越短。</li>
+<li>解决的方法是，一次读大量的数据。减少串口的操作次数，实测能够大幅提高速度。瓶颈应该是在读串口上。</li>
+</ol>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-03-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E4%B8%B2%E5%8F%A3/">串口</a>
+          <a href="/tags/windows/">Windows</a>
+          <a href="/tags/c/c&#43;&#43;/">C/C&#43;&#43;</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/ansi%E5%92%8Cunicode%E8%BD%AC%E6%8D%A2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">VS中ANSI和Unicode转换</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/frp&#43;windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/">
+            <span class="next-text nav-default">FRP&#43;Windows远程桌面</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>MFC学习 - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="VS2008 MFC学习
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/mfc%E5%AD%A6%E4%B9%A0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="MFC学习" />
+<meta property="og:description" content="VS2008 MFC学习" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/mfc%E5%AD%A6%E4%B9%A0/" />
+<meta property="article:published_time" content="2019-08-14T10:10:10+08:00" />
+<meta property="article:modified_time" content="2019-08-14T10:10:10+08:00" />
+<meta itemprop="name" content="MFC学习">
+<meta itemprop="description" content="VS2008 MFC学习">
+
+
+<meta itemprop="datePublished" content="2019-08-14T10:10:10&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-14T10:10:10&#43;08:00" />
+<meta itemprop="wordCount" content="15922">
+
+
+
+<meta itemprop="keywords" content="MFC,C/C&#43;&#43;,Windows," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MFC学习"/>
+<meta name="twitter:description" content="VS2008 MFC学习"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">MFC学习</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%BD%AF%E4%BB%B6/"> 软件 </a>
+            </div>
+          <span class="more-meta"> 约 15922 字 </span>
+          <span class="more-meta"> 预计阅读 32 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#vs2008新建fmc工程步骤">VS2008新建FMC工程步骤：</a>
+<ul>
+<li><a href="#应用程序类型说明"><strong>应用程序类型说明</strong>：</a></li>
+</ul></li>
+<li><a href="#应用程序工程中文件的组成结构">应用程序工程中文件的组成结构</a></li>
+<li><a href="#mfc框架结构的分析">MFC框架结构的分析</a>
+<ul>
+<li><a href="#框架代码文件的结构">框架代码文件的结构</a>
+<ul>
+<li><a href="#文件介绍">文件介绍：</a></li>
+</ul></li>
+<li><a href="#应用程序类">应用程序类</a></li>
+<li><a href="#框架类和视图类">框架类和视图类</a></li>
+<li><a href="#对话框类">对话框类</a></li>
+<li><a href="#添加消息响应">添加消息响应</a></li>
+</ul></li>
+<li><a href="#mfc消息映射机制概述">MFC消息映射机制概述</a>
+<ul>
+<li><a href="#什么是消息">什么是消息</a></li>
+<li><a href="#什么是消息映射机制">什么是消息映射机制</a></li>
+<li><a href="#windows消息分类">Windows消息分类</a></li>
+<li><a href="#消息映射表">消息映射表</a></li>
+</ul></li>
+<li><a href="#mfc中典型类和函数的介绍">MFC中典型类和函数的介绍</a>
+<ul>
+<li><a href="#mfc字符串操作类cstring">MFC字符串操作类CString</a></li>
+<li><a href="#典型函数">典型函数</a></li>
+</ul></li>
+<li><a href="#mfc视图和窗口的基本概念">MFC视图和窗口的基本概念</a>
+<ul>
+<li><a href="#视-view-类窗口">视（View）类窗口</a></li>
+<li><a href="#主框架-mainframe-窗口">主框架（MainFrame）窗口</a></li>
+<li><a href="#文档-doc">文档（Doc）</a></li>
+</ul></li>
+<li><a href="#mfc-文档-视图和框架窗口间的关系和消息传送">MFC 文档、视图和框架窗口间的关系和消息传送</a></li>
+<li><a href="#其他内容-略">其他内容（略）</a></li>
+<li><a href="#添加资源-窗口-菜单等">添加资源（窗口、菜单等）</a></li>
+<li><a href="#对话框">对话框</a></li>
+<li><a href="#mfc常用控件">MFC常用控件</a>
+<ul>
+<li><a href="#list-control-表格">List Control 表格</a></li>
+<li><a href="#红绿灯">红绿灯</a></li>
+<li><a href="#combox">Combox</a></li>
+<li><a href="#checkbox">Checkbox</a></li>
+</ul></li>
+<li><a href="#mfc常用函数">MFC常用函数</a>
+<ul>
+<li><a href="#bool-precreatewindow-createstruct-cs">BOOL PreCreateWindow(CREATESTRUCT&amp; cs)</a></li>
+<li><a href="#void-oninitialupdate">void OnInitialUpdate()</a></li>
+<li><a href="#void-assertvalid-const">void AssertValid() const</a></li>
+<li><a href="#void-dump-cdumpcontext-dc-const">void Dump(CDumpContext&amp; dc) const</a></li>
+<li><a href="#hbrush-onctlcolor-cdc-pdc-cwnd-pwnd-uint-nctlcolor">HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)</a></li>
+<li><a href="#dodataexchange">DoDataExchange</a></li>
+<li><a href="#定时器">定时器</a></li>
+</ul></li>
+<li><a href="#窗口销毁">窗口销毁</a>
+<ul>
+<li><a href="#onok-oncancel-ondestroy的区别">OnOK、OnCancel、OnDestroy的区别:</a></li>
+</ul></li>
+<li><a href="#对话框类中添加消息对应的函数">对话框类中添加消息对应的函数</a></li>
+<li><a href="#附">附</a>
+<ul>
+<li><a href="#this指针">This指针</a></li>
+<li><a href="#虚函数">虚函数：</a></li>
+<li><a href="#message-map">MESSAGE_MAP</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>VS2008 MFC学习</p>
+
+<p>2019年8月23日16:44:04 更新，精简内容；</p>
+
+<p>参考：</p>
+
+<p><a href="http://c.biancheng.net/cpp/mfc/">http://c.biancheng.net/cpp/mfc/</a> MFC入门教程：1天深入浅出MFC</p>
+
+<p><a href="https://www.cnblogs.com/muouln/p/8036693.html">https://www.cnblogs.com/muouln/p/8036693.html</a> 深入浅出话VC++——MFC的本质</p>
+
+<p><a href="http://www.jizhuomi.com/school/c/149.html">http://www.jizhuomi.com/school/c/149.html</a> VS2010/MFC编程入门之前言</p>
+
+<h1 id="vs2008新建fmc工程步骤">VS2008新建FMC工程步骤：</h1>
+
+<p>文件新建项目</p>
+
+<p><img src="/media-MFC学习/4891424f4ed65001e525ac0d10de9149.png" alt="" /></p>
+
+<p>选择MFC应用程序</p>
+
+<p><img src="/media-MFC学习/b1d79887a42e5fb1439782af1debfb53.png" alt="" /></p>
+
+<p><img src="/media-MFC学习/1214643f95096472ebfd0e7d08e12ccb.png" alt="" /></p>
+
+<p><a href="#应用程序类型说明">应用程序类型</a>：选择单文档</p>
+
+<p><img src="/media-MFC学习/a78845e75555630f8f54ee4ea909ea4d.png" alt="" /></p>
+
+<p>出现MFC向导的第三个对话框，复合文档支持保持默认选择，然后在出现的对话框中一直点击下一步来完成一个单文档MFC应用程序的创建。</p>
+
+<p><img src="/media-MFC学习/9ad414bf7c395e80216639c3dc69ca30.png" alt="" /></p>
+
+<p><img src="/media-MFC学习/031de815d6a5667e95c0498ff60ff0b3.png" alt="" /></p>
+
+<p><img src="/media-MFC学习/c08da51c4b3eda6aeb606ce89ff4f9a1.png" alt="" /></p>
+
+<p><img src="/media-MFC学习/c0453538bcf3741516207752c52ad2e2.png" alt="" /></p>
+
+<p><img src="/media-MFC学习/c4e95aaa0c88efc67932eb3915204352.png" alt="" /></p>
+
+<p>下面，按下Ctrl+F5来运行MFC应用程序，之后将看到我们创建的MFC应用程序界面，具体如下图所示：</p>
+
+<p><img src="/media-MFC学习/e343d7a60f62c07609328125b0665360.png" alt="" /></p>
+
+<h2 id="应用程序类型说明"><strong>应用程序类型说明</strong>：</h2>
+
+<p><strong>单文档：</strong>记事本类程序的标准模式，有菜单栏、工具栏等，只能进行一份文档的操作，即不能同时在同一个应用程序中打开两个文件</p>
+
+<p><strong>多文档：</strong>WORD类或浏览器程序的标准模式，可多个窗口显示不同的信息，进行不同的任务，有多个视图环境，可同时操作多个文件。多个文件共享同一菜单栏、工具栏等</p>
+
+<p><strong>对话框：</strong>可方便的使用控件，所见即所得的编程，没有菜单栏、工具栏等</p>
+
+<p>怎样看出一个MFC应用程序是基于单文档、多文档还是对话框？</p>
+
+<p>1.运行应用程序观看，对话框一般没有菜单栏、工具栏等，单文档和多文档有，另多文档可产生子窗口，会有一个childframe
+class</p>
+
+<p>2.从源码中的类观看：</p>
+
+<p>基于对话框—&gt;一般含以下3个类：CAboutDlg、程序名App、程序名Dlg</p>
+
+<p>基于单文档—&gt;一般含以下4个类：CMainFrame、程序名App、程序名Doc、程序名View</p>
+
+<p>基于多文档—&gt;一般含以下5个类：CMainFrame、CChildFrame、程序名App、程序名Doc、程序名View</p>
+
+<h1 id="应用程序工程中文件的组成结构">应用程序工程中文件的组成结构</h1>
+
+<p><a href="http://www.jizhuomi.com/school/c/152.html">http://www.jizhuomi.com/school/c/152.html</a></p>
+
+<p>鸡啄米将所有文件分为6个部分<strong>：解决方案相关文件、工程相关文件、应用程序头文件和源文件、资源文件、预编译头文件和编译链接生成文件。</strong></p>
+
+<p><strong>1.解决方案相关文件</strong></p>
+
+<p>解决方案相关文件包括解决方案文件夹下的.sdf文件、.sln文件、.suo文件和ipch文件夹。</p>
+
+<p><strong>.sdf文件和ipch目录</strong>一般占用空间比较大，几十兆甚至上百兆，与智能提示、错误提示、代码恢复和团队本地仓库等相关。如果你觉得不需要则可以设置不生成它们，方法是点击菜单栏Tools-&gt;Options，弹出Options对话框，选择左侧面板中Text
+Editor-&gt;C/C++-&gt;Advanced，右侧列表中第一项Disable
+Database由False改为True就可以了，最后关闭VS2010再删除.sdf文件和ipch目录以后就不会再产生了。但关闭此选项以后也会有很多不便，例如写程序时的智能提示没有了。</p>
+
+<p><strong>.sln文件和.suo</strong>文件为MFC自动生成的解决方案文件，它包含当前解决方案中的工程信息，存储解决方案的设置。</p>
+
+<p><strong> 2.工程相关文件</strong></p>
+
+<p>工程相关文件包括工程文件夹下的.vcxproj文件和.vcxproj.filters文件。</p>
+
+<p>.vcxproj文件是MFC生成的工程文件，它包含当前工程的设置和工程所包含的文件等信息。.vcxproj.filters文件存放工程的虚拟目录信息，也就是在解决方案浏览器中的目录结构信息。</p>
+
+<p><strong> 3.应用程序头文件和源文件</strong></p>
+
+<p>应用程序向导会根据应用程序的类型（单文档、多文档或基于对话框的程序）自动生成一些头文件和源文件，这些文件是工程的主体部分，用于实现主框架、文档、视图等。鸡啄米下面分别简单介绍下各个文件：（HelloWorld为工程名）</p>
+
+<p>HelloWorld.h：<strong>应用程序的主头文件</strong>。主要包含由CWinAppEx类派生的<strong>CHelloWorldApp类</strong>的声明，以及CHelloWorldApp类的<strong>全局对象theApp</strong>的声明。</p>
+
+<p>HelloWorld.cpp：<strong>应用程序的主源文件</strong>。主要包含CHelloWorldApp类的实现，CHelloWorldApp类的全局对象theApp的定义等。</p>
+
+<p>MainFrm.h和MainFrm.cpp：通过这两个文件从CFrameWndEx类派生出CMainFrame类，用于<strong>创建主框架、菜单栏、工具栏和状态栏等</strong>。</p>
+
+<p>HelloWorldDoc.h和HelloWorldDoc.cpp：这两个文件从CDocument类派生出文档类CHelloWorldDoc，包含一些用来初始化文档、串行化（保存和装入）文档和调试的成员函数。</p>
+
+<p>HelloWorldView.h和HelloWorldView.cpp：它们<strong>从CView类派生出名为CHelloWorldView的视图类</strong>，用来显示和打印文档数据，<strong>包含了一些绘图和用于调试的成员函数</strong>。</p>
+
+<p>ClassView.h和ClassView.cpp：由CDockablePane类派生出CClassView类，用于实现应用程序界面左侧面板上的Class
+View。</p>
+
+<p>FileView.h和FileView.cpp：由CDockablePane类派生出CFileView类，用于实现应用程序界面左侧面板上的File
+View。</p>
+
+<p>OutputWnd.h和OutputWnd.cpp：由CDockablePane类派生出COutputWnd类，用于实现应用程序界面下侧面板Output。</p>
+
+<p>PropertiesWnd.h和PropertiesWnd.cpp：由CDockablePane类派生出CPropertiesWnd类，用于实现应用程序界面右侧面板Properties。</p>
+
+<p>ViewTree.h和ViewTree.cpp：由CTreeCtrl类派生出CViewTree类，用于实现出现在ClassView和FileView等中的树视图。</p>
+
+<p><strong>4.资源文件</strong></p>
+
+<p>一般我们使用MFC生成窗口程序都会有对话框、图标、菜单等资源，应用程序向导会生成资源相关文件：res目录、HelloWorld.rc文件和Resource.h文件。</p>
+
+<p>res目录：工程文件夹下的res目录中含有应用程序默认图标、工具栏使用图标等图标文件。</p>
+
+<p>HelloWorld.rc：包含默认菜单定义、字符串表和加速键表，指定了默认的About对话框和应用程序默认图标文件等。</p>
+
+<p>Resource.h：含有各种资源的ID定义。</p>
+
+<p><strong>5.预编译头文件</strong></p>
+
+<p>几乎所有的MFC程序的文件都要包含afxwin.h等文件，如果每次都编译一次则会大大减慢编译速度。所以把常用的MFC头文件都放到了stdafx.h文件中，然后由stdafx.cpp包含stdafx.h文件，编译器对stdafx.cpp只编译一次，并生成编译之后的<strong>预编译头HelloWorld.pch</strong>，大大提高了编译效率。</p>
+
+<p><strong>6.编译链接生成文件</strong></p>
+
+<p>如果是Debug方式编译，则会在解决方案文件夹和工程文件夹下都生成Debug子文件夹，而如果是Release方式编译则生成Release子文件夹。</p>
+
+<p>工程文件夹下的Debug或Release子文件夹中包含了编译链接时产生的中间文件，解决方案文件夹下的Debug或Release子文件夹中主要包含有应用程序的可执行文件。</p>
+
+<h1 id="mfc框架结构的分析">MFC框架结构的分析</h1>
+
+<h2 id="框架代码文件的结构">框架代码文件的结构</h2>
+
+<p>基于MFC对话框程序的框架结构如图1-3-1所示：</p>
+
+<p><img src="/media-MFC学习/a96b48f3e34547d050dc53f1ccfee35c.png" alt="http://c.biancheng.net/cpp/uploads/allimg/151221/1-151221100045940.png" /></p>
+
+<p>图1-3-1 基于MFC对话框程序的框架代码结构示意图</p>
+
+<p>主要有4个部分组成：</p>
+
+<p>1) 资源文件Resource.h：主要是定义资源的ID。</p>
+
+<p>2) 预编译文件：可以用来解决头文件包含冲突的问题，定义一些需要全局性包含的文件。</p>
+
+<p>3) 应用程序类对应文件：项目名称是TestOne，对应类名为CTestOneApp。</p>
+
+<p>4) 对话框类：项目名称是TestOne，对应类名为CTestOneDlg。</p>
+
+<h3 id="文件介绍">文件介绍：</h3>
+
+<p>头文件：</p>
+
+<ul>
+<li><p>App 应用类</p></li>
+
+<li><p>Dlg 对话框类</p></li>
+
+<li><p>Doc 文本类</p></li>
+
+<li><p>View 绘图类</p></li>
+</ul>
+
+<p>源文件：</p>
+
+<ul>
+<li><p>App 应用类</p></li>
+
+<li><p>Dlg 对话框类</p></li>
+
+<li><p>Doc 文本类</p></li>
+
+<li><p>View 绘图类</p></li>
+</ul>
+
+<p>资源文件：</p>
+
+<p>rc和rc2都是资源文件,包含了应用程序中用到的所有的资源。</p>
+
+<p>两者不同在于：rc文件中的资源可以直接在VC集成环境中以可视化的方法进行编辑和修改;</p>
+
+<p>而rc2中的资源不能在VC的集成环境下直接进行编辑和修改,
+而是由根据需要手工地进行编辑。</p>
+
+<p>Rc文件中共有如下内容：</p>
+
+<p><img src="/media-MFC学习/4f0361c137ae823707274d19bc6c92fb.png" alt="" /></p>
+
+<h2 id="应用程序类">应用程序类</h2>
+
+<p><strong>MFC定义了一个应用程序基类CWinApp</strong>，所有基于MFC的应用程序都会继承这个类。TestOne项目也不例外，此时的应用程序类是CTestOneApp，定义如下：</p>
+
+<ol>
+<li><p><strong>class</strong> CTestOneApp : <strong>public</strong> CWinApp</p></li>
+
+<li><p>{</p></li>
+
+<li><p><strong>public</strong>:</p></li>
+
+<li><p>CTestOneApp();</p></li>
+
+<li><p><strong>public</strong>:</p></li>
+
+<li><p>// 重载虚函数</p></li>
+
+<li><p><strong>virtual</strong> BOOL InitInstance();</p></li>
+
+<li><p>// 实现</p></li>
+
+<li><p>DECLARE_MESSAGE_MAP()</p></li>
+
+<li><p>};</p></li>
+</ol>
+
+<p>这个类的定义很简单，<strong>重点来看一下InitInstance函数</strong>：</p>
+
+<ol>
+<li><p>BOOL CTestOneApp::InitInstance()</p></li>
+
+<li><p>{</p></li>
+
+<li><p>//初始化应用程序环境包控件等操作，省略部分代码.</p></li>
+
+<li><p>CWinApp::InitInstance();..</p></li>
+
+<li><p>//省略部分代码&hellip;</p></li>
+
+<li><p>//定义对话框对象</p></li>
+
+<li><p>CTestOneDlg dlg;</p></li>
+
+<li><p>//保存对话框到全局变量</p></li>
+
+<li><p>m_pMainWnd = &amp;dlg;</p></li>
+
+<li><p>//显示对话框</p></li>
+
+<li><p>INT_PTR nResponse = dlg.DoModal();</p></li>
+
+<li><p><strong>if</strong> (nResponse == IDOK)</p></li>
+
+<li><p>{</p></li>
+
+<li><p>//“确定”来关闭对话框的代码</p></li>
+
+<li><p>}</p></li>
+
+<li><p><strong>else if</strong> (nResponse == IDCANCEL)</p></li>
+
+<li><p>{</p></li>
+
+<li><p>//“取消”来关闭对话框的代码</p></li>
+
+<li><p>}</p></li>
+
+<li><p>// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，
+而不是启动应用程序的消息泵。</p></li>
+
+<li><p><strong>return</strong> FALSE;</p></li>
+
+<li><p>}</p></li>
+</ol>
+
+<p>这个函数可以看作MFC程序的入口函数，main函数隐藏在这个函数中。在实际的开发中，一般不需要对这个类进行操作，但如果需要在建立主对话框之前处理一些数据或者准备工作，那么就可以把代码添加到这个函数中，主对话框显示之前。</p>
+
+<p>这里有两个比较个典型的应用。</p>
+
+<ol>
+<li><p>启动界面之前弹出登陆界面，需要正确输入用户名和密码才能弹出主界面；</p></li>
+
+<li><p>启动界面之前，弹出一个项目配置界面，例如操作员，设备编号，项目名称，批次等信息，同时这些信息需要传递到主界面中，主界面根据项目和批次决定某种操作方式。</p></li>
+
+<li><p>上面两个应用在实际的项目开发中很常见，需求比较普遍。</p></li>
+</ol>
+
+<p>第一个需求不涉及数据传递，可以在代码中将用户名和密码固定，如果输入的结果与设定的结果一致，那么就开放此软件的使用权限；稍微复杂一点的，可以比较输入的结果与数据库中存储的用户名和密码是否匹配，如果匹配，才开放此软件的使用权限；再稍微复杂一点的，还可以将界面输入结果与服务器中的信息比较，查看当前用户是否有此软件的使用权限，当然这个还涉及到服务端的处理，与网络通信有关。</p>
+
+<p>第二个需求涉及不同对话框之间的数据传递，应用也比较广泛。</p>
+
+<p>篇幅有限，这里不再展示这两个需求的源码，源码统一在本教程的源码获取链接中获取。</p>
+
+<h2 id="框架类和视图类">框架类和视图类</h2>
+
+<p>CMainFrame是视图CHelloWorldView的父窗口，视图CHelloWorldView就显示在CMainFrame的客户区中。视图类CHelloWorldView用来显示文档类CHelloWorldDoc中的数据，并根据对视图类的操作修改文档类的数据。一个视图类只能跟一个文档类相联系，而一个文档类可以跟多个视图类相联系</p>
+
+<h2 id="对话框类">对话框类</h2>
+
+<p>MFC主对话框类（主对话框是指与项目名称一致的那个类对应的对话框，下同）CTestOneDlg继承CDialogEx类，CDialogEx又继承CDialog类，这个可以通过类转到定义查看，对话框类负责与用户交互，处理用户消息，接受用户输入。类的定义如下：</p>
+
+<ol>
+<li><p>// CTestOneDlg 对话框</p></li>
+
+<li><p><strong>class</strong> CTestOneDlg : <strong>public</strong> CDialogEx</p></li>
+
+<li><p>{</p></li>
+
+<li><p><strong>public</strong>:</p></li>
+
+<li><p>// 标准构造函数</p></li>
+
+<li><p>CTestOneDlg(CWnd* pParent = NULL);</p></li>
+
+<li><p>// 对话框数据</p></li>
+
+<li><p><strong>enum</strong> { IDD = IDD_TESTONE_DIALOG };</p></li>
+
+<li><p><strong>protected</strong>:</p></li>
+
+<li><p>// 动态数据交换，负责控件与变量之间的关联</p></li>
+
+<li><p><strong>virtual</strong> void DoDataExchange(CDataExchange* pDX);</p></li>
+
+<li><p><strong>protected</strong>:</p></li>
+
+<li><p>//应用程序句柄</p></li>
+
+<li><p>HICON m_hIcon;</p></li>
+
+<li><p>//重载初始化对话框</p></li>
+
+<li><p><strong>virtual</strong> BOOL OnInitDialog();</p></li>
+
+<li><p>//定义消息WM_SYSCOMMAND处理函数</p></li>
+
+<li><p>afx_msg void OnSysCommand(UINT nID, LPARAM lParam);</p></li>
+
+<li><p>//定义消息WM_PAINT处理函数</p></li>
+
+<li><p>afx_msg void OnPaint();</p></li>
+
+<li><p>//定义消息ON_WM_QUERYDRAGICON处理函数</p></li>
+
+<li><p>afx_msg HCURSOR OnQueryDragIcon();</p></li>
+
+<li><p>//消息映射</p></li>
+
+<li><p>DECLARE_MESSAGE_MAP()</p></li>
+
+<li><p>};</p></li>
+</ol>
+
+<p>从这个类的定义可以看出以下几点：</p>
+
+<ol>
+<li><p>控件与数据关联，可以简单地交给框架来实现；</p></li>
+
+<li><p>在MFC框架上开发主要是针对消息处理机制。</p></li>
+</ol>
+
+<h2 id="添加消息响应">添加消息响应</h2>
+
+<p>MFC消息响应机制过程比较复杂，这里因为还只是基础部分，不做深入的探讨，只做一个简单的过程演示，给读者一个初步的印象，后面会在专门的章节中讨论这个问题。本节演示在界面中添加一个按钮的消息响应。</p>
+
+<p><strong>首先把工作区间切换到“资源视图”</strong>，如果工作区间没有显示资源视图，在菜单中的视图中查找“资源视图”并点击，这样工作区间就会显示出来。切换到资源视图后，找到Dialog文件夹<strong>找到IDD_TESTONE_DIALOG</strong>，如图1-3-2所示。</p>
+
+<p><img src="/media-MFC学习/49bb1146b75897f59c5457c18e58f362.png" alt="" /></p>
+
+<blockquote>
+<p><a href="http://c.biancheng.net/cpp/uploads/allimg/151221/1-151221100642294.png">http://c.biancheng.net/cpp/uploads/allimg/151221/1-151221100642294.png</a></p>
+</blockquote>
+
+<p>图1-3-2 MFC对话框程序资源视图示例</p>
+
+<p>双击图1-3-2中选中的对话框ID就会显示这个对话框窗口，从<strong>工具栏</strong>中选择“Button”按钮后，可以<strong>直接将按钮拖至显示的这个对话框窗口中</strong>。说明一下，工具栏只有当主工作区间显示对话框时才会显示，初学者可能会碰到找不到工具栏的情况。用鼠标右键点击按钮，选择“属性”切换到属性页，修改按钮的名称（对应Caption）“Test”，同时修改按钮的ID为IDC_BTN_TEST。有两种方式可以完成添加按钮的消息处理函数。</p>
+
+<p>1) 直接双击按钮；</p>
+
+<p>2) 右键选中按钮，点击“添加事件处理程序”；</p>
+
+<p>两种方式区别在于，第一种方式添加的消息响应函数名称是默认的，第二种方式添加的消息响应函数名称是可以编辑的。</p>
+
+<p><img src="/media-MFC学习/249adf742cbbf96a67776be507e969fb.png" alt="http://c.biancheng.net/cpp/uploads/allimg/151221/1-151221100R2152.png" /></p>
+
+<p>图1-3-3 MFC添加按钮消息响应事件处理向导</p>
+
+<p>代码如下所示：</p>
+
+<ol>
+<li><p>//添加按钮IDC_BTN_TEST的单击消息处理函数</p></li>
+
+<li><p>void CTestOneDlg::OnBtnTest()</p></li>
+
+<li><p>{</p></li>
+
+<li><p>AfxMessageBox(_T(&ldquo;测试成功！&rdquo;));</p></li>
+
+<li><p>}</p></li>
+</ol>
+
+<p>添加一个MessageBox之后，编译并执行。在软件中添加我们添加的“Test”按钮之后，出现消息框，如图1-3-4所示。</p>
+
+<p><img src="/media-MFC学习/05a0245c4c36fb97c5f83f4d0034f154.png" alt="http://c.biancheng.net/cpp/uploads/allimg/151221/1-151221100933363.png" /></p>
+
+<p>图1-3-4显示处理按钮的消息</p>
+
+<h1 id="mfc消息映射机制概述">MFC消息映射机制概述</h1>
+
+<p><a href="http://www.jizhuomi.com/school/c/154.html">http://www.jizhuomi.com/school/c/154.html</a></p>
+
+<p>前面已经说过，Windows应用程序是消息驱动的。在MFC软件开发中，界面操作或者线程之间通信都会经常用到消息，通过对消息的处理实现相应的操作。比较典型的过程是，用户操作窗口，然后有消息产生，送给窗口的消息处理函数处理，对用户的操作做出响应。</p>
+
+<h2 id="什么是消息">什么是消息</h2>
+
+<p>      
+窗口消息一般由三个部分组成：(1)一个无符号整数，是消息值；(2)消息附带的WPARAM类型的参数；(3)消息附带的LPARAM类型的参数。其实我们一般所说的消息是狭义上的消息值，也就是一个无符号整数，经常被定义为宏。</p>
+
+<h2 id="什么是消息映射机制">什么是消息映射机制</h2>
+
+<p>      
+MFC使用一种消息映射机制来处理消息，在应用程序框架中的表现就是一个消息与消息处理函数一一对应的消息映射表，以及消息处理函数的声明和实现等代码。当窗口接收到消息时，会到消息映射表中查找该消息对应的消息处理函数，然后由消息处理函数进行相应的处理。SDK编程时需要在窗口过程中一一判断消息值进行相应的处理，相比之下MFC的消息映射机制要方便好用的多。</p>
+
+<h2 id="windows消息分类">Windows消息分类</h2>
+
+<p>      
+先讲下Windows消息的分类。Windows消息分为系统消息和用户自定义消息。Windows系统消息有三种：</p>
+
+<p>      
+1.<strong>标准Windows消息。</strong>除WM_COMMAND外以WM_开头的消息是标准消息。例如，WM_CREATE、WM_CLOSE。</p>
+
+<p>      
+2.<strong>命令消息。</strong>消息名为WM_COMMAND，消息中附带了标识符ID来区分是来自哪个菜单、工具栏按钮或加速键的消息。</p>
+
+<p>      
+3.<strong>通知消息。</strong>通知消息一般由列表框等子窗口发送给父窗口，消息名也是WM_COMMAND，其中附带了控件通知码来区分控件。</p>
+
+<p>       CWnd的派生类都可以接收到标准Windows消息、通知消息和命令消息。命令消息还可以由文档类等接收。</p>
+
+<p>      
+用户自定义消息是实际上就是用户定义一个宏作为消息，此宏的值应该大于等于WM_USER，然后此宏就可以跟系统消息一样使用，窗口类中可以定义它的处理函数。</p>
+
+<h2 id="消息映射表">消息映射表</h2>
+
+<p>      
+除了一些没有基类的类或CObject的直接派生类外，其他的类都可以自动生成消息映射表。下面的讲解都以前面例程HelloWorld的CMainFrame为例。消息映射表如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>1 2 3 4 5 6 7 8</th>
+<th>BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)      ON_WM_CREATE()      ON_COMMAND(ID_VIEW_CUSTOMIZE, &amp;CMainFrame::OnViewCustomize)      ON_REGISTERED_MESSAGE(AFX_WM_CREATETOOLBAR, &amp;CMainFrame::OnToolbarCreateNew)      ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &amp;CMainFrame::OnApplicationLook)      ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &amp;CMainFrame::OnUpdateApplicationLook)      ON_WM_SETTINGCHANGE()    END_MESSAGE_MAP()</th>
+</tr>
+</thead>
+
+<tbody>
+</tbody>
+</table>
+
+<p>     
+在BEGIN_MESSAG_MAP和END_MESSAGE_MAP之间的内容成为消息映射入口项。消息映射除了在CMainFrame的实现文件中添加消息映射表外，在类的定义文件MainFrm.h中还会添加一个宏调用：</p>
+
+<p>       DECLARE_MESSAGE_MAP()</p>
+
+<p>       一般这个宏调用写在类定义的结尾处。</p>
+
+<p>       <strong>添加消息处理函数</strong></p>
+
+<p>       如何添加消息处理函数呢？不管是自动还是手动添加都有三个步骤：</p>
+
+<p>      
+1.在类定义中加入消息处理函数的函数声明，注意要以afx_msg打头。例如MainFrm.h中WM_CREATE的消息处理函数的函数声明：afx_msg
+int OnCreate(LPCREATESTRUCT lpCreateStruct);。</p>
+
+<p>      
+2.在类的消息映射表中添加该消息的消息映射入口项。例如WM_CREATE的消息映射入口项：ON_WM_CREATE()。</p>
+
+<p>      
+3.在类实现中添加消息处理函数的函数实现。例如，MainFrm.cpp中WM_CREATE的消息处理函数的实现：</p>
+
+<table>
+<thead>
+<tr>
+<th>1 2 3 4</th>
+<th>int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {            &hellip;&hellip; }</th>
+</tr>
+</thead>
+
+<tbody>
+</tbody>
+</table>
+
+<p>      
+通过以上三个步骤以后，WM_CREATE等消息就可以在窗口类中被消息处理函数处理了。</p>
+
+<p>       <strong>各种Windows消息的消息处理函数</strong></p>
+
+<p>       标准Windows消息的消息处理函数都与WM_CREATE消息类似。</p>
+
+<p>       命令消息的消息映射入口项形式如：ON_COMMAND(ID_VIEW_CUSTOMIZE,
+&amp;CMainFrame::OnViewCustomize)，消息为ID_VIEW_CUSTOMIZE，消息处理函数为OnViewCustomize。</p>
+
+<p>      
+如果想要使用某个处理函数批量处理某些命令消息，则可以像CMainFrame消息映射表中的ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000,
+ID_VIEW_APPLOOK_WINDOWS_7,
+&amp;CMainFrame::OnApplicationLook)一样添加消息映射入口项，这样值在ID_VIEW_APPLOOK_WIN_2000到ID_VIEW_APPLOOK_WINDOWS_7之间的菜单项等的命令消息都由CMainFrame的OnApplicationLook函数处理。函数原型为afx_msg
+void OnApplicationLook(UINT id);，参数id为用户操作的菜单项等的ID。</p>
+
+<p>      
+在操作列表框等控件时往往会给父窗口发送WM_NOTIFY通知消息。WM_NOTIFY消息的wParam参数为发送通知消息的控件的ID，lParam参数指向一个结构体，可能是NMHDR结构体，也可能是第一个元素为NMHDR结构体变量的其他结构体。NMHDR结构体的定义如下（仅作了解）：</p>
+
+<table>
+<thead>
+<tr>
+<th>1 2 3 4 5</th>
+<th>Typedef sturct tagNMHDR{     HWND hwndFrom;     UINT idFrom;     UINT code; } NMHDR;</th>
+</tr>
+</thead>
+
+<tbody>
+</tbody>
+</table>
+
+<p>       hwndFrom为发送通知消息控件的句柄，idFrom为控件ID，code为要处理的通知消息的通知码，例如NM_CLICK。</p>
+
+<p>       通知消息的消息映射入口项形式如：</p>
+
+<p>       ON_NOTIFY(wNotifyCode,id,memberFxn)</p>
+
+<p>       wNotifyCode为要处理的通知消息通知码，例如：NM_CLICK。id为控件标识ID。MemberFxn为此消息的处理函数。</p>
+
+<p>       通知消息的处理函数的原型为：</p>
+
+<p>       afx_msg void memberFxn( NMHDR * pNotifyStruct, LRESULT * result);</p>
+
+<p>       如果需要使用用户自定义消息，首先要定义消息宏，如：#define WM_UPDATE_WND
+(WM_USER+1)，再到消息映射表中添加消息映射入口项：ON_MESSAGE(WM_UPDATE_WND,
+&amp;CMainFrame::OnUpdateWnd)，然后在MainFrm.h中添加消息处理函数的函数声明：afx_msg
+LRESULT OnUpdateWnd(WPARAM wParam, LPARAM
+lParam);，最后在MainFrm.cpp中实现此函数。</p>
+
+<p>鸡啄米本节对MFC消息映射机制只是做了比较简单的讲解，让大家对它有一定的认识，编程入门者不必强求完全掌握。在以后的教程中会经常涉及到消息的使用，大家会逐渐熟悉MFC的消息映射机制。</p>
+
+<h1 id="mfc中典型类和函数的介绍">MFC中典型类和函数的介绍</h1>
+
+<p>在MFC中，典型的类有CString、CRect、CDialog等等。这里篇幅有限，以CString类的使用为例做一个详细说明。类的使用主要还是使用类的方法，可以查看类的定义，查看这个类提供了哪些方法，在使用的时候，只需要注意方法的返回值和参数即可。这些类的使用方法是通用的，大家在学习的时候要注意体会和总结。</p>
+
+<h2 id="mfc字符串操作类cstring">MFC字符串操作类CString</h2>
+
+<p>CString是用来表示可变长度的字符串的类。在MFC中，这个类的使用频率非常高。CString是MFC经过封装后特有的一种字符串类型，较string或iftream或oftream的字符串有更多明显的有点，如使用CString可不指明内存大小，CString会根据需要自行分配，除此之外还可以对字符串进行拼接操作。因为MFC已经对这个类进行了封装，我们可以在MFC程序任何地方调用它提供的一系列操作字符串的方法，示例代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//CString 使用方法示例
+</span><span class="c1"></span><span class="n">CString</span> <span class="n">strTemp</span><span class="o">=</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;MFC Tutorial&#34;</span><span class="p">);</span>
+<span class="c1">//(1)获取字符串的长度
+</span><span class="c1">//结果： iLength=12,中间的空格也算一个字符
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">iLength</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">GetLength</span><span class="p">();</span>
+
+<span class="c1">//(2)获取字符串strTemp的第三个字符
+</span><span class="c1">//结果：cFlag=‘C’
+</span><span class="c1"></span><span class="kt">char</span> <span class="n">cFlag</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">GetAt</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">//(3)数据类型转换 将char型字符转换为CString类型
+</span><span class="c1"></span><span class="err">数据类型的转换内容较多，后面会单独讨论</span>
+<span class="c1">//结果：strS=_T(&#34;C&#34;);
+</span><span class="c1"></span><span class="n">CString</span> <span class="n">strS</span><span class="o">=</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span>
+<span class="n">strS</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;%c&#34;</span><span class="p">),</span><span class="n">cFlag</span><span class="p">);</span>
+
+<span class="c1">//(4)字符串比较 Compare方法，如果两个一致，返回0;不一致，返回-1
+</span><span class="c1">//结果：iResult0==0；iResult1==-1；iResult2=1
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">iResult0</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">Compare</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;MFC Tutorial&#34;</span><span class="p">));</span>
+<span class="kt">int</span> <span class="n">iResult1</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">Compare</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;MFC TutorialX&#34;</span><span class="p">));</span>
+<span class="kt">int</span> <span class="n">iResult2</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">Compare</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;MFC TutoRiaL&#34;</span><span class="p">));</span>
+
+<span class="c1">//(5)字符串比较 CompareNoCase方法，如果两个不区分大小写一致，返回0;
+</span><span class="c1">//结果：iResult3==0；iResult4==0；iResult5==-120
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">iResult3</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">CompareNoCase</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;MFC Tutorial&#34;</span><span class="p">));</span>
+<span class="kt">int</span> <span class="n">iResult4</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">CompareNoCase</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;MFC TutoRiaL&#34;</span><span class="p">));</span>
+<span class="kt">int</span> <span class="n">iResult5</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">CompareNoCase</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;MFC TutoRiaLX&#34;</span><span class="p">));</span>
+
+<span class="c1">//(5)改为小写
+</span><span class="c1">//结果mfc tutorial
+</span><span class="c1"></span><span class="n">CString</span> <span class="n">strLower</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">MakeLower</span><span class="p">();</span>
+
+<span class="c1">//(6)改为大写
+</span><span class="c1">//结果MFC TUTORIAL
+</span><span class="c1"></span>
+<span class="n">CString</span> <span class="n">strUpper</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">MakeUpper</span><span class="p">();</span>
+
+<span class="c1">//(6)获取逆序的字符串
+</span><span class="c1">//结果LAIROTUT CFM
+</span><span class="c1"></span>
+<span class="n">CString</span> <span class="n">strReverse</span><span class="o">=</span><span class="n">strTemp</span><span class="p">.</span><span class="n">MakeReverse</span><span class="p">();</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>对代码的说明：</p>
+
+<p>1) CString
+是MFC提供的类，这个例子中列举了这个类的几个使用方法。这些方法是如何封装的对我们使用者来说是透明的，我们不可暂时不必深究。暂时只需要掌握如何使用这些方法即可。使用的时候，也只需关注方法的原型，参数和返回值即可。同样，对于使用
+MFC提供的其他类封装的方法原理是一样的，希望大家仔细体会，融会贯通。</p>
+
+<p>2)
+CString在MFC中应用非常广泛，后面将会给出这个类的具体使用方法示例，可以本章的从源码库中获取。</p>
+
+<h2 id="典型函数">典型函数</h2>
+
+<p>在MFC中，经常会看到以Afx开头的一些函数，如下所示：</p>
+
+<ol>
+<li><p>CWindApp* AfxGetApp();</p></li>
+
+<li><p>HINSTANCE AfxGetInstanceHandle( );</p></li>
+
+<li><p>HINSTANCE AfxGetResourceHandle( );</p></li>
+
+<li><p>int AfxMessageBox( LPCTSTR lpszText, UINT nType = MB_OK, UINT nIDHelp = 0 );</p></li>
+</ol>
+
+<p>这里说明一下，Afx前缀的函数代表应用程序框架（Application
+Framework）函数。应用程序框架实际上是一套辅助我们生成应用程序的框架模型。该模型把多个类进行了一个有机的集成，可以根据该模型提供的方案来设计自己的应用程序。在MFC中，以Afx为前缀的函数都是全局函数，可以在程序的任何地方调用他们。</p>
+
+<h1 id="mfc视图和窗口的基本概念">MFC视图和窗口的基本概念</h1>
+
+<h2 id="视-view-类窗口">视（View）类窗口</h2>
+
+<p><strong>视类窗口是指程序运行后，显示信息的那一部分。对应的类是CXXXView</strong>（XXX表示项目名称）类，CXXXView类是派生于CView类，而CView类又派生于CWnd类。他们的继承关系可以通过查找类的定义来查看继承关系。视图类CView，拥有窗口的客户区域，负责显示文档数据，接受用户的输入，提供文档与用户的通信。视类窗口只是主框架窗口中空白的部分。</p>
+
+<h2 id="主框架-mainframe-窗口">主框架（MainFrame）窗口</h2>
+
+<p>主框架窗口是指程序运行后，程序的整个界面。对应的类是CMainFrame，CMainFrame类派生于CFrameWnd类，而CFrameWnd类又又派生于CWnd类。主框架窗口就是整个应用程序外框所包括的部分，包括了图3-1-1的全部内容。</p>
+
+<p>框架窗口是视类窗口的一个父窗口（这里暂时记住结论，各个窗口之间的关系会在后面的章节中单独讨论，目前还只针对初学者），他们之间的关系如图3-1-1所示：</p>
+
+<p><img src="/media-MFC学习/3d31e82a5939e35f7fd1798181c0c7f5.png" alt="http://c.biancheng.net/cpp/uploads/allimg/151227/1-15122GZ441919.png" /></p>
+
+<p>图3-1-1  主框架窗口和视窗口之间的关系</p>
+
+<h2 id="文档-doc">文档（Doc）</h2>
+
+<p>文档类CDcoument负责维护应用程序所需要的数据，提供一系列可对这些数据进行操作的方法，并且能够为视图提供所需的数据。</p>
+
+<blockquote>
+<p>新建一个MFC单文档应用程序，项目名称为SDITest。项目结构示意图如图3-1-2所示：</p>
+</blockquote>
+
+<p><img src="/media-MFC学习/8fcfa24f76b0dfb7c09c1b7d862dc627.png" alt="http://c.biancheng.net/cpp/uploads/allimg/151227/1-15122GZ55c13.png" /></p>
+
+<p>图3-1-2 MFC单文档程序结构示意图</p>
+
+<p>上图中可以看到SDITest程序中还有一个CSDITestDoc类，它派生于CDocument类，CDocument类的基类是CCmdTarget，而CCmdTarget又派生于CObject类，从而可知这个CSDITestDoc类不是一个窗口类，实际上是一个文档类。</p>
+
+<p><strong>MFC提供的文档/视（Document/View）结构</strong>，其中文档是指CDocument类，视类是指CView类。Microsoft在设计基础类库时，考虑到要<strong>把数据本身与它的显示分离开</strong>，于是就采用文档类和视类结构来实现这一想法。数据的存储和加载由文档类来完成，数据的显示和修改则由视类完成，从而把数据的管理和显示方法分离开来。文档/视类结构是MFC程序的一个重点，在后面的中级部分会详细地介绍这部分内容。这里希望大家能够有一个初步的印象。</p>
+
+<p>下面再介绍一下MFC单文档程序是如何将文档类对象、框架对象、视类对象组织在一起的。还是以SDITest项目为例，在源文件SDITest.cpp中找到CSDITestApp类的InitInstance函数定义，有下面这一段代码：</p>
+
+<ol>
+<li><p>// 注册应用程序的文档模板。文档模板将用作文档、框架窗口和视图之间的连接</p></li>
+
+<li><p>CSingleDocTemplate* pDocTemplate;</p></li>
+
+<li><p>pDocTemplate = <strong>new</strong> CSingleDocTemplate(</p></li>
+
+<li><p>IDR_MAINFRAME,</p></li>
+
+<li><p>RUNTIME_CLASS(CSDITestDoc),</p></li>
+
+<li><p>RUNTIME_CLASS(CMainFrame), // 主 SDI 框架窗口</p></li>
+
+<li><p>RUNTIME_CLASS(CSDITestView)</p></li>
+
+<li><p>);</p></li>
+
+<li><p><strong>if</strong> (!pDocTemplate)</p></li>
+
+<li><p><strong>return</strong> FALSE;</p></li>
+
+<li><p>AddDocTemplate(pDocTemplate);</p></li>
+</ol>
+
+<p>从上面的代码段中可以看到其中定义了一个单文档模板对象指针pDocTemplate，这个对象把文档对象、框架对象、视类对象有机地组织在一起，形成了一个有机的整体，程序接着利用AddDocTemplate函数把这个单文档模板添加到文档模板中，从而把这三个类组织为一个整体。</p>
+
+<h1 id="mfc-文档-视图和框架窗口间的关系和消息传送">MFC 文档、视图和框架窗口间的关系和消息传送</h1>
+
+<p>在上一节中对文档、视图和框架窗口做了简单地介绍，总结一下：<strong>文档相当于数据容器</strong>，<strong>视（View）相当于查看数据的窗口或是和数据发生交互的窗口</strong>。（这一结构在MFC中的OLE，ODBC开发时又得到更多的拓展）因此<strong>一个完整的应用一般由四个类组成：CWinApp应用类，CFrameWnd窗口框架类，CDocument文档类，CView视类</strong>。</p>
+
+<p>在程序运行时CWinApp将创建一个CFrameWnd框架窗口实例，而框架窗口将创建文档模板，然后有文档模板创建文档实例和视实例，并将两者关联。一般来讲我们只需对文档和视进行操作，框架的各种行为已经被MFC封装好了，不需人为干预，这也是Microsoft设计文档-视结构的主旨，使界面和逻辑分离，让开发人员将主要的精力放在程序的算法和功能实现上。</p>
+
+<p>在应用中一个视对应一个文档，但一个文档可以包含多个视。一个应用中只用一个框架窗口，对多文档界面来讲可能有多个MDI子窗口。每一个视都是一个子窗口，在单文档界面中父窗口即是框架窗口，在多文档界面中父窗口为MDI子窗口。一个多文档应用中可以包含多个文档模板，一个模板定义了一个文档和一个或多个视之间的对应关系。同一个文档可以属于多个模板，但一个模板中只允许定义一个文档。同样一个视也可以属于多个文档模板。</p>
+
+<p>接下来看看如何在程序中得到各种对象的指针：</p>
+
+<p>全局函数AfxGetApp可以得到CWinApp应用类指针。</p>
+
+<p>AfxGetApp()-&gt;m_pMainWnd为框架窗口指针。</p>
+
+<p>在框架窗口中：CFrameWnd::GetActiveDocument得到当前活动文档指针。</p>
+
+<p>在框架窗口中：CFrameWnd::GetActiveView得到当前活动视指针。</p>
+
+<p>在视中：CView::GetDocument得到对应的文档指针。</p>
+
+<p>在文档中：CDocument::GetFirstViewPosition，CDocument::GetNextView用来遍历所有和文档关联的视。</p>
+
+<p>在文档中：CDocument::GetDocTemplate得到文档模板指针。</p>
+
+<p>在多文档界面中：CMDIFrameWnd::MDIGetActive得到当前活动的MDI子窗口。</p>
+
+<p>一般来讲用户输入消息（如菜单选择，鼠标，键盘等）会首先发送视，如果视未处理则会发往框架窗口。所以定义消息映射时定义在视中就可以了，如果一个应用同时拥有多个视而当前活动视没有对消息进行处理则消息会发往框架窗口。</p>
+
+<h1 id="其他内容-略">其他内容（略）</h1>
+
+<p><a href="http://c.biancheng.net/cpp/html/3085.html">MFC中所提供的各种视类介绍</a></p>
+
+<p><a href="http://c.biancheng.net/cpp/html/3086.html">MFC文档与视图结构</a></p>
+
+<p><a href="http://c.biancheng.net/cpp/html/3087.html">MFC单文档与多文档</a></p>
+
+<p><a href="http://c.biancheng.net/cpp/html/3088.html">MFC图形设备接口</a></p>
+
+<p><a href="http://c.biancheng.net/cpp/html/3089.html">MFC画笔CPen类</a></p>
+
+<p><a href="http://c.biancheng.net/cpp/html/3090.html">MFC画刷CBrush类</a></p>
+
+<p><a href="http://c.biancheng.net/cpp/html/3091.html">MFC使用GDI对象CBitmap示例</a></p>
+
+<h1 id="添加资源-窗口-菜单等">添加资源（窗口、菜单等）</h1>
+
+<p><img src="/media-MFC学习/8017771d16aa137bc4489bb6c3f21b55.png" alt="" /></p>
+
+<p>在资源视图中，右击选择添加资源，可以添加如图所示类型的资源。</p>
+
+<h1 id="对话框">对话框</h1>
+
+<h1 id="mfc常用控件">MFC常用控件</h1>
+
+<h2 id="list-control-表格">List Control 表格</h2>
+
+<p><img src="/media-MFC学习/dc502b99e9850f45b11911c4dda25f90.png" alt="" /></p>
+
+<p>右键“添加变量”，</p>
+
+<p><img src="/media-MFC学习/75be3b6051f2d14191e5a9249b3044a3.png" alt="" /></p>
+
+<p>需要改的只有变量名，其余不需要更改。</p>
+
+<p>添加完毕后，会在对应的类的头文件和源文件中自动添加内容。</p>
+
+<p>插入数据：</p>
+
+<p>InserColumn插入列</p>
+
+<p>SetItemText设置内容</p>
+
+<p><img src="/media-MFC学习/53a76ffc55e801761a08b72732498a56.png" alt="" /></p>
+
+<h2 id="红绿灯">红绿灯</h2>
+
+<p>对话框上新建一个Static Text，在对应的头文件，类成员中新加一个CLed对象；</p>
+
+<p><img src="/media-MFC学习/4914e6cbfd5f6fc48c5bc49778b7bd54.png" alt="" /></p>
+
+<p>在对应的源文件中，将Static Text对应到CLed。</p>
+
+<p><img src="/media-MFC学习/dd9969debd1703ed074372c44f153955.png" alt="" /></p>
+
+<p>更改LED颜色</p>
+
+<p><img src="/media-MFC学习/ecaef5942435700cec16e945ac0d33a4.png" alt="" /></p>
+
+<h2 id="combox">Combox</h2>
+
+<p><a href="https://blog.csdn.net/yunqi415/article/details/6963720">https://blog.csdn.net/yunqi415/article/details/6963720</a></p>
+
+<p>添加Combox控件</p>
+
+<p>在对应对话框类中添加Combox成员，CCombox xxx（自定义名称）</p>
+
+<p><img src="/media-MFC学习/606f8623cad28d832a3d7c6423997636.png" alt="" /></p>
+
+<p>在窗口对应的源文件中绑定控件ID和控件成员名称</p>
+
+<p><img src="/media-MFC学习/0dfd680ae28f50935db998d5ffeb87c8.png" alt="" /></p>
+
+<p>m_droplist即对应刚添加的控件，控件ID可在属性中看到。</p>
+
+<h2 id="checkbox">Checkbox</h2>
+
+<p>添加checkbox</p>
+
+<p>在消息映射函数中增加消息映射，在VS208中双击控件会添加默认的处理函数。</p>
+
+<p><img src="/media-MFC学习/dd7faae146440475ec4ae9d2894b983e.png" alt="" /></p>
+
+<p>并且自动添加消息映射。</p>
+
+<p><img src="/media-MFC学习/f14855dfd7fc32d824f8e20c0ce6201d.png" alt="" /></p>
+
+<p>其实可以手动指定，右击控件。</p>
+
+<p><img src="/media-MFC学习/aa889f9f1fe22b44db9c1bdb643e1800.png" alt="" /></p>
+
+<p>可指定消息处理函数。</p>
+
+<p><img src="/media-MFC学习/626919df2f8d720bc6b02c1790fc14e1.png" alt="" /></p>
+
+<p>并且会自动在Resource.h中定义ID值</p>
+
+<p><img src="/media-MFC学习/7d2892601f4aa58cc248685b462e7b9b.png" alt="" /></p>
+
+<h1 id="mfc常用函数">MFC常用函数</h1>
+
+<p>有两类函数，一类是消息对应的响应函数，还有一类是窗口类（或其他父类）中定义好的函数。对前者来说，需要操作时添加消息映射，对后者来说需要重载函数。</p>
+
+<p>定时器就是一个消息映射的例子。</p>
+
+<p><img src="/media-MFC学习/15ffc516bc8d998890f3dcae892b3123.png" alt="" /></p>
+
+<p><img src="/media-MFC学习/a620b9c39ccde2b631c336410675220d.png" alt="" /></p>
+
+<p>重载函数</p>
+
+<p><img src="/media-MFC学习/923b73514f2d5853c339d8510af45834.png" alt="" /></p>
+
+<h2 id="bool-precreatewindow-createstruct-cs">BOOL PreCreateWindow(CREATESTRUCT&amp; cs)</h2>
+
+<p>PreCreateWindow由Framework在窗口创建前被调用，所以当你需要修改窗口的大小、风格、窗口所属的窗口类等cs成员变量时，要改写PrecreateWindow函数。</p>
+
+<h2 id="void-oninitialupdate">void OnInitialUpdate()</h2>
+
+<p>视图窗口完全建立后第一个被框架调用的函数。框架在第一次调用OnDraw前会调用OnInitialUpdate，因此OnInitialUpdate是设置滚动视图的逻辑尺寸和映射模式的最合适的地方.</p>
+
+<p>也就是程序界面上所有内容都会在这里设置。</p>
+
+<h2 id="void-assertvalid-const">void AssertValid() const</h2>
+
+<p>AssertValid函数通过检查其内部状态来对此对象执行有效性检查。
+在库的Debug版本中，AssertValid可以断言并因此终止程序，并显示一条消息，列出断言失败的行号和文件名。</p>
+
+<p>CUSBTransmissionView::AssertValid 成员函数提供对对象内部状态的运行时检查。虽然从
+CUSBTransmissionView派生类时不须要重写
+AssertValid，但能够通过重写使您的类更安全可靠。AssertValid
+应在对象的全部成员变量上运行断言，以验证它们包括有效值。比如，它应检查指针成员变量不为
+NULL。</p>
+
+<h2 id="void-dump-cdumpcontext-dc-const">void Dump(CDumpContext&amp; dc) const</h2>
+
+<p>Dump函数在程序调试时候使用,主要用于记录调试过程的中间量,及一些相关信息</p>
+
+<ol>
+<li>CUSBTransmissionDoc* CUSBTransmissionView::GetDocument() const</li>
+</ol>
+
+<p>GetDocument视图对象是用来显示文档对象的内容，函数GetDocument()用于获取当前文档对象的指针m_pDocument.而函数OnDraw()是一个虚函数，负责文档对象的数据在用户视图区的显示输出。在向导生成的成员函数OnDraw()中调用了函数GetDocument().通过获取的文档类指针可以在视图中显示文档内容。</p>
+
+<p>最后那个const，表示不能在函数内修改类的成员变量</p>
+
+<h2 id="hbrush-onctlcolor-cdc-pdc-cwnd-pwnd-uint-nctlcolor">HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)</h2>
+
+<p>从OnCtlColor函数名易看出，OnCtlColor函数的作用是<strong>改变（或响应）控件的颜色</strong>，<strong>多用在对话框应用程序（或基于CFormView的应用程序）中</strong>，希望在对话框显示时，里面的控件的颜色可以设置为我们想要的颜色在OnInitDialog()
+函数中，我们一般设置好控件的字体在OnPaint()函数中，用来画图，或者是加载一幅位图我们往控件里拖入了很多控件，那么控件的颜色可以在哪里更改呢？就在OnCtlColor函数里（要注意的是，该控件始终要返回一个画刷（句柄），因为有了画刷，才能真正的改变控件的颜色嘛）。</p>
+
+<ol>
+<li>LRESULT CSpreadTransmissionView::OnUpdateUI(WPARAM wparam,LPARAM lparam)</li>
+</ol>
+
+<blockquote>
+<p>OnUpdateUI函数起到更新界面的作用（从控件变量向界面更新和从界面更新到变量），即时将函数1，关联的两者相互更新。</p>
+</blockquote>
+
+<p>MFC几个常用函数：OnCreate和OnInitialUpDate，GetActiveFrame和MDIGetActive，Invalidate、SetModifiedFlage、UpdateAll</p>
+
+<p><a href="https://blog.csdn.net/xfortius/article/details/8546394">https://blog.csdn.net/xfortius/article/details/8546394#</a></p>
+
+<h2 id="dodataexchange">DoDataExchange</h2>
+
+<p>MSDN是这样描述的：Called by the framework to exchange and validate dialog
+data.大意是<strong>框架调用此函数来改写与确认对话框数据</strong>。DoDataExchange的作用是
+将界面上的控件与一个变量或者一个类对象相关联</p>
+
+<p>当程序需要交换数据时，不要直接调用DoDataExchange函数，而应该调用CWnd::UpdateData。UpdataData函数内部调用了DoDataExchange。该函数只有一个布尔型参数，它决定了数据传送的方向。调用UpdateData(TRUE)将数据从对话框的控件中传送到对应的数据成员中，调用UpdateData(FALSE)则将数据从数据成员中传送给对应的控件。</p>
+
+<p>需要注意是否是能够双向传输数据的控件才能使用UpdateData函数更新。</p>
+
+<h2 id="定时器">定时器</h2>
+
+<p>在这个窗口对应的类中，增加WM_TIMER消息对应的函数。</p>
+
+<p><img src="/media-MFC学习/a620b9c39ccde2b631c336410675220d.png" alt="" /></p>
+
+<p>添加完毕后，在对应的头文件以及源码中，工具自动添加了类成员函数
+OnTimer（），源码中OnTimer（）函数内容需要自己添加。对应的消息ON_WM_TIMER()，已经自动增加到BEGIN_MESSAGE_MAP中。</p>
+
+<p>根据实际情况，决定设置定时器的位置，比如初始化时OnInitialUpdate()。</p>
+
+<p>调用SetTimer(1,2,3);函数指明①一个事件id和②一个时间和③回调函数。当③为NULL时，使用默认的OnTimer();</p>
+
+<p>可以多次调用settimer函数，指明不同定时时间，每个时间约定一个不同的id.</p>
+
+<p>在ontimer函数里根据id判断是什么定时器触发的</p>
+
+<h1 id="窗口销毁">窗口销毁</h1>
+
+<p>一般是OnDestroy函数里调用KillTimer（K、T大写）函数关闭每一个id。几个就调用几次，和前面SetTimer对应起来。防止资源泄露。可以多调用几次KillTimer，不会有影响。</p>
+
+<blockquote>
+<p>OnClose-&gt;DestroyWindow-&gt;OnDestroy-&gt; PostNcDestroy()</p>
+
+<p>OnCancle-&gt;DestroyWindow-&gt;OnDestroy-&gt; PostNcDestroy()</p>
+</blockquote>
+
+<h2 id="onok-oncancel-ondestroy的区别">OnOK、OnCancel、OnDestroy的区别:</h2>
+
+<p>总结OnOK、OnCancel、EndDialog、OnClose、OnDestroy函数之间的区别:</p>
+
+<p>第一，OnOk()和OnCancel()是CDialog基类的成员函数。</p>
+
+<blockquote>
+<p>即ID为ID_OK和ID_CANCEL的按钮的通知消息的响应函数，<strong>而OnClose()和OnDestroy()是CWnd基类的成员函数，即WM消息响应函数</strong>。</p>
+</blockquote>
+
+<p>第二，OnClose()和OnDestroy()</p>
+
+<blockquote>
+<p>在对话框程序中，根据《深入浅出MFC》所讲，程序退出执行时执行的操作顺序为（从点X按钮开始）</p>
+
+<ul>
+<li><p>(1) 用户点击X关闭按钮，发送了<strong>WM_CLOSE消息–&gt;响应OnClose()</strong></p></li>
+
+<li><p>(2) 在WM_CLOSE消息的处理函数中，调用<strong>DestroyWindow()</strong>-&gt;销毁与指定CWnd对象关联的窗口，但没有销毁CWnd对象</p></li>
+
+<li><p>(3) 在DestroyWindow()中发送了<strong>WM_DESTROY消息–&gt;窗口销毁后响应OnDestroy();</strong></p></li>
+
+<li><p>(4) 在WM_DESTROY消息中调用<strong>PostQuitMessage()</strong>，发送WM_QUITT消息，结束消息循环</p></li>
+</ul>
+
+<p>可以看到，程序的退出过程，是先响应OnClose()，然后响应OnDestroy()。OnDestroy中调用PostQuitMessage()发送WM_QUIT消息结束消息循环。</p>
+
+<p>如果没有重定义OnClose函数的话，在对话框程序中执行顺序如下：</p>
+
+<ul>
+<li><p>(1) 用户点击X关闭按钮，调用的是<strong>CDialog::OnCancel函数</strong></p></li>
+
+<li><p>(2) 在<strong>CDialog::OnCancel</strong>的处理函数中，调用<strong>CDialog::EndDialog</strong>关闭对话框；销毁与指定CDialog对象关联的对话框，但<strong>没有销毁CDialog对象</strong></p></li>
+
+<li><p>(3) 在CDialog::EndDialog中发<strong>送了WM_DESTROY消息</strong>–&gt;窗口销毁后响应OnDestroy();</p></li>
+
+<li><p>(4) 在WM_DESTROY消息中调用PostQuitMessage()，发送WM_QUITT消息，结束消息循环</p></li>
+</ul>
+
+<p>可以看到，程序的退出过程，是先响应OnCancel()，然后响应OnDestroy()。OnDestroy中调用PostQuitMessage()发送WM_QUIT消息结束消息循环。</p>
+</blockquote>
+
+<p>第三，OnOk(),OnCancel(),OnClose(),OnDestroy()</p>
+
+<blockquote>
+<p>CDialog::OnOk首先调用UpdateData(TRUE)将数据传给对话框成员变量，然后调用CDialog::EndDialog()关闭对话框；CDialog::OnCancel只调用CDialog::EndDialog关闭对话框；</p>
+
+<p>OnClose()是WM_CLOSE的响应函数。在一定程度上可以说CDialog::EndDialog()和OnClose()完成类似的工作，但处理的机制不一样，<strong>前者是CDialog的对象机制，后者是WM的消息映射机制</strong>。</p>
+
+<p>CDialog::EndDialog()-&gt;OnDestroy()</p>
+
+<p>OnClose()-&gt;OnDestroy()</p>
+
+<p>所以我们在按下cancel按钮的时候，程序不会执行OnClose()，而是调用了直接调用了CDialog::EndDialog(），然后调用了OnDestroy()</p>
+</blockquote>
+
+<p>第四， DestroyWindow(),OnDestroy(),OnNcDestroy(), PostNcDestroy()</p>
+
+<p>1  virtual void PostNcDestroy( );</p>
+
+<p>参数： 在窗口被销毁以后，缺省的OnNcDestroy成员函数调用这个函数。派生类可以利用这个函数来执行自定义的清除工作，比如删除指针。 </p>
+
+<p>2   afx_msg void OnNcDestroy( );</p>
+
+<p>说明：<br />
+当非客户区即将被销毁时，框架调用这个函数，这是Windows的窗口被销毁时调用的最后一个成员函数。缺省的实现执行一些清除工作，然后调用虚成员函数PostNcDestroy。<br />
+如果你希望执行自己的清除操作，例如删除，则应重载PostNcDestroy。如果你重载了OnNcDestroy，则必须调用基类的OnNcDestroy以确保内部为窗口分配的内存都被释放。</p>
+
+<p>3  virtual BOOL DestroyWindow( );</p>
+
+<p>返回值：如果销毁了窗口，则返回非零值；否则返回0。</p>
+
+<p>4   afx_msg void OnDestroy( );</p>
+
+<p>框架调用这个成员函数以通知CWnd对象它将被销毁。 OnDestroy 是在CWnd对象已经从屏幕上清除以后被调用的。</p>
+
+<p>首先为被销毁的CWnd调用OnDestroy，然后当CWnd的子窗口被销毁时为它们调用OnDestroy。可以假定当OnDestroy运行的时候，所有的子窗口依然存在。</p>
+
+<blockquote>
+<p>综合以上：<strong>先调用DestroyWindow，在此间会有OnDestroy消息，接着窗口被销毁，于是DestroyWindow返回TRUE，然后是OnNcDestroy消息，之后再调用PostNcDestroy。</strong></p>
+
+<p>也不知道这个结论对不对，我的想法是，OnNcDestroy是非客户区销毁时调用，而DestroyWindow销毁的是窗口，非客户区是没有窗口句柄的。</p>
+</blockquote>
+
+<h1 id="对话框类中添加消息对应的函数">对话框类中添加消息对应的函数</h1>
+
+<p>在类视图中找到窗口对应的类，然后再属性中找到消息，如下图红框</p>
+
+<p><img src="/media-MFC学习/adfe5c5d659e0a01d6a27ff4a13c12b4.png" alt="" /></p>
+
+<p>找到对应的消息，可以在右面添加对应函数。</p>
+
+<p><img src="/media-MFC学习/995e6e80ca4e95ef7c955be611fd3fc2.png" alt="" /></p>
+
+<h1 id="附">附</h1>
+
+<h2 id="this指针">This指针</h2>
+
+<p>this表示当前类的实例的指针，也就是说你 this 在哪个类里，这里 this
+就指向哪个类。例如当 this 写在 CTreeView 类的函数里， this 指针就指向 CTreeView
+的实例；</p>
+
+<p>CSpreadTransmissionView *g_pMainView;</p>
+
+<p><img src="/media-MFC学习/0ebbe971c78fd16c85a2b95e532f37b4.png" alt="" /></p>
+
+<h2 id="虚函数">虚函数：</h2>
+
+<p>实现多态功能。更新基类，支持不同类型。而不是更新基类实现新功能。</p>
+
+<p>在无需了解具体子类类型的情况下，通过<strong>基类指针</strong>调用子类的实现。</p>
+
+<p>把基类函数声明为虚，才能在运行时，通过调用基类的函数做出多态的分派。如果没有声明为虚，那么调用哪个函数是在编译期静态决定的。</p>
+
+<h2 id="message-map">MESSAGE_MAP</h2>
+
+<p>BEGIN_MESSAGE_MAP是<a href="https://baike.baidu.com/item/%E5%AE%8F%E5%AE%9A%E4%B9%89/8711494">宏定义</a>的一种，在BEGIN_MESSAGE_MAP()和END_MESSAGE_MAP()之间添加你的消息响应函数,为每个<strong>消息处理函数</strong>加入一个入口。</p>
+
+<p> </p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-08-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mfc/">MFC</a>
+          <a href="/tags/c/c&#43;&#43;/">C/C&#43;&#43;</a>
+          <a href="/tags/windows/">Windows</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/hugo/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Hugo</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/verilog%E8%AF%AD%E6%B3%95/">
+            <span class="next-text nav-default">Verilog 常用语法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

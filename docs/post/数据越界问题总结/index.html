@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>数据越界问题总结 - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="数据越界问题总结
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/%E6%95%B0%E6%8D%AE%E8%B6%8A%E7%95%8C%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="数据越界问题总结" />
+<meta property="og:description" content="数据越界问题总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/%E6%95%B0%E6%8D%AE%E8%B6%8A%E7%95%8C%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" />
+<meta property="article:published_time" content="2019-10-22T10:31:43+08:00" />
+<meta property="article:modified_time" content="2019-10-22T10:31:43+08:00" />
+<meta itemprop="name" content="数据越界问题总结">
+<meta itemprop="description" content="数据越界问题总结">
+
+
+<meta itemprop="datePublished" content="2019-10-22T10:31:43&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-22T10:31:43&#43;08:00" />
+<meta itemprop="wordCount" content="2080">
+
+
+
+<meta itemprop="keywords" content="MFC,越界," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据越界问题总结"/>
+<meta name="twitter:description" content="数据越界问题总结"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">数据越界问题总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%BD%AF%E4%BB%B6/"> 软件 </a>
+            </div>
+          <span class="more-meta"> 约 2080 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#数据越界问题总结"><strong>数据越界问题总结</strong></a></li>
+<li><a href="#问题1测试记录">问题1测试记录</a>
+<ul>
+<li><a href="#问题现象">问题现象</a></li>
+<li><a href="#测试计划和情况">测试计划和情况</a></li>
+<li><a href="#问题原因和解决方法">问题原因和解决方法</a></li>
+</ul></li>
+<li><a href="#问题2测试记录">问题2测试记录</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>数据越界问题总结</p>
+
+<h1 id="数据越界问题总结"><strong>数据越界问题总结</strong></h1>
+
+<p>1.软件运行时数据明显被篡改，关闭时释放资源失败。<strong>此类问题，一般都是栈被破坏，主要是查看出现错误地方用到的栈(比如数组)在使用过程中是否有越界。</strong></p>
+
+<blockquote>
+<p>数组和字符串的名称都是指针，当其下标越界时就会出现数据访问越界的情况。因此尤其需要注意。</p>
+</blockquote>
+
+<p>2.另外像这种有尺寸的buf，在用的时候对存入的数据大小做一个限制，超出限制时需要报出相关信息。</p>
+
+<blockquote>
+<p>比如说strcpy字符串拷贝函数和memcpy内存拷贝函数，以及sprintf打印函数，打印信息时不会检查数据的长度信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt; 1. Strcpy函数可以用strncpy_s函数替代。</pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>将接收数据存到一个buf中，现在一直都没有检查存入的数据长度是否会超过我们声明buf的长度。</li>
+</ol>
+</blockquote>
+
+<p>3.定位问题的方法</p>
+
+<blockquote>
+<ol>
+<li>通过调用堆栈来定位具体出错的代码位置；</li>
+<li>添加监视来观察变量的数值变化；</li>
+<li>在内存窗口中直接观察内存中一定区域内的数值。</li>
+</ol>
+</blockquote>
+
+<h1 id="问题1测试记录">问题1测试记录</h1>
+
+<p>上位机版本：RTTC_SS_20190916，FPGA版本：2019091501</p>
+
+<ol>
+<li>保通道设备自环，用前端模拟软件发送遥控数据，远控接收数据</li>
+<li>参数：2047，-30，±180KHz，15KHz/s，正弦扫描，16384，10.23，关，关，关，L码，EC175D39，512.（遥控模拟端帧长设置为1024，测试可变帧长）</li>
+</ol>
+
+<h2 id="问题现象">问题现象</h2>
+
+<ol>
+<li><p>远控遥控收令和基带遥控发令的条数一致保持一致。</p></li>
+
+<li><p>基带遥测收数会有1-2帧的丢帧，远控遥测发数一直为0.</p></li>
+
+<li><p>当基带遥测收数的条数满了时，提示“TM数据队列满”，四个控件中的数值显示都会突然变得很大，然后远控遥控收令、基带遥控发令、基带遥测收数还能继续加1向上增长。</p></li>
+</ol>
+
+<p><img src="/media-数据越界问题总结/f840a7bb7d05f6315b1811b417da78d1.png" alt="" /></p>
+
+<p><img src="/media-数据越界问题总结/219ed3658e940d4204e3ffa0795b439a.png" alt="" /></p>
+
+<ol>
+<li>出现计数值的错误后，关闭上位机出现异常中断。</li>
+</ol>
+
+<p><img src="/media-数据越界问题总结/6797b4e205e5268b371881a316179d89.png" alt="IMG_256" /></p>
+
+<h2 id="测试计划和情况">测试计划和情况</h2>
+
+<ol>
+<li>关闭数据快视，看看会不会出错；
+
+<ul>
+<li>没有数据快视，也会出错。</li>
+</ul></li>
+<li>去掉插入发送队列再看看是否会出错。
+
+<ul>
+<li>去掉插入发送队列也会出错。</li>
+</ul></li>
+
+<li><p>增加测试代码和断点，当数据异常时触发中断。</p>
+
+<ul>
+<li>发现问题出现在上位机接收到FPGA数据前；</li>
+</ul></li>
+</ol>
+
+<p><img src="/media-数据越界问题总结/2c21873290afb879d042ecd2b9d82996.png" alt="" /></p>
+
+<ol>
+<li><p>出错时我们发送的是固定码0x37，基带遥测收数变量的g_FpgaRecvTM_Num变量的值为0x33373337，怀疑是有数据的越界，因为0x37用ASCII码表示是0x3337；</p></li>
+
+<li><p>当我们将固定码更改为0x38，出错时g_FpgaRecvTM_Num变量的值为0x33383338；固定码更改为0x28，出错时g_FpgaRecvTM_Num变量的值为0x32383238。</p></li>
+
+<li><p>通过加断点验证，发现出现问题的地方是在前一次正常接收数据之后，这一次还未开始的地方；应该是接收数据的队列有越界的地方，最后发现将向窗口输出本次接收数据内容的代码主是时候，可以避免上述问题，排查到是接收以太网数据，存储打印数据内容的buf开的太小了。</p></li>
+
+<li><p>更换bit文件为090701版本，将遥控模拟帧长设置为512，观察是否能正常收发数据。</p>
+
+<ol>
+<li>测试发现也会出现上述问题。</li>
+</ol></li>
+</ol>
+
+<p><img src="/media-数据越界问题总结/447b71c4d0c0d17401171e13147c6550.png" alt="" /></p>
+
+<h2 id="问题原因和解决方法">问题原因和解决方法</h2>
+
+<ol>
+<li><p>因为将接收数据打印到信息显示栏，需要将二进制数据转换为ASCII码字符形式，一字节需要用2字符来显示，这也就解释了存储打印数据内容的buf数据越界，导致计数变量显示的错误值的问题。</p></li>
+
+<li><p>TCtcpListen.cpp文件中，打印信息的地方注释掉之后，发现没有再出现上述问题，进入InsertStrInfoToTeam函数中发现g_strInfoTeamIn-&gt;strInfoBuf数组的容量只有1024，但是我们发送的数据帧长度为512字节，再加上一些打印的字，已经超出了此数据组的容量。<strong>此处数据越界。</strong></p></li>
+</ol>
+
+<p><img src="/media-数据越界问题总结/e95b2314c2354477008809e4f500a005.png" alt="" /></p>
+
+<p><img src="/media-数据越界问题总结/edd7ec23c32751cd0e128522786434c2.png" alt="" /></p>
+
+<ol>
+<li><p>将数组容量更改为3072，根据大于以太网传输最大包长2倍定义。</p></li>
+
+<li><p>更改过后，再次测试上述问题已经修复。</p></li>
+</ol>
+
+<h1 id="问题2测试记录">问题2测试记录</h1>
+
+<p>USB上位机远控切换为本控时出现异常中断，并提示：0xC0000008: An invalid handle was specified</p>
+
+<p>打开设备前，将参数设置为“远控”模式。打开设备后，自动启动远控模式。</p>
+
+<p>启动时可以看到HANDLE变量值为0xFFFFFFFF.</p>
+
+<p><img src="/media-数据越界问题总结/535122fa8f2aa4168a9f88804abd6a5e.png" alt="" /></p>
+
+<p>创建后，各个HANDLE数值如下：</p>
+
+<p><img src="/media-数据越界问题总结/3896959ec755fead77cb593424567187.png" alt="" /></p>
+
+<p>界面上点击“本控”按钮后，发现数值变化！如图所示，在该断点处，通过监视窗口可以看到g_hMainThreadExitEvent[5]和g_hMainThreadExitEvent[8]的值和其余相差较大。</p>
+
+<p><img src="/media-数据越界问题总结/acf16e00d813c4421143a4eb1c5bd083.png" alt="" /></p>
+
+<p>当执行到CloseHandle时，出现0xC0000008: An invalid handle was specified错误。</p>
+
+<p>继续定位问题的具体位置。</p>
+
+<p>发现启动后，不点击“本控”控件，而是点击“关闭设备”控件，发现也会出错。</p>
+
+<p><img src="/media-数据越界问题总结/4853fd962f663a91895c96fdedab9dcd.png" alt="" /></p>
+
+<p>重试一遍，发现“本控”按钮的函数开始执行时，已经出现问题。</p>
+
+<p><img src="/media-数据越界问题总结/cbfbb967b3f790b65f6a06c73e1ec067.png" alt="" /></p>
+
+<p>晚上继续测试</p>
+
+<p>发现处于远控模式关闭上位机后，再启动上位机并打开设备，上位机自动进入远控模式。待上位机启动远控完毕后，直接在菜单-&gt;调试-&gt;全部中断上位机运行，发现从<strong>内存窗口</strong>中观察到数据已经出错。</p>
+
+<p><img src="/media-数据越界问题总结/852786bed53e001c041c956fd8775a5c.png" alt="" /></p>
+
+<p>发现出错的数据是“RF：”，发现是主界面更新工作模式时会显示射频板卡的设备号。而机箱中没有射频卡时，显示的就是“RF：”，将这部分注释掉之后就不会有这个问题。</p>
+
+<p><img src="/media-数据越界问题总结/b302b34f96f9db1c34c5a38879723cec.png" alt="" /></p>
+
+<p>逐步调试：</p>
+
+<p><img src="/media-数据越界问题总结/b10258e0030ea979b4c122c9010cc17a.png" alt="" /></p>
+
+<p>增加赋值为””</p>
+
+<p><img src="/media-数据越界问题总结/6f1e4282d3fd04d0488a9f26bb63c554.png" alt="" /></p>
+
+<p>之后，发现地址不再和handle地址冲突，变为</p>
+
+<p><img src="/media-数据越界问题总结/dd063404b9b7d8c20079280ddbb67f09.png" alt="" /></p>
+
+<p><img src="/media-数据越界问题总结/8a3411becea9a7a71ae17f5fbab058d6.png" alt="" /></p>
+
+<p><strong>真正的原因是射频卡不存在的时候ID返回值是-1，导致数组越界。</strong></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-10-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mfc/">MFC</a>
+          <a href="/tags/%E8%B6%8A%E7%95%8C/">越界</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/tkinter/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python3 tkinter</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python%E8%AF%AD%E6%B3%95/">
+            <span class="next-text nav-default">Python3 常用语法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

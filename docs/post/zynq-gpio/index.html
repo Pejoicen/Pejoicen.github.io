@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Zynq GPIO - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/zynq-gpio/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Zynq GPIO" />
+<meta property="og:description" content="详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/zynq-gpio/" />
+<meta property="article:published_time" content="2019-08-22T19:37:10+08:00" />
+<meta property="article:modified_time" content="2019-08-22T19:37:10+08:00" />
+<meta itemprop="name" content="Zynq GPIO">
+<meta itemprop="description" content="详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。">
+
+
+<meta itemprop="datePublished" content="2019-08-22T19:37:10&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-22T19:37:10&#43;08:00" />
+<meta itemprop="wordCount" content="2668">
+
+
+
+<meta itemprop="keywords" content="ZYNQ,嵌入式,C/C&#43;&#43;," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Zynq GPIO"/>
+<meta name="twitter:description" content="详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Zynq GPIO</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%BD%AF%E4%BB%B6/"> 软件 </a>
+            </div>
+          <span class="more-meta"> 约 2668 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#gpio">GPIO</a>
+<ul>
+<li><a href="#gpio初始化">GPIO初始化</a></li>
+<li><a href="#gpio中断">GPIO中断</a></li>
+</ul></li>
+<li><a href="#gpio-中断">GPIO 中断</a></li>
+<li><a href="#常用函数">常用函数</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。</p>
+
+<h1 id="gpio">GPIO</h1>
+
+<p>初始化GPIO
+配置GPIO
+设置GPIO中断</p>
+
+<h2 id="gpio初始化">GPIO初始化</h2>
+
+<ol>
+<li>声明 XGpioPs</li>
+</ol>
+
+<blockquote>
+<p>作用：作为GPIO驱动的一个实例？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">static</span> <span class="n">XGpioPs</span> <span class="n">Gpio</span><span class="p">;</span> <span class="cm">/* The Instance of the GPIO Driver */</span>
+
+<span class="o">-----------------------------------------------------------------------</span>
+<span class="cm">/**
+</span><span class="cm"> * The XGpioPs driver instance data. The user is required to allocate a
+</span><span class="cm"> * variable of this type for the GPIO device in the system. A pointer
+</span><span class="cm"> * to a variable of this type is then passed to the driver API functions.
+</span><span class="cm"> */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">XGpioPs_Config</span> <span class="n">GpioConfig</span><span class="p">;</span>	<span class="cm">/**&lt; Device configuration */</span>
+	<span class="n">u32</span> <span class="n">IsReady</span><span class="p">;</span>			<span class="cm">/**&lt; Device is initialized and ready */</span>
+	<span class="n">XGpioPs_Handler</span> <span class="n">Handler</span><span class="p">;</span>	<span class="cm">/**&lt; Status handlers for all banks */</span>
+	<span class="kt">void</span> <span class="o">*</span><span class="n">CallBackRef</span><span class="p">;</span> 		<span class="cm">/**&lt; Callback ref for bank handlers */</span>
+	<span class="n">u32</span> <span class="n">Platform</span><span class="p">;</span>			<span class="cm">/**&lt; Platform data */</span>
+	<span class="n">u32</span> <span class="n">MaxPinNum</span><span class="p">;</span>			<span class="cm">/**&lt; Max pins in the GPIO device */</span>
+	<span class="n">u8</span> <span class="n">MaxBanks</span><span class="p">;</span>			<span class="cm">/**&lt; Max banks in a GPIO device */</span>
+<span class="p">}</span> <span class="n">XGpioPs</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+
+<ol>
+<li>声明 并 获取 XGpioPs_Config</li>
+</ol>
+
+<blockquote>
+<p>作用：声明GPIO的配置信息变量，查找 配置信息</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c">	<span class="n">XGpioPs_Config</span> <span class="o">*</span><span class="n">ConfigPtr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">Status</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="c1">//printf(&#34;Initialize the Gpio driver.\n\r&#34;);
+</span><span class="c1"></span>	<span class="n">ConfigPtr</span> <span class="o">=</span> <span class="n">XGpioPs_LookupConfig</span><span class="p">(</span><span class="n">GPIO_DEVICE_ID</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">ConfigPtr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">XST_FAILURE</span><span class="p">;</span>
+	<span class="p">}</span>
+
+<span class="o">-----------------------------------------------------------------------</span>
+<span class="cm">/**
+</span><span class="cm"> * This typedef contains configuration information for a device.
+</span><span class="cm"> */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">u16</span> <span class="n">DeviceId</span><span class="p">;</span>		<span class="cm">/**&lt; Unique ID of device */</span>
+	<span class="n">u32</span> <span class="n">BaseAddr</span><span class="p">;</span>		<span class="cm">/**&lt; Register base address */</span>
+<span class="p">}</span> <span class="n">XGpioPs_Config</span><span class="p">;</span>
+
+<span class="o">-----------------------------------------------------------------------</span>
+<span class="cm">/*****************************************************************************/</span>
+<span class="cm">/**
+</span><span class="cm">* 根据ID号，在配置表中找到并返回对应的GPIO设备信息，函数返回类型为自定义类型的指针。
+</span><span class="cm">* This function looks for the device configuration based on the unique device
+</span><span class="cm">* ID. The table XGpioPs_ConfigTable[] contains the configuration information
+</span><span class="cm">* for each device in the system.
+</span><span class="cm">*
+</span><span class="cm">* @param	DeviceId is the unique device ID of the device being looked up.
+</span><span class="cm">*
+</span><span class="cm">* @return	A pointer to the configuration table entry corresponding to the
+</span><span class="cm">*		given device ID, or NULL if no match is found.
+</span><span class="cm">*
+</span><span class="cm">* @note		None.
+</span><span class="cm">*
+</span><span class="cm">******************************************************************************/</span>
+<span class="n">XGpioPs_Config</span> <span class="o">*</span><span class="n">XGpioPs_LookupConfig</span><span class="p">(</span><span class="n">u16</span> <span class="n">DeviceId</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">XGpioPs_Config</span> <span class="o">*</span><span class="n">CfgPtr</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+	<span class="n">u32</span> <span class="n">Index</span><span class="p">;</span>
+
+	<span class="k">for</span> <span class="p">(</span><span class="n">Index</span> <span class="o">=</span> <span class="mi">0U</span><span class="p">;</span> <span class="n">Index</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">u32</span><span class="p">)</span><span class="n">XPAR_XGPIOPS_NUM_INSTANCES</span><span class="p">;</span> <span class="n">Index</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">XGpioPs_ConfigTable</span><span class="p">[</span><span class="n">Index</span><span class="p">].</span><span class="n">DeviceId</span> <span class="o">==</span> <span class="n">DeviceId</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">CfgPtr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">XGpioPs_ConfigTable</span><span class="p">[</span><span class="n">Index</span><span class="p">];</span>
+			<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="p">(</span><span class="n">XGpioPs_Config</span> <span class="o">*</span><span class="p">)</span><span class="n">CfgPtr</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="cm">/* GPIO配置表
+</span><span class="cm">* The configuration table for devices
+</span><span class="cm">*/</span>
+
+<span class="n">XGpioPs_Config</span> <span class="n">XGpioPs_ConfigTable</span><span class="p">[</span><span class="n">XPAR_XGPIOPS_NUM_INSTANCES</span><span class="p">]</span> <span class="o">=</span>
+<span class="p">{</span>
+	<span class="p">{</span>
+		<span class="n">XPAR_PS7_GPIO_0_DEVICE_ID</span><span class="p">,</span>
+		<span class="n">XPAR_PS7_GPIO_0_BASEADDR</span>
+	<span class="p">}</span>
+<span class="p">};</span></code></pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li><p>配置GPIO方向、读写GPIO</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">XGpioPs_SetDirection</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Gpio</span><span class="p">,</span> <span class="n">GPIO_BANK</span><span class="p">,</span> <span class="n">GPIO_DIR</span><span class="p">);</span>    <span class="c1">// bank3 set to all input
+</span><span class="c1"></span>
+<span class="c1">// 函数在 xgpiops.c 中，其中还包括了配置GPIO方向，以及写、读GPIO引脚的功能函数
+</span><span class="c1"></span>
+
+<span class="o">-----------------------------------------------------------------------</span>
+<span class="cm">/****************************************************************************/</span>
+<span class="cm">/**
+</span><span class="cm">*
+</span><span class="cm">* Set the Direction of the pins of the specified GPIO Bank.
+</span><span class="cm">*
+</span><span class="cm">* @param	InstancePtr is a pointer to the XGpioPs instance.
+</span><span class="cm">* @param	Bank is the bank number of the GPIO to operate on.
+</span><span class="cm">*		Valid values are 0-3 in Zynq and 0-5 in Zynq Ultrascale+ MP.
+</span><span class="cm">* @param	Direction is the 32 bit mask of the Pin direction to be set for
+</span><span class="cm">*		all the pins in the Bank. Bits with 0 are set to Input mode,
+</span><span class="cm">*		bits with 1 are	set to Output Mode.
+</span><span class="cm">*
+</span><span class="cm">* @return	None.
+</span><span class="cm">*
+</span><span class="cm">* @note		This function is used for setting the direction of all the pins
+</span><span class="cm">*		in the specified bank. The previous state of the pins is
+</span><span class="cm">*		not maintained.
+</span><span class="cm">*
+</span><span class="cm">*****************************************************************************/</span>
+<span class="kt">void</span> <span class="n">XGpioPs_SetDirection</span><span class="p">(</span><span class="n">XGpioPs</span> <span class="o">*</span><span class="n">InstancePtr</span><span class="p">,</span> <span class="n">u8</span> <span class="n">Bank</span><span class="p">,</span> <span class="n">u32</span> <span class="n">Direction</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">Xil_AssertVoid</span><span class="p">(</span><span class="n">InstancePtr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+	<span class="n">Xil_AssertVoid</span><span class="p">(</span><span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">IsReady</span> <span class="o">==</span> <span class="n">XIL_COMPONENT_IS_READY</span><span class="p">);</span>
+	<span class="n">Xil_AssertVoid</span><span class="p">(</span><span class="n">Bank</span> <span class="o">&lt;</span> <span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">MaxBanks</span><span class="p">);</span>
+
+	<span class="n">XGpioPs_WriteReg</span><span class="p">(</span><span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">GpioConfig</span><span class="p">.</span><span class="n">BaseAddr</span><span class="p">,</span>
+			  <span class="p">((</span><span class="n">u32</span><span class="p">)(</span><span class="n">Bank</span><span class="p">)</span> <span class="o">*</span> <span class="n">XGPIOPS_REG_MASK_OFFSET</span><span class="p">)</span> <span class="o">+</span>
+			  <span class="n">XGPIOPS_DIRM_OFFSET</span><span class="p">,</span> <span class="n">Direction</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="o">-----------------------------------------------------------------------</span>
+
+<span class="cm">/****************************************************************************/</span>
+<span class="cm">/**
+</span><span class="cm">*
+</span><span class="cm">* Read the Data register of the specified GPIO bank.
+</span><span class="cm">*
+</span><span class="cm">* @param	InstancePtr is a pointer to the XGpioPs instance.
+</span><span class="cm">* @param	Bank is the bank number of the GPIO to operate on.
+</span><span class="cm">*		Valid values are 0-3 in Zynq and 0-5 in Zynq Ultrascale+ MP.
+</span><span class="cm">*
+</span><span class="cm">* @return	Current value of the Data register.
+</span><span class="cm">*
+</span><span class="cm">* @note		This function is used for reading the state of all the GPIO pins
+</span><span class="cm">*		of specified bank.
+</span><span class="cm">*
+</span><span class="cm">*****************************************************************************/</span>
+<span class="n">u32</span> <span class="n">XGpioPs_Read</span><span class="p">(</span><span class="n">XGpioPs</span> <span class="o">*</span><span class="n">InstancePtr</span><span class="p">,</span> <span class="n">u8</span> <span class="n">Bank</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">Xil_AssertNonvoid</span><span class="p">(</span><span class="n">InstancePtr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+	<span class="n">Xil_AssertNonvoid</span><span class="p">(</span><span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">IsReady</span> <span class="o">==</span> <span class="n">XIL_COMPONENT_IS_READY</span><span class="p">);</span>
+	<span class="n">Xil_AssertNonvoid</span><span class="p">(</span><span class="n">Bank</span> <span class="o">&lt;</span> <span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">MaxBanks</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="nf">XGpioPs_ReadReg</span><span class="p">(</span><span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">GpioConfig</span><span class="p">.</span><span class="n">BaseAddr</span><span class="p">,</span>
+				 <span class="p">((</span><span class="n">u32</span><span class="p">)(</span><span class="n">Bank</span><span class="p">)</span> <span class="o">*</span> <span class="n">XGPIOPS_DATA_BANK_OFFSET</span><span class="p">)</span> <span class="o">+</span>
+				 <span class="n">XGPIOPS_DATA_RO_OFFSET</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">-----------------------------------------------------------------------</span>
+
+<span class="cm">/****************************************************************************/</span>
+<span class="cm">/**
+</span><span class="cm">*
+</span><span class="cm">* Write to the Data register of the specified GPIO bank.
+</span><span class="cm">*
+</span><span class="cm">* @param	InstancePtr is a pointer to the XGpioPs instance.
+</span><span class="cm">* @param	Bank is the bank number of the GPIO to operate on.
+</span><span class="cm">*		Valid values are 0-3 in Zynq and 0-5 in Zynq Ultrascale+ MP.
+</span><span class="cm">* @param	Data is the value to be written to the Data register.
+</span><span class="cm">*
+</span><span class="cm">* @return	None.
+</span><span class="cm">*
+</span><span class="cm">* @note		This function is used for writing to all the GPIO pins of
+</span><span class="cm">*		the bank. The previous state of the pins is not maintained.
+</span><span class="cm">*
+</span><span class="cm">*****************************************************************************/</span>
+<span class="kt">void</span> <span class="n">XGpioPs_Write</span><span class="p">(</span><span class="n">XGpioPs</span> <span class="o">*</span><span class="n">InstancePtr</span><span class="p">,</span> <span class="n">u8</span> <span class="n">Bank</span><span class="p">,</span> <span class="n">u32</span> <span class="n">Data</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">Xil_AssertVoid</span><span class="p">(</span><span class="n">InstancePtr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+	<span class="n">Xil_AssertVoid</span><span class="p">(</span><span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">IsReady</span> <span class="o">==</span> <span class="n">XIL_COMPONENT_IS_READY</span><span class="p">);</span>
+	<span class="n">Xil_AssertVoid</span><span class="p">(</span><span class="n">Bank</span> <span class="o">&lt;</span> <span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">MaxBanks</span><span class="p">);</span>
+
+	<span class="n">XGpioPs_WriteReg</span><span class="p">(</span><span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">GpioConfig</span><span class="p">.</span><span class="n">BaseAddr</span><span class="p">,</span>
+			  <span class="p">((</span><span class="n">u32</span><span class="p">)(</span><span class="n">Bank</span><span class="p">)</span> <span class="o">*</span> <span class="n">XGPIOPS_DATA_BANK_OFFSET</span><span class="p">)</span> <span class="o">+</span>
+			  <span class="n">XGPIOPS_DATA_OFFSET</span><span class="p">,</span> <span class="n">Data</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+
+<h2 id="gpio中断">GPIO中断</h2>
+
+<ol>
+<li><p>声明GIC驱动实例 XScuGic</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">XScuGic</span> <span class="n">GicInstancePtr</span><span class="p">;</span> <span class="cm">/* The Instance of the Interrupt Controller Driver */</span>
+
+<span class="o">--------------------------------------------------------------------------------</span>
+<span class="cm">/**
+</span><span class="cm">* The XScuGic driver instance data. The user is required to allocate a
+</span><span class="cm">* variable of this type for every intc device in the system. A pointer
+</span><span class="cm">* to a variable of this type is then passed to the driver API functions.
+</span><span class="cm">*/</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+	<span class="n">XScuGic_Config</span> <span class="o">*</span><span class="n">Config</span><span class="p">;</span>  <span class="cm">/**&lt; Configuration table entry */</span>
+	<span class="n">u32</span> <span class="n">IsReady</span><span class="p">;</span>		 <span class="cm">/**&lt; Device is initialized and ready */</span>
+	<span class="n">u32</span> <span class="n">UnhandledInterrupts</span><span class="p">;</span> <span class="cm">/**&lt; Intc Statistics */</span>
+<span class="p">}</span> <span class="n">XScuGic</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>声明 并 查找 GIC配置信息 XScuGic_Config,XScuGic_CfgInitialize</p></li>
+</ol>
+
+<blockquote>
+<p>功能和GPIO类似，初始化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c">	<span class="n">XScuGic_Config</span> <span class="o">*</span><span class="n">IntcConfig</span><span class="p">;</span> <span class="cm">/* Instance of the interrupt controller */</span>
+    
+    <span class="n">IntcConfig</span> <span class="o">=</span> <span class="n">XScuGic_LookupConfig</span><span class="p">(</span><span class="n">INTC_DEVICE_ID</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">IntcConfig</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">XST_FAILURE</span><span class="p">;</span>
+	<span class="p">}</span>
+    
+	<span class="n">Status</span> <span class="o">=</span> <span class="n">XScuGic_CfgInitialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">GicInstancePtr</span><span class="p">,</span> <span class="n">IntcConfig</span><span class="p">,</span>
+					<span class="n">IntcConfig</span><span class="o">-&gt;</span><span class="n">CpuBaseAddress</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">Status</span> <span class="o">!=</span> <span class="n">XST_SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">XST_FAILURE</span><span class="p">;</span>
+	<span class="p">}</span>
+    
+    </code></pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>注册 中断控制器 handler 和 硬件中断 handling 逻辑 Xil_ExceptionRegisterHandler</li>
+</ol>
+
+<p>interrupt handler = interrupt service routine ISR 中断服务程序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c">	<span class="cm">/*
+</span><span class="cm">	 * Connect the interrupt controller interrupt handler to the hardware
+</span><span class="cm">	 * interrupt handling logic in the processor.
+</span><span class="cm">	 */</span>
+	<span class="n">Xil_ExceptionRegisterHandler</span><span class="p">(</span><span class="n">XIL_EXCEPTION_ID_INT</span><span class="p">,</span>                          <span class="c1">// 5 XIL_EXCEPTION_ID_IRQ_INT
+</span><span class="c1"></span>				<span class="p">(</span><span class="n">Xil_ExceptionHandler</span><span class="p">)</span><span class="n">XScuGic_InterruptHandler</span><span class="p">,</span>                 <span class="c1">// must call this func
+</span><span class="c1"></span>				<span class="o">&amp;</span><span class="n">GicInstancePtr</span><span class="p">);</span>                                               <span class="c1">// Gic instance
+</span><span class="c1"></span>     
+<span class="o">--------------------------------------------------------------------------------</span>     
+<span class="cm">/*****************************************************************************/</span>
+<span class="cm">/**
+</span><span class="cm">* @brief	Register a handler for a specific exception. This handler is being
+</span><span class="cm">*			called when the processor encounters the specified exception.
+</span><span class="cm">*
+</span><span class="cm">* @param	exception_id contains the ID of the exception source and should
+</span><span class="cm">*			be in the range of 0 to XIL_EXCEPTION_ID_LAST.
+</span><span class="cm">*			See xil_exception.h for further information.
+</span><span class="cm">* @param	Handler to the Handler for that exception.
+</span><span class="cm">* @param	Data is a reference to Data that will be passed to the
+</span><span class="cm">*			Handler when it gets called.
+</span><span class="cm">*
+</span><span class="cm">* @return	None.
+</span><span class="cm">*
+</span><span class="cm">* @note		None.
+</span><span class="cm">*
+</span><span class="cm">****************************************************************************/</span>
+<span class="kt">void</span> <span class="n">Xil_ExceptionRegisterHandler</span><span class="p">(</span><span class="n">u32</span> <span class="n">Exception_id</span><span class="p">,</span>
+				    <span class="n">Xil_ExceptionHandler</span> <span class="n">Handler</span><span class="p">,</span>
+				    <span class="kt">void</span> <span class="o">*</span><span class="n">Data</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">XExc_VectorTable</span><span class="p">[</span><span class="n">Exception_id</span><span class="p">].</span><span class="n">Handler</span> <span class="o">=</span> <span class="n">Handler</span><span class="p">;</span>
+	<span class="n">XExc_VectorTable</span><span class="p">[</span><span class="n">Exception_id</span><span class="p">].</span><span class="n">Data</span> <span class="o">=</span> <span class="n">Data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">--------------------------------------------------------------------------------</span>    
+<span class="cm">/*****************************************************************************/</span>
+<span class="cm">/**
+</span><span class="cm">* This function is the primary interrupt handler for the driver.  It must be
+</span><span class="cm">* connected to the interrupt source such that it is called when an interrupt of
+</span><span class="cm">* the interrupt controller is active. It will resolve which interrupts are
+</span><span class="cm">* active and enabled and call the appropriate interrupt handler. It uses
+</span><span class="cm">* the Interrupt Type information to determine when to acknowledge the interrupt.
+</span><span class="cm">* Highest priority interrupts are serviced first.
+</span><span class="cm">*
+</span><span class="cm">* This function assumes that an interrupt vector table has been previously
+</span><span class="cm">* initialized.  It does not verify that entries in the table are valid before
+</span><span class="cm">* calling an interrupt handler.
+</span><span class="cm">*
+</span><span class="cm">*
+</span><span class="cm">* @param	InstancePtr is a pointer to the XScuGic instance.
+</span><span class="cm">*
+</span><span class="cm">* @return	None.
+</span><span class="cm">*
+</span><span class="cm">* @note		None.
+</span><span class="cm">*
+</span><span class="cm">******************************************************************************/</span>
+<span class="kt">void</span> <span class="n">XScuGic_InterruptHandler</span><span class="p">(</span><span class="n">XScuGic</span> <span class="o">*</span><span class="n">InstancePtr</span><span class="p">)</span>
+<span class="p">{</span>
+
+	<span class="n">u32</span> <span class="n">InterruptID</span><span class="p">;</span>
+	    <span class="n">u32</span> <span class="n">IntIDFull</span><span class="p">;</span>
+	    <span class="n">XScuGic_VectorTableEntry</span> <span class="o">*</span><span class="n">TablePtr</span><span class="p">;</span>
+
+	    <span class="cm">/* Assert that the pointer to the instance is valid
+</span><span class="cm">	     */</span>
+	    <span class="n">Xil_AssertVoid</span><span class="p">(</span><span class="n">InstancePtr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+	    <span class="cm">/*
+</span><span class="cm">	     * Read the int_ack register to identify the highest priority interrupt ID
+</span><span class="cm">	     * and make sure it is valid. Reading Int_Ack will clear the interrupt
+</span><span class="cm">	     * in the GIC.
+</span><span class="cm">	     */</span>
+	    <span class="n">IntIDFull</span> <span class="o">=</span> <span class="n">XScuGic_CPUReadReg</span><span class="p">(</span><span class="n">InstancePtr</span><span class="p">,</span> <span class="n">XSCUGIC_INT_ACK_OFFSET</span><span class="p">);</span>
+	    <span class="n">InterruptID</span> <span class="o">=</span> <span class="n">IntIDFull</span> <span class="o">&amp;</span> <span class="n">XSCUGIC_ACK_INTID_MASK</span><span class="p">;</span>
+
+	    <span class="k">if</span><span class="p">(</span><span class="n">XSCUGIC_MAX_NUM_INTR_INPUTS</span> <span class="o">&lt;</span> <span class="n">InterruptID</span><span class="p">){</span>
+		<span class="k">goto</span> <span class="n">IntrExit</span><span class="p">;</span>
+	    <span class="p">}</span>
+
+	    <span class="cm">/*
+</span><span class="cm">	     * If the interrupt is shared, do some locking here if there are multiple
+</span><span class="cm">	     * processors.
+</span><span class="cm">	     */</span>
+	    <span class="cm">/*
+</span><span class="cm">	     * If pre-eption is required:
+</span><span class="cm">	     * Re-enable pre-emption by setting the CPSR I bit for non-secure ,
+</span><span class="cm">	     * interrupts or the F bit for secure interrupts
+</span><span class="cm">	     */</span>
+
+	    <span class="cm">/*
+</span><span class="cm">	     * If we need to change security domains, issue a SMC instruction here.
+</span><span class="cm">	     */</span>
+
+	    <span class="cm">/*
+</span><span class="cm">	     * Execute the ISR. Jump into the Interrupt service routine based on the
+</span><span class="cm">	     * IRQSource. A software trigger is cleared by the ACK.
+</span><span class="cm">	     */</span>
+	    <span class="n">TablePtr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">InstancePtr</span><span class="o">-&gt;</span><span class="n">Config</span><span class="o">-&gt;</span><span class="n">HandlerTable</span><span class="p">[</span><span class="n">InterruptID</span><span class="p">]);</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">TablePtr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+	        <span class="n">TablePtr</span><span class="o">-&gt;</span><span class="n">Handler</span><span class="p">(</span><span class="n">TablePtr</span><span class="o">-&gt;</span><span class="n">CallBackRef</span><span class="p">);</span>
+		<span class="p">}</span>
+
+	<span class="nl">IntrExit</span><span class="p">:</span>
+	    <span class="cm">/*
+</span><span class="cm">	     * Write to the EOI register, we are all done here.
+</span><span class="cm">	     * Let this function return, the boot code will restore the stack.
+</span><span class="cm">	     */</span>
+	    <span class="n">XScuGic_CPUWriteReg</span><span class="p">(</span><span class="n">InstancePtr</span><span class="p">,</span> <span class="n">XSCUGIC_EOI_OFFSET</span><span class="p">,</span> <span class="n">IntIDFull</span><span class="p">);</span>
+
+	    <span class="cm">/*
+</span><span class="cm">	     * Return from the interrupt. Change security domains could happen here.
+</span><span class="cm">     */</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+
+<ol>
+<li><p>XScuGic_Connect</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c">	<span class="cm">/*
+</span><span class="cm">	 * Connect the device driver handler that will be called when an
+</span><span class="cm">	 * interrupt for the device occurs, the handler defined above performs
+</span><span class="cm">	 * the specific interrupt processing for the device.
+</span><span class="cm">	 */</span>
+	<span class="n">Status</span> <span class="o">=</span> <span class="n">XScuGic_Connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">GicInstancePtr</span><span class="p">,</span> 
+            <span class="n">GPIO_INTERRUPT_ID</span><span class="p">,</span>                                              <span class="c1">// 52
+</span><span class="c1"></span>				<span class="p">(</span><span class="n">Xil_ExceptionHandler</span><span class="p">)</span><span class="n">XGpioPs_IntrHandler</span><span class="p">,</span>
+				<span class="o">&amp;</span><span class="n">Gpio</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">Status</span> <span class="o">!=</span> <span class="n">XST_SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">Status</span><span class="p">;</span>
+	<span class="p">}</span>
+    
+<span class="o">--------------------------------------------------------------------------------</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+
+<p>/**************************************************************************<strong>/
+/</strong>
+ * This handler data type allows the user to define a callback function to
+ * handle the interrupts for the GPIO device. The application using this
+ * driver is expected to define a handler of this type, to support interrupt
+ * driven mode. The handler executes in an interrupt context such that minimal
+ * processing should be performed.
+ *
+ * @param   CallBackRef is a callback reference passed in by the upper layer
+ *      when setting the callback functions for a GPIO bank. It is
+ *      passed back to the upper layer when the callback is invoked. Its
+ *      type is not important to the driver component, so it is a void
+ *      pointer.
+ * @param   Bank is the bank for which the interrupt status has changed.
+ * @param   Status is the Interrupt status of the GPIO bank.
+ *
+ *****************************************************************************/
+typedef void (*XGpioPs_Handler) (void *CallBackRef, u32 Bank, u32 Status);</p>
+
+<p>/**
+ * This typedef contains configuration information for a device.
+ */
+typedef struct {
+    u16 DeviceId;       /<strong>&lt; Unique ID of device */
+    u32 BaseAddr;       /</strong>&lt; Register base address */
+} XGpioPs_Config;</p>
+
+<p>/**
+ * The XGpioPs driver instance data. The user is required to allocate a
+ * variable of this type for the GPIO device in the system. A pointer
+ * to a variable of this type is then passed to the driver API functions.
+ */
+typedef struct {
+    XGpioPs_Config GpioConfig;  /<strong>&lt; Device configuration */
+    u32 IsReady;            /</strong>&lt; Device is initialized and ready */
+    XGpioPs_Handler Handler;    /<strong>&lt; Status handlers for all banks */
+    void *CallBackRef;      /</strong>&lt; Callback ref for bank handlers */
+    u32 Platform;           /<strong>&lt; Platform data */
+    u32 MaxPinNum;          /</strong>&lt; Max pins in the GPIO device */
+    u8 MaxBanks;            /**&lt; Max banks in a GPIO device */
+} XGpioPs;</p>
+
+<h1 id="gpio-中断">GPIO 中断</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c">	<span class="cm">/*
+</span><span class="cm">	 * Run the GPIO interrupt example, specify the parameters that
+</span><span class="cm">	 * are generated in xparameters.h.
+</span><span class="cm">	 */</span>
+	<span class="n">Status</span> <span class="o">=</span> <span class="n">GpioIntrExample</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Intc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Gpio</span><span class="p">,</span> <span class="n">GPIO_DEVICE_ID</span><span class="p">,</span>
+				 <span class="n">GPIO_INTERRUPT_ID</span><span class="p">);</span>
+
+
+
+
+<span class="cm">/****************************************************************************/</span>
+<span class="cm">/**
+</span><span class="cm">* This function shows the usage of interrupt fucntionality of the GPIO device.
+</span><span class="cm">* It is responsible for initializing the GPIO device, setting up interrupts and
+</span><span class="cm">* providing a foreground loop such that interrupts can occur in the background.
+</span><span class="cm">*
+</span><span class="cm">* @param	Intc is a pointer to the XScuGic driver Instance.
+</span><span class="cm">* @param	Gpio is a pointer to the XGpioPs driver Instance.
+</span><span class="cm">* @param	DeviceId is the XPAR_&lt;Gpio_Instance&gt;_PS_DEVICE_ID value
+</span><span class="cm">*		from xparameters.h.
+</span><span class="cm">* @param	GpioIntrId is XPAR_&lt;GIC&gt;_&lt;GPIO_Instance&gt;_VEC_ID value
+</span><span class="cm">*		from xparameters.h
+</span><span class="cm">*
+</span><span class="cm">* @return
+</span><span class="cm">*		- XST_SUCCESS if the example has completed successfully.
+</span><span class="cm">*		- XST_FAILURE if the example has failed.
+</span><span class="cm">*
+</span><span class="cm">* @note		None
+</span><span class="cm">*
+</span><span class="cm">*****************************************************************************/</span>
+<span class="kt">int</span> <span class="nf">GpioIntrExample</span><span class="p">(</span><span class="n">XScuGic</span> <span class="o">*</span><span class="n">Intc</span><span class="p">,</span> <span class="n">XGpioPs</span> <span class="o">*</span><span class="n">Gpio</span><span class="p">,</span> <span class="n">u16</span> <span class="n">DeviceId</span><span class="p">,</span> <span class="n">u16</span> <span class="n">GpioIntrId</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">XGpioPs_Config</span> <span class="o">*</span><span class="n">ConfigPtr</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">Status</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">Type_of_board</span><span class="p">;</span>
+
+	<span class="n">Type_of_board</span> <span class="o">=</span> <span class="n">XGetPlatform_Info</span><span class="p">();</span>
+	<span class="k">switch</span> <span class="p">(</span><span class="n">Type_of_board</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nl">XPLAT_ZYNQ_ULTRA_MP</span><span class="p">:</span>
+		<span class="n">Input_Pin</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
+		<span class="n">Output_Pin</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+
+	<span class="k">case</span> <span class="nl">XPLAT_ZYNQ</span><span class="p">:</span>
+		<span class="n">Input_Pin</span> <span class="o">=</span> <span class="mi">14</span><span class="p">;</span>
+		<span class="n">Output_Pin</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/* Initialize the Gpio driver. */</span>
+	<span class="n">ConfigPtr</span> <span class="o">=</span> <span class="n">XGpioPs_LookupConfig</span><span class="p">(</span><span class="n">DeviceId</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">ConfigPtr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">XST_FAILURE</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">XGpioPs_CfgInitialize</span><span class="p">(</span><span class="n">Gpio</span><span class="p">,</span> <span class="n">ConfigPtr</span><span class="p">,</span> <span class="n">ConfigPtr</span><span class="o">-&gt;</span><span class="n">BaseAddr</span><span class="p">);</span>
+
+	<span class="cm">/* Run a self-test on the GPIO device. */</span>
+	<span class="n">Status</span> <span class="o">=</span> <span class="n">XGpioPs_SelfTest</span><span class="p">(</span><span class="n">Gpio</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">Status</span> <span class="o">!=</span> <span class="n">XST_SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">XST_FAILURE</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/* Set the direction for the specified pin to be input */</span>
+	<span class="n">XGpioPs_SetDirectionPin</span><span class="p">(</span><span class="n">Gpio</span><span class="p">,</span> <span class="n">Input_Pin</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">);</span>
+
+	<span class="cm">/* Set the direction for the specified pin to be output. */</span>
+	<span class="n">XGpioPs_SetDirectionPin</span><span class="p">(</span><span class="n">Gpio</span><span class="p">,</span> <span class="n">Output_Pin</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">XGpioPs_SetOutputEnablePin</span><span class="p">(</span><span class="n">Gpio</span><span class="p">,</span> <span class="n">Output_Pin</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">XGpioPs_WritePin</span><span class="p">(</span><span class="n">Gpio</span><span class="p">,</span> <span class="n">Output_Pin</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">);</span>
+
+	<span class="cm">/*
+</span><span class="cm">	 * Setup the interrupts such that interrupt processing can occur. If
+</span><span class="cm">	 * an error occurs then exit.
+</span><span class="cm">	 */</span>
+	<span class="n">Status</span> <span class="o">=</span> <span class="n">SetupInterruptSystem</span><span class="p">(</span><span class="n">Intc</span><span class="p">,</span> <span class="n">Gpio</span><span class="p">,</span> <span class="n">GPIO_INTERRUPT_ID</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">Status</span> <span class="o">!=</span> <span class="n">XST_SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">XST_FAILURE</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">xil_printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n\r</span><span class="s">Push Switch button to exit</span><span class="se">\n\r</span><span class="s">&#34;</span><span class="p">);</span>
+	<span class="n">AllButtonsPressed</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+
+	<span class="cm">/*
+</span><span class="cm">	 * Loop forever while the button changes are handled by the interrupt
+</span><span class="cm">	 * level processing.
+</span><span class="cm">	 */</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">AllButtonsPressed</span> <span class="o">==</span> <span class="n">FALSE</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="n">XST_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="常用函数">常用函数</h1>
+
+<p>XGpioPs_LookupConfig
+XScuGic_LookupConfig</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-08-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/zynq/">ZYNQ</a>
+          <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+          <a href="/tags/c/c&#43;&#43;/">C/C&#43;&#43;</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E9%98%9F%E5%88%97%E8%AE%BE%E8%AE%A1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">队列实现</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/zynq%E4%B8%AD%E6%96%AD/">
+            <span class="next-text nav-default">Zynq中断</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

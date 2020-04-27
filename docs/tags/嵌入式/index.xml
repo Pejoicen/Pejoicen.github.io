@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>嵌入式 on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+    <link>https://pejoicen.github.io/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/</link>
+    <description>Recent content in 嵌入式 on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 22 Aug 2019 19:37:10 +0800</lastBuildDate>
+    
+	<atom:link href="https://pejoicen.github.io/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Zynq GPIO</title>
+      <link>https://pejoicen.github.io/post/zynq-gpio/</link>
+      <pubDate>Thu, 22 Aug 2019 19:37:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq-gpio/</guid>
+      <description>&lt;p&gt;详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zynq中断</title>
+      <link>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</link>
+      <pubDate>Thu, 22 Aug 2019 19:37:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</guid>
+      <description>&lt;p&gt;整理Zynq中断&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>USB测试记录</title>
+      <link>https://pejoicen.github.io/post/zynq7020usb%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Fri, 28 Sep 2018 20:28:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq7020usb%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/</guid>
+      <description>&lt;p&gt;使用petalinux测试USB功能。在MicroZus板卡教程基础上修改测试。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

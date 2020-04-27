@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python3 tkinter - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/tkinter/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python3 tkinter" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/tkinter/" />
+<meta property="article:published_time" content="2020-01-28T20:16:32+08:00" />
+<meta property="article:modified_time" content="2020-01-28T20:16:32+08:00" />
+<meta itemprop="name" content="Python3 tkinter">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2020-01-28T20:16:32&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-28T20:16:32&#43;08:00" />
+<meta itemprop="wordCount" content="883">
+
+
+
+<meta itemprop="keywords" content="Python,语法," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python3 tkinter"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python3 tkinter</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-28 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+          <span class="more-meta"> 约 883 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#tkinter">tkinter</a>
+<ul>
+<li><a href="#tkinter-组件">Tkinter 组件</a></li>
+<li><a href="#标准属性">标准属性</a></li>
+<li><a href="#几何管理">几何管理</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="tkinter">tkinter</h1>
+
+<p>根窗体就是画板，在tkinter中则是Toplevel，画布就是tkinter中的容器（Frame），画板上可以放很多张画布（Convas），tkinter中的容器中也可以放很多个容器，绘画中的构图布局则是tkinter中的布局管理器（几何管理器），绘画的内容就是tkinter中的一个个小组件，一幅画由许多元素构成，而我们的GUI界面，就是有一个个组件拼装起来的，它们就是widget。</p>
+
+<p>tkinter.TK();</p>
+
+<p>tkinter.Frame</p>
+
+<p>tkinter.Convas</p>
+
+<h2 id="tkinter-组件">Tkinter 组件</h2>
+
+<p>Tkinter的提供各种控件，如按钮，标签和文本框，一个GUI应用程序中使用。这些控件通常被称为控件或者部件。</p>
+
+<p>目前有15种Tkinter的部件。我们提出这些部件以及一个简短的介绍，在下面的表:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">控件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><a href="https://www.runoob.com/python/python-tk-button.html">Button</a></td>
+<td align="left">按钮控件；在程序中显示按钮。</td>
+</tr>
+
+<tr>
+<td align="left"><a href="https://www.runoob.com/python/python-tk-canvas.html">Canvas</a></td>
+<td align="left">画布控件；显示图形元素如线条或文本</td>
+</tr>
+
+<tr>
+<td align="left"><a href="https://www.runoob.com/python/python-tk-checkbutton.html">Checkbutton</a></td>
+<td align="left">多选框控件；用于在程序中提供多项选择框</td>
+</tr>
+
+<tr>
+<td align="left"><a href="https://www.runoob.com/python/python-tkinter-entry.html">Entry</a></td>
+<td align="left">输入控件；用于显示简单的文本内容</td>
+</tr>
+
+<tr>
+<td align="left">Frame</td>
+<td align="left">框架控件；在屏幕上显示一个矩形区域，多用来作为容器</td>
+</tr>
+
+<tr>
+<td align="left">Label</td>
+<td align="left">标签控件；可以显示文本和位图</td>
+</tr>
+
+<tr>
+<td align="left">Listbox</td>
+<td align="left">列表框控件；在Listbox窗口小部件是用来显示一个字符串列表给用户</td>
+</tr>
+
+<tr>
+<td align="left">Menubutton</td>
+<td align="left">菜单按钮控件，用于显示菜单项。</td>
+</tr>
+
+<tr>
+<td align="left">Menu</td>
+<td align="left">菜单控件；显示菜单栏,下拉菜单和弹出菜单</td>
+</tr>
+
+<tr>
+<td align="left">Message</td>
+<td align="left">消息控件；用来显示多行文本，与label比较类似</td>
+</tr>
+
+<tr>
+<td align="left">Radiobutton</td>
+<td align="left">单选按钮控件；显示一个单选的按钮状态</td>
+</tr>
+
+<tr>
+<td align="left">Scale</td>
+<td align="left">范围控件；显示一个数值刻度，为输出限定范围的数字区间</td>
+</tr>
+
+<tr>
+<td align="left">Scrollbar</td>
+<td align="left">滚动条控件，当内容超过可视化区域时使用，如列表框。.</td>
+</tr>
+
+<tr>
+<td align="left">Text</td>
+<td align="left">文本控件；用于显示多行文本</td>
+</tr>
+
+<tr>
+<td align="left">Toplevel</td>
+<td align="left">容器控件；用来提供一个单独的对话框，和Frame比较类似</td>
+</tr>
+
+<tr>
+<td align="left">Spinbox</td>
+<td align="left">输入控件；与Entry类似，但是可以指定输入范围值</td>
+</tr>
+
+<tr>
+<td align="left">PanedWindow</td>
+<td align="left">PanedWindow是一个窗口布局管理的插件，可以包含一个或者多个子控件。</td>
+</tr>
+
+<tr>
+<td align="left">LabelFrame</td>
+<td align="left">labelframe 是一个简单的容器控件。常用与复杂的窗口布局。</td>
+</tr>
+
+<tr>
+<td align="left">tkMessageBox</td>
+<td align="left">用于显示你应用程序的消息框。</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="标准属性">标准属性</h2>
+
+<p>标准属性也就是所有控件的共同属性，如大小，字体和颜色等等。</p>
+
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Dimension</td>
+<td>控件大小；</td>
+</tr>
+
+<tr>
+<td>Color</td>
+<td>控件颜色；</td>
+</tr>
+
+<tr>
+<td>Font</td>
+<td>控件字体；</td>
+</tr>
+
+<tr>
+<td>Anchor</td>
+<td>锚点；</td>
+</tr>
+
+<tr>
+<td>Relief</td>
+<td>控件样式；</td>
+</tr>
+
+<tr>
+<td>Bitmap</td>
+<td>位图；</td>
+</tr>
+
+<tr>
+<td>Cursor</td>
+<td>光标；</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="几何管理">几何管理</h2>
+
+<p>Tkinter控件有特定的几何状态管理方法，管理整个控件区域组织，一下是Tkinter公开的几何管理类：包、网格、位置</p>
+
+<table>
+<thead>
+<tr>
+<th>几何方法</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>pack()</td>
+<td>包装；</td>
+</tr>
+
+<tr>
+<td>grid()</td>
+<td>网格；</td>
+</tr>
+
+<tr>
+<td>place()</td>
+<td>位置；</td>
+</tr>
+</tbody>
+</table>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-01-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">Python</a>
+          <a href="/tags/%E8%AF%AD%E6%B3%95/">语法</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/frp&#43;windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">FRP&#43;Windows远程桌面</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E6%95%B0%E6%8D%AE%E8%B6%8A%E7%95%8C%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
+            <span class="next-text nav-default">数据越界问题总结</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>线程 on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+    <link>https://pejoicen.github.io/tags/%E7%BA%BF%E7%A8%8B/</link>
+    <description>Recent content in 线程 on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 20 Aug 2019 14:23:10 +0800</lastBuildDate>
+    
+	<atom:link href="https://pejoicen.github.io/tags/%E7%BA%BF%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>原子操作和事件</title>
+      <link>https://pejoicen.github.io/post/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%92%8C%E6%B6%88%E6%81%AF/</link>
+      <pubDate>Tue, 20 Aug 2019 14:23:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%92%8C%E6%B6%88%E6%81%AF/</guid>
+      <description>&lt;p&gt;整理Windows MFC编程中用到的原子操作和事件。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows的多线程编程</title>
+      <link>https://pejoicen.github.io/post/%E5%9C%A8windows%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Tue, 20 Aug 2019 10:09:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E5%9C%A8windows%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/</guid>
+      <description>&lt;p&gt;在Windows的多线程编程中，创建线程的函数主要有CreateThread，_beginthead(_beginthreadex)和AfxBeginThread，那么它们之间有什么联系与区别呢？当我需要创建一个线程时该用哪个函数呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MFC窗口和线程间传递信息</title>
+      <link>https://pejoicen.github.io/post/mfc%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BA%BF%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Thu, 15 Aug 2019 16:56:43 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/mfc%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BA%BF%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E4%BF%A1%E6%81%AF/</guid>
+      <description>&lt;p&gt;MFC窗口和线程间传递信息的注意事项和方法。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

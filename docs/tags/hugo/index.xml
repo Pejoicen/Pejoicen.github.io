@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+    <link>https://pejoicen.github.io/tags/hugo/</link>
+    <description>Recent content in hugo on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 14 Aug 2019 14:56:10 +0800</lastBuildDate>
+    
+	<atom:link href="https://pejoicen.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://pejoicen.github.io/post/hugo/</link>
+      <pubDate>Wed, 14 Aug 2019 14:56:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/hugo/</guid>
+      <description>&lt;p&gt;使用hugo创建博客&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

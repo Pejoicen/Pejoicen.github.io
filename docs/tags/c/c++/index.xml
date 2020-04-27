@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C/C&#43;&#43; on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+    <link>https://pejoicen.github.io/tags/c/c&#43;&#43;/</link>
+    <description>Recent content in C/C&#43;&#43; on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Apr 2020 10:09:32 +0800</lastBuildDate>
+    
+	<atom:link href="https://pejoicen.github.io/tags/c/c++/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>VS中ANSI和Unicode转换</title>
+      <link>https://pejoicen.github.io/post/ansi%E5%92%8Cunicode%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Mon, 27 Apr 2020 10:09:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/ansi%E5%92%8Cunicode%E8%BD%AC%E6%8D%A2/</guid>
+      <description>&lt;p&gt;VS默认字符集为Unicode，之前的工程一直在用ANSI。在此整理ANSI和Unicode转换方法。&lt;/p&gt;
+
+&lt;p&gt;包括：
+CString转ANSI char*
+ANSI char*转CString&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows串口</title>
+      <link>https://pejoicen.github.io/post/%E4%B8%B2%E5%8F%A3/</link>
+      <pubDate>Wed, 11 Mar 2020 14:12:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E4%B8%B2%E5%8F%A3/</guid>
+      <description>&lt;p&gt;整理Windows串口操作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MFC鼠标移动到控件上显示提示信息</title>
+      <link>https://pejoicen.github.io/post/%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E5%88%B0%E6%8E%A7%E4%BB%B6%E4%B8%8A%E6%98%BE%E7%A4%BA%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Fri, 20 Sep 2019 14:19:43 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E5%88%B0%E6%8E%A7%E4%BB%B6%E4%B8%8A%E6%98%BE%E7%A4%BA%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF/</guid>
+      <description>&lt;p&gt;MFC程序中实现 鼠标移动到控件上显示提示信息 功能。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zynq GPIO</title>
+      <link>https://pejoicen.github.io/post/zynq-gpio/</link>
+      <pubDate>Thu, 22 Aug 2019 19:37:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq-gpio/</guid>
+      <description>&lt;p&gt;详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zynq中断</title>
+      <link>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</link>
+      <pubDate>Thu, 22 Aug 2019 19:37:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</guid>
+      <description>&lt;p&gt;整理Zynq中断&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows的多线程编程</title>
+      <link>https://pejoicen.github.io/post/%E5%9C%A8windows%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Tue, 20 Aug 2019 10:09:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/%E5%9C%A8windows%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/</guid>
+      <description>&lt;p&gt;在Windows的多线程编程中，创建线程的函数主要有CreateThread，_beginthead(_beginthreadex)和AfxBeginThread，那么它们之间有什么联系与区别呢？当我需要创建一个线程时该用哪个函数呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CString、char[]数组和&#39;数&#39;之间的转换</title>
+      <link>https://pejoicen.github.io/post/cstringchar%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Tue, 20 Aug 2019 09:50:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/cstringchar%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/</guid>
+      <description>&lt;p&gt;整理CString、char[]和&amp;rdquo;数值&amp;rdquo;变量间的转换&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MFC学习</title>
+      <link>https://pejoicen.github.io/post/mfc%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Wed, 14 Aug 2019 10:10:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/mfc%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;VS2008 MFC学习&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

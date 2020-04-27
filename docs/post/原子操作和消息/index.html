@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>原子操作和事件 - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="整理Windows MFC编程中用到的原子操作和事件。
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%92%8C%E6%B6%88%E6%81%AF/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="原子操作和事件" />
+<meta property="og:description" content="整理Windows MFC编程中用到的原子操作和事件。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%92%8C%E6%B6%88%E6%81%AF/" />
+<meta property="article:published_time" content="2019-08-20T14:23:10+08:00" />
+<meta property="article:modified_time" content="2019-08-20T14:23:10+08:00" />
+<meta itemprop="name" content="原子操作和事件">
+<meta itemprop="description" content="整理Windows MFC编程中用到的原子操作和事件。">
+
+
+<meta itemprop="datePublished" content="2019-08-20T14:23:10&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-20T14:23:10&#43;08:00" />
+<meta itemprop="wordCount" content="2621">
+
+
+
+<meta itemprop="keywords" content="线程,进程,Windows," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="原子操作和事件"/>
+<meta name="twitter:description" content="整理Windows MFC编程中用到的原子操作和事件。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">原子操作和事件</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-20 </span>
+        <div class="post-category">
+            <a href="/categories/c/c&#43;&#43;/"> C/C&#43;&#43; </a>
+            </div>
+          <span class="more-meta"> 约 2621 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#原子操作">原子操作</a>
+<ul>
+<li><a href="#ccriticalsection">CCriticalSection</a></li>
+<li><a href="#cmutex">CMutex</a></li>
+</ul></li>
+<li><a href="#事件">事件</a>
+<ul>
+<li><a href="#举例">举例</a></li>
+<li><a href="#handle">HANDLE</a></li>
+<li><a href="#createevent-setevent-resetevent">CreateEvent、SetEvent、ResetEvent</a></li>
+<li><a href="#waitforsingleobject">WaitForSingleObject</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>整理Windows MFC编程中用到的原子操作和事件。</p>
+
+<h1 id="原子操作">原子操作</h1>
+
+<p>&ldquo;原子操作(atomic operation)是不需要synchronized&rdquo;，这是多线程编程的老生常谈了。
+所谓原子操作是指不会被线程调度机制打断的操作；
+这种操作一旦开始，就一直运行到结束，中间不会有任何 context switch （切换到另一个线程）。</p>
+
+<h2 id="ccriticalsection">CCriticalSection</h2>
+
+<p>类CCriticalSection的对象表示一个“临界区”，它是一个用于同步的对象，同一时刻只允许一个线程存取资源或代码区。  临界区在控制一次只有一个线程修改数据或其它的控制资源时非常有用。
+例如，在链表中增加一个结点就只允许一次一个线程进行。通过使用CCriticalSection对象来控制链表，就可以达到这个目的。
+在运行性能比较重要而且资源不会跨进程使用时，建议采用临界区代替信号灯。有关在MFC中使用信号灯的详细信息，请参阅CMutex。</p>
+
+<p>使用CCriticalSection对象之前，需要构造它。在构造函数返回后，就可以使用临界区了。在使用完之后要调用UnLock函数。存取由CCriticalSection控制的资源时，要在资源的存取函数中定义一个CSingleLock型的变量。然后调用加锁对象的Lock成员函数（如CSingleLock::Lock）。
+此时，调用的线程要么获得对资源的存取权，要么等待他人释放资源等待加锁，或者等待他人释放资源，但又因为超时而加锁失败。
+这样就<strong>保证了一次只有一个线程在存取临界资源</strong>。释放资源只需调用成员函数UnLock（例如CSingleLock::Unlock），或让锁对象在作用范围之外。此外，可以单独地建立一个CCriticalSection对象，并在存取临界资源之前显式地存取它。
+这种方式有助于保持代码的清晰，但是更容易出错，因为程序员要记住在存取临界资源前加锁，存取之后开锁。
+使用时必须包含头文件#include &ldquo;afxmt.h&rdquo;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&#34;afxmt.h&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="n">CCriticalSection</span> <span class="n">g_InsertRcvDataInfoCriticalSection</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">InsertRcvDataInfoToTeam</span><span class="p">(</span><span class="n">BYTE</span> <span class="o">*</span><span class="n">pRcvDataBuf</span><span class="p">,</span><span class="kt">int</span> <span class="n">nBytes</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//使用临界区加锁
+</span><span class="c1"></span>    <span class="n">g_InsertRcvDataInfoCriticalSection</span><span class="p">.</span><span class="n">Lock</span><span class="p">();</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="n">isRcvDataInfoTeamFull</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">Sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">g_RcvDataInfoTeamIn</span><span class="o">-&gt;</span><span class="n">RcvDataBuf</span><span class="p">,</span><span class="n">pRcvDataBuf</span><span class="p">,</span><span class="n">nBytes</span><span class="p">);</span>
+    <span class="n">g_RcvDataInfoTeamIn</span><span class="o">-&gt;</span><span class="n">RcvDataLenInBytes</span> <span class="o">=</span> <span class="n">nBytes</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">g_RcvDataInfoTeamIn</span> <span class="o">==</span> <span class="p">(</span><span class="n">g_RcvDataInfoTeam</span> <span class="o">+</span> <span class="n">MAX_RCVDATA_INFO_ITEMS</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">g_RcvDataInfoTeamIn</span> <span class="o">=</span> <span class="n">g_RcvDataInfoTeam</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">g_RcvDataInfoTeamIn</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="n">g_pMainView</span><span class="o">-&gt;</span><span class="n">PostMessage</span><span class="p">(</span><span class="n">WM_DISPLAY_INFO</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="c1">// 临界区解锁
+</span><span class="c1"></span>    <span class="n">g_InsertRcvDataInfoCriticalSection</span><span class="p">.</span><span class="n">Unlock</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// 当两个线程都调用InsertRcvDataInfoToTeam函数时，临界区内的内容同一时间只有一个线程访问。一个线程执行代码时，如果发现g_InsertRcvDataInfoCriticalSection.Lock()处于lock状态，则会在这里等待。
+</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>CCriticalSection类定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">/////////////////////////////////////////////////////////////////////////////
+</span><span class="c1">// CCriticalSection
+</span><span class="c1"></span>
+<span class="k">class</span><span class="err"> </span><span class="nc">CCriticalSection</span> <span class="o">:</span> <span class="k">public</span> <span class="n">CSyncObject</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_DYNAMIC</span><span class="p">(</span><span class="n">CCriticalSection</span><span class="p">)</span>
+
+<span class="k">private</span><span class="o">:</span>
+   <span class="k">using</span> <span class="n">CSyncObject</span><span class="o">::</span><span class="n">Unlock</span><span class="p">;</span>
+
+<span class="c1">// Constructor
+</span><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+    <span class="n">CCriticalSection</span><span class="p">();</span>
+
+<span class="c1">// Attributes
+</span><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+    <span class="k">operator</span> <span class="n">CRITICAL_SECTION</span><span class="o">*</span><span class="p">();</span>
+    <span class="n">CRITICAL_SECTION</span> <span class="n">m_sect</span><span class="p">;</span>
+
+<span class="c1">// Operations
+</span><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+    <span class="n">BOOL</span> <span class="n">Unlock</span><span class="p">();</span>
+    <span class="n">BOOL</span> <span class="nf">Lock</span><span class="p">();</span>
+    <span class="n">BOOL</span> <span class="nf">Lock</span><span class="p">(</span><span class="n">DWORD</span> <span class="n">dwTimeout</span><span class="p">);</span>
+
+<span class="c1">// Implementation
+</span><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">CCriticalSection</span><span class="p">();</span>
+
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">BOOL</span> <span class="n">Init</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="cmutex">CMutex</h2>
+
+<p>(待补充)</p>
+
+<h1 id="事件">事件</h1>
+
+<p>事件是很常用的多线程同步互斥机制</p>
+
+<h2 id="举例">举例</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">HANDLE</span> <span class="n">g_hTMFrameSampleThreadExitEvent</span><span class="p">[</span><span class="n">NUM_OF_CARDS</span><span class="p">];</span>
+
+<span class="c1">// 初始化
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">InitParamVal</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">//所有事件赋初值INVALID_HANDLE_VALUE
+</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NUM_OF_CARDS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// TM采样线程事件
+</span><span class="c1"></span>        <span class="n">g_hTMFrameSampleThreadExitEvent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">INVALID_HANDLE_VALUE</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//开始启动所有线程
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">StartServerListenThread</span><span class="p">(</span><span class="n">CWnd</span> <span class="o">*</span><span class="n">pWnd</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NUM_OF_CARDS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 创建事件
+</span><span class="c1"></span>        <span class="n">g_hTMFrameSampleThreadExitEvent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>  <span class="n">CreateEvent</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">TRUE</span><span class="p">,</span><span class="n">TRUE</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//开启TM采样线程
+</span><span class="c1"></span>        <span class="n">g_TMFrameSampleThreadParam</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pWnd</span> <span class="o">=</span> <span class="n">pWnd</span><span class="p">;</span>
+        <span class="n">g_TMFrameSampleThreadParam</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Index_Card</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">AfxBeginThread</span><span class="p">(</span><span class="n">SampleTMFrameThread</span><span class="p">,</span><span class="o">&amp;</span><span class="n">g_TMFrameSampleThreadParam</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">THREAD_PRIORITY_NORMAL</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 采样数据的线程
+</span><span class="c1"></span><span class="n">UINT</span> <span class="nf">SampleTMFrameThread</span><span class="p">(</span><span class="n">LPVOID</span> <span class="n">pParam</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ResetEvent</span><span class="p">(</span><span class="n">g_hTMFrameSampleThreadExitEvent</span><span class="p">[</span><span class="n">Index_Card</span><span class="p">]);</span>                    <span class="c1">// 不发信号
+</span><span class="c1"></span>
+    <span class="c1">// 线程运行标志 和 设备打开标志
+</span><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="n">g_Receive_Thread_Run</span> <span class="o">&amp;</span> <span class="n">g_DeviceStatus</span> <span class="o">&amp;</span> <span class="n">g_FPGAStatus</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+    
+    <span class="n">SetEvent</span><span class="p">(</span><span class="n">g_hTMFrameSampleThreadExitEvent</span><span class="p">[</span><span class="n">Index_Card</span><span class="p">]);</span>                      <span class="c1">// 发信号
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">StopServerListenThread</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">//等待TM采样线程退出
+</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NUM_OF_CARDS</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">g_hTMFrameSampleThreadExitEvent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INVALID_HANDLE_VALUE</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">WaitForSingleObject</span><span class="p">(</span><span class="n">g_hTMFrameSampleThreadExitEvent</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>         <span class="c1">// 发信号状态时继续执行
+</span><span class="c1"></span>            <span class="n">CloseHandle</span><span class="p">(</span><span class="n">g_hTMFrameSampleThreadExitEvent</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="handle">HANDLE</h2>
+
+<p><a href="https://blog.csdn.net/dongchongyang/article/details/9629891">INVALID_HANDLE_VALUE 与 NULL</a>
+CreateEvent();函数返回值为 HANDLE</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">BOOL</span> <span class="nf">CloseHandle</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hObject</span>
+<span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>参数<br />
+* hObject ：代表一个已打开对象handle。</p>
+
+<p>返回值<br />
+* TRUE：执行成功；<br />
+* FALSE：执行失败，可以调用GetLastError()获知失败原因。</p>
+
+<h2 id="createevent-setevent-resetevent">CreateEvent、SetEvent、ResetEvent</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">HANDLE</span> <span class="nf">CreateEvent</span><span class="p">(</span>
+    <span class="n">LPSECURITY_ATTRIBUTES</span> <span class="n">lpEventAttributes</span><span class="p">,</span><span class="c1">// 安全属性
+</span><span class="c1"></span>    <span class="n">BOOL</span> <span class="n">bManualReset</span><span class="p">,</span>  <span class="c1">// 复位方式 
+</span><span class="c1"></span>    <span class="n">BOOL</span> <span class="n">bInitialState</span><span class="p">,</span> <span class="c1">// 初始状态
+</span><span class="c1"></span>    <span class="n">LPCTSTRl</span> <span class="n">pName</span>      <span class="c1">// 对象名称
+</span><span class="c1"></span><span class="p">);</span>
+
+<span class="n">CEvent</span><span class="o">::</span><span class="n">SetEvent</span>
+<span class="n">BOOL</span> <span class="n">SetEvent</span><span class="p">(</span><span class="n">HANDLE</span> <span class="n">hEvent</span><span class="p">);</span>   <span class="c1">//hEvent表示句柄，返回值：如果操作成功，则返回非零值，否则为0。
+</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>CreateEvent是一个Windows API函数。它用来创建或打开一个命名的或无名的事件对象。</p>
+
+<p><strong>lpEventAttributes[输入]</strong></p>
+
+<p>一个指向SECURITY_ATTRIBUTES结构的指针，确定返回的句柄是否可被子进程继承。如果lpEventAttributes是NULL，此句柄不能被继承。
+Windows NT/2000：lpEventAttributes的结构中的成员为新的事件指定了一个安全符。如果lpEventAttributes是NULL，事件将获得一个默认的安全符。</p>
+
+<p><strong>bManualReset[输入]</strong></p>
+
+<p>指定将事件对象创建成手动复原还是自动复原。</p>
+
+<ul>
+<li><p>如果是TRUE，那么必须用ResetEvent函数来手工将事件的状态复原到无信号状态。</p></li>
+
+<li><p>如果设置为FALSE，当一个等待线程被释放以后，系统将会自动将事件状态复原为无信号状态。</p></li>
+</ul>
+
+<p><strong>bInitialState[输入]</strong></p>
+
+<p>指定事件对象的初始状态。<strong>如果为TRUE，初始状态为有信号状态；</strong> 否则为无信号状态。</p>
+
+<p><strong>lpName[输入]</strong></p>
+
+<p>指定事件的对象的名称，是一个以0结束的字符串指针。名称的字符格式限定在MAX_PATH之内。名字是对大小写敏感的。如果lpName为NULL，将创建一个无名的事件对象。</p>
+
+<h2 id="waitforsingleobject">WaitForSingleObject</h2>
+
+<p>WaitForSingleObject函数用来检测hHandle事件的信号状态。
+在某一线程中调用该函数时，线程暂时挂起：
+如果在挂起的dwMilliseconds毫秒内，线程所等待的对象变为有信号状态，则该函数立即返回；
+如果超时时间已经到达dwMilliseconds毫秒，但hHandle所指向的对象还没有变成有信号状态，函数照样返回。</p>
+
+<p>WaitForSingleObject()等待，直到参数所指定的OBJECT成为发信号状态时才返回，OBJECT可以是EVENT，也可以是其它内核对象。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="nf">WaitForSingleObject</span><span class="p">(</span>
+<span class="n">__in</span> <span class="n">HANDLE</span> <span class="n">hHandle</span><span class="p">,</span>
+<span class="n">__in</span> <span class="n">DWORD</span> <span class="n">dwMilliseconds</span>
+<span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>hHandle [in]对象句柄。</p>
+
+<ul>
+<li>可以指定一系列的对象，如Event、Job、Memory resource notification、Mutex、Process、Semaphore、Thread、Waitable timer等。</li>
+</ul>
+
+<p>dwMilliseconds [in]定时时间间隔，单位为milliseconds（毫秒）</p>
+
+<ul>
+<li><p>如果指定一个非零值，函数处于等待状态直到hHandle标记的对象被触发，或者时间到了。</p></li>
+
+<li><p>如果dwMilliseconds为0，对象没有被触发信号，函数不会进入一个等待状态，它总是立即返回。</p></li>
+
+<li><p>如果dwMilliseconds为INFINITE，对象被触发信号后，函数才会返回。</p></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-08-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%BA%BF%E7%A8%8B/">线程</a>
+          <a href="/tags/%E8%BF%9B%E7%A8%8B/">进程</a>
+          <a href="/tags/windows/">Windows</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/zynq%E4%B8%AD%E6%96%AD/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Zynq中断</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E5%9C%A8windows%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/">
+            <span class="next-text nav-default">Windows的多线程编程</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
