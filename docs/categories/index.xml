@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Apr 2020 10:09:32 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2020 11:48:32 +0800</lastBuildDate>
     
 	<atom:link href="https://pejoicen.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python</title>
+      <link>https://pejoicen.github.io/categories/python/</link>
+      <pubDate>Sat, 09 May 2020 11:48:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/categories/python/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>软件</title>
@@ -26,15 +35,6 @@
       <pubDate>Fri, 07 Feb 2020 08:46:32 +0800</pubDate>
       
       <guid>https://pejoicen.github.io/categories/%E6%8A%98%E8%85%BE/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://pejoicen.github.io/categories/python/</link>
-      <pubDate>Tue, 28 Jan 2020 20:16:32 +0800</pubDate>
-      
-      <guid>https://pejoicen.github.io/categories/python/</guid>
       <description></description>
     </item>
     

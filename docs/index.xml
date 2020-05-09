@@ -6,7 +6,7 @@
     <description>Recent content on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Apr 2020 10:09:32 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2020 11:48:32 +0800</lastBuildDate>
     
 	<atom:link href="https://pejoicen.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://pejoicen.github.io/about/</guid>
       <description>不知道这页怎么改，就先这样吧 Hugo is a static site engine written in Go. It makes use of a variety of open source projects including: Cobra Viper J Walter Weatherman Cast Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>matplotlib画图</title>
+      <link>https://pejoicen.github.io/post/matplotlib%E7%94%BB%E5%9B%BE/</link>
+      <pubDate>Sat, 09 May 2020 11:48:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/matplotlib%E7%94%BB%E5%9B%BE/</guid>
+      <description>&lt;p&gt;matplotlib画图 常用语法&lt;/p&gt;</description>
     </item>
     
     <item>
