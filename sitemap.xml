@@ -10,20 +10,45 @@
   
   <url>
     <loc>https://pejoicen.github.io/categories/</loc>
-    <lastmod>2020-05-09T11:48:32+08:00</lastmod>
+    <lastmod>2020-05-10T20:16:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pejoicen.github.io/</loc>
-    <lastmod>2020-05-09T11:48:32+08:00</lastmod>
+    <lastmod>2020-05-10T20:16:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pejoicen.github.io/post/</loc>
-    <lastmod>2020-05-09T11:48:32+08:00</lastmod>
+    <lastmod>2020-05-10T20:16:32+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pejoicen.github.io/tags/</loc>
+    <lastmod>2020-05-10T20:16:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pejoicen.github.io/tags/tt/</loc>
+    <lastmod>2020-05-10T20:16:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pejoicen.github.io/categories/%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2020-05-10T20:16:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pejoicen.github.io/post/tt%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2020-05-10T20:16:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -34,12 +59,6 @@
   
   <url>
     <loc>https://pejoicen.github.io/tags/python/</loc>
-    <lastmod>2020-05-09T11:48:32+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://pejoicen.github.io/tags/</loc>
     <lastmod>2020-05-09T11:48:32+08:00</lastmod>
     <priority>0</priority>
   </url>

@@ -6,7 +6,7 @@
     <description>Recent content on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 09 May 2020 11:48:32 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 10 May 2020 20:16:32 +0800</lastBuildDate>
     
 	<atom:link href="https://pejoicen.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://pejoicen.github.io/about/</guid>
       <description>不知道这页怎么改，就先这样吧 Hugo is a static site engine written in Go. It makes use of a variety of open source projects including: Cobra Viper J Walter Weatherman Cast Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>总结</title>
+      <link>https://pejoicen.github.io/post/tt%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 10 May 2020 20:16:32 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/tt%E6%80%BB%E7%BB%93/</guid>
+      <description></description>
     </item>
     
     <item>
