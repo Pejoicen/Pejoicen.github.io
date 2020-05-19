@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Xilinx 7Series FPGA复位整理 - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="Xilinx 7Series FPGA复位整理
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/xilinx-7series-fpga%E5%A4%8D%E4%BD%8D/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Xilinx 7Series FPGA复位整理" />
+<meta property="og:description" content="Xilinx 7Series FPGA复位整理" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/xilinx-7series-fpga%E5%A4%8D%E4%BD%8D/" />
+<meta property="article:published_time" content="2018-12-27T10:10:10+08:00" />
+<meta property="article:modified_time" content="2018-12-27T10:10:10+08:00" />
+<meta itemprop="name" content="Xilinx 7Series FPGA复位整理">
+<meta itemprop="description" content="Xilinx 7Series FPGA复位整理">
+
+
+<meta itemprop="datePublished" content="2018-12-27T10:10:10&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-27T10:10:10&#43;08:00" />
+<meta itemprop="wordCount" content="3330">
+
+
+
+<meta itemprop="keywords" content="FPGA," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Xilinx 7Series FPGA复位整理"/>
+<meta name="twitter:description" content="Xilinx 7Series FPGA复位整理"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Xilinx 7Series FPGA复位整理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-27 </span>
+        <div class="post-category">
+            <a href="/categories/fpga/"> FPGA </a>
+            </div>
+          <span class="more-meta"> 约 3330 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#结论">结论</a></li>
+<li><a href="#复位信号对fpga布线的影响">复位信号对FPGA布线的影响</a>
+<ul>
+<li><a href="#clb-configurable-logic-block">CLB （configurable logic block）</a></li>
+<li><a href="#lut-ram-srl">LUT RAM SRL</a></li>
+<li><a href="#bram-dsp">BRAM DSP</a></li>
+<li><a href="#综上所述">综上所述：</a></li>
+</ul></li>
+<li><a href="#如何减少复位">如何减少复位</a>
+<ul>
+<li><a href="#赋初值">赋初值</a></li>
+<li><a href="#不必要的复位">不必要的复位</a></li>
+</ul></li>
+<li><a href="#同步复位和异步复位">同步复位和异步复位</a></li>
+<li><a href="#异步复位同步释放">异步复位同步释放</a></li>
+<li><a href="#同步复位容易出现的问题">同步复位容易出现的问题</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Xilinx 7Series FPGA复位整理</p>
+
+<p>参考：</p>
+
+<p>UG949 UltraFast Design Methodology Guide for the Vivado Design Suite ：Chapter3
+Design Creation RTL Coding Guidelines</p>
+
+<p><a href="https://www.eetimes.com/document.asp?doc_id=1278998">https://www.eetimes.com/document.asp?doc_id=1278998</a></p>
+
+<p>UG474 7 Series FPGAs Configurable Logic Block User Guide</p>
+
+<p><a href="https://forums.xilinx.com/t5/Adaptable-Advantage-Blog/Demystifying-Resets-Synchronous-Asynchronous-other-Design/ba-p/882252">https://forums.xilinx.com/t5/Adaptable-Advantage-Blog/Demystifying-Resets-Synchronous-Asynchronous-other-Design/ba-p/882252</a></p>
+
+<p><a href="https://forums.xilinx.com/t5/Adaptable-Advantage-Blog/Demystifying-Resets-Synchronous-Asynchronous-and-other-Design/ba-p/887366">https://forums.xilinx.com/t5/Adaptable-Advantage-Blog/Demystifying-Resets-Synchronous-Asynchronous-and-other-Design/ba-p/887366</a></p>
+
+<h1 id="结论">结论</h1>
+
+<p>本结论只适用于Xilinx 7Serie FPGA。</p>
+
+<ol>
+<li><p>如果可以尽量不使用复位信号；</p></li>
+
+<li><p>使用复位信号时使用同步复位；</p></li>
+
+<li><p>异步复位要同步释放；</p></li>
+
+<li><p>Xilinx Slice内FF只支持高复位，因此使用低复位时会多用一个LUT去翻转电平；</p></li>
+</ol>
+
+<h1 id="复位信号对fpga布线的影响">复位信号对FPGA布线的影响</h1>
+
+<p>复位信号是一种常用的控制信号，对所有使用控制信号的资源都有影响。</p>
+
+<h2 id="clb-configurable-logic-block">CLB （configurable logic block）</h2>
+
+<p>CLB是FPGA内部主要的逻辑资源，用来构成时序和组合电路。每个CLB都与开关矩阵相连最后接入通用布线矩阵。一个CLB单元包括两个Slice。</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/226cc55fdb1bd489467398d86c38299a.png" alt="C:\\Users\\Pejoicen\\AppData\\Local\\Temp\\enhtmlclip\\Image.png" /></p>
+
+<p>Slice有两种，其中2/3的Slice为SLICEL，其余的为SLICEM。二者区别主要在于存储功能，在此不仔细说明。相同的是，都有4个LUT，8个FF（Flip-Flop）。</p>
+
+<p>SLICEM的内部结构如下图所示：</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/7159febe5126c5925ae48b1264f4ffb0.png" alt="" /></p>
+
+<p>SLICEL结构如如下图所示：</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/2cd2fd0a42b029f4900607a29c9aff57.png" alt="" /></p>
+
+<p>Control Signals为左下角的ser/reset(SR)、clock
+enable(CE)、CLK。每个SLICE中所有FF，共享同一组控制信号。因此只有具有相同控制信号的寄存器才能被打包到同一个Slice中。</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/61e618feb24c0a57ac9b4cd9dca41e08.png" alt="" /></p>
+
+<p>每个FF中还有INIT0、INIT1，以及SRHIGH、SRLOW。其中INIT0、INIT1作用于上电初始化过程或者使用GSR控制。SRHIGH、SRLOW作用于S/R
+port有效（高电平）时。此处有一个问题，一个SLICE中是否8个FF的INIT0、1和SRHIGH、SRLOW配置相同？</p>
+
+<p>INIT已经验证，同一个SLICE中FF INIT值可以不同。</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/88f955ed5159b961a39fa58ee88fd8e4.png" alt="" /></p>
+
+<p>根据SLICE中FF的不同使用方式（主要是复位的不同）共分为四种FF：FDSE、FDRE、FDCE、FDPE。</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/ecc1f3d56bd67f99488b38129379dffd.png" alt="" /></p>
+
+<p>区别主要在于S/R port上，S/R port都是高有效。当功能为同步复位时，Synchronous
+ResetFDRE；当功能为同步置位时Synchronous SetFDSE；当为异步复位时，Asynchronous
+ResetClearFDCE；为异步置位时，Asynchronous SetPre SetFDPE；</p>
+
+<h2 id="lut-ram-srl">LUT RAM SRL</h2>
+
+<p>LUT RAM和Shift Register
+logic不支持复位。因此如果代码中使用了复位，工具就不会使用FPGA内部专用的LUT
+RAM、SRL等资源。</p>
+
+<p>LUT RAM以及SRL资源，以后有时间再了解。SRL可以看XAPP465。</p>
+
+<h2 id="bram-dsp">BRAM DSP</h2>
+
+<p>BRAM、DSP不支持异步复位，只支持同步复位，如果实现异步复位功能需要使用额外的逻辑资源。</p>
+
+<h2 id="综上所述">综上所述：</h2>
+
+<p>复位信号首先要<strong>占用布线资源</strong>，当复位信号扇出足够多的时候可能需要用到BUFG这种全局资源；其次当存在不同的控制信号时会在一定程度上造成部分SLICE中FF无法充分利用。有些FPGA内部资源本身不支持复位，所以代码中带复位的话，就不能使用这些资源，需要用其他资源替代。</p>
+
+<p>当整个设计只有一个复位信号的时候，无论是异步复位还是同步复位，对使用的SLICE资源来说并没有什么影响。但是当复位操作不同时，则需要不同的复位信号的时候。在不同复位信号控制下的FF是不能放到同一个SLICE中的。</p>
+
+<h1 id="如何减少复位">如何减少复位</h1>
+
+<p>在何种情况下可以不使用复位。</p>
+
+<h2 id="赋初值">赋初值</h2>
+
+<p>当需要一个寄存器需要有一个上电的初始值时，并非只有通过复位这一种方法。在每个FF中都有INIT0和INIT1来配置初始值。</p>
+
+<p>在代码中声明信号时直接赋初值就可以。</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/7f40619964b0561d3a6f938071ba8c29.jpg" alt="https://m.eet.com/media/1118129/ask_fig2.jpg" /></p>
+
+<p>UG949：</p>
+
+<p>Xilinx devices have a dedicated global set/reset signal (GSR).</p>
+
+<p>Xilinx设备有一个专用的全局set/reset信号(GSR)。</p>
+
+<p>This signal sets the initial value of all sequential cells in hardware at the
+end of device configuration.</p>
+
+<p>该信号在FPGA加载配置完毕时设置硬件中所有时序单元的初始值。</p>
+
+<p>In most cases, the default value is zero.<strong>If an initial state is not
+specified</strong>, sequential primitives are assigned a default value.</p>
+
+<p>在大多数情况下，默认值为0。如果<strong>未指定初始状态</strong>，则为顺序原语分配默认值。</p>
+
+<p>Exceptions are the FDSE and FDPE primitives that default to a logic one.</p>
+
+<p>例外是FDSE和FDPE原语，默认状态为逻辑1。（<strong>所以可以通过指定初始状态的方式来实现使用GSR赋初始值</strong>）</p>
+
+<p>Every register will be at a known state at the end of configuration.</p>
+
+<p>在配置结束时，每个寄存器都处于已知状态。</p>
+
+<p><strong>Therefore, it is not necessary to code a global reset for the sole purpose of
+initializing a device on power up.</strong></p>
+
+<p><strong>因此,没有必要为上电初始化设备这一唯一目的编写全局复位代码。</strong></p>
+
+<h2 id="不必要的复位">不必要的复位</h2>
+
+<p>当不需要复位来赋初始值时，复位还有另一个控制功能。即需要在某种情况下，对部分逻辑进行复位操作。</p>
+
+<p>UG949：</p>
+
+<p>In many situations, resets might be required on the control path logic for
+proper operation.</p>
+
+<p>在许多情况下，需要<strong>在控制路径逻辑上使用复位</strong>以进行正确的操作。</p>
+
+<p>However, resets are generally less necessary on the data path logic.</p>
+
+<p>然而，<strong>在数据路径逻辑上，复位通常不那么必要</strong>。</p>
+
+<p>另外，多级寄存器流水，只需要在第一级复位。其他的打几拍后数值就更新了。但是不能向下图这么写：</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/c17e2ae4b500dded3919c2f2729a06a5.png" alt="" /></p>
+
+<p>需要这样：</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/549e3c6fd3bb48936ad713ad5299fea1.png" alt="" /></p>
+
+<h1 id="同步复位和异步复位">同步复位和异步复位</h1>
+
+<ol>
+<li><p>同步复位布线的时候更灵活，可以不适用FF的SR引脚，合并D引脚前的LUT，能够充分利用SLICE中的FF；</p></li>
+
+<li><p>某些资源本身只支持同步复位，实现异步复位需要消耗额外的资源。</p></li>
+</ol>
+
+<p>UG949中Xilinx建议使用同步复位。</p>
+
+<p>Synchronous resets can directly map to more resource elements in the FPGA device
+architecture.</p>
+
+<p>在FPGA结构中同步复位可以直接布线到更多的资源上去。</p>
+
+<p>Asynchronous resets also impact the performance of the general logic
+structures.异步复位还会影响一般逻辑结构的性能。As all Xilinx FPGA
+general-purpose registers can program the set/reset as either asynchronous or
+synchronous, it can be perceived that there is no penalty in using asynchronous
+resets. That assumption is often wrong.由于所有Xilinx
+FPGA通用寄存器都可以将set/reset编程为异步或同步的，因此可以认为使用异步复位没有任何损失。这种假设通常是错误的。<strong>If
+a global asynchronous reset is used, it does not increase the control
+sets.</strong>使用全局异步复位，不会增加控制集。<strong>However, the need to route this reset
+signal to all register elements increases timing complexity.
+然而，将此复位信号布线到所有寄存器资源需要增加时序复杂度。</strong></p>
+
+<p>Synchronous resets give more flexibility for <strong>control set</strong> remapping when
+higher density or fine tuned placement is
+needed.当需要更高密度或精确的调整布局时，同步复位为<strong>控制集</strong>重新映射提供了更大的灵活性。A
+synchronous reset may be <strong>remapped to the data path</strong> of the register if an
+incompatible reset is found in the more optimally placed Slice.
+如果在放置在最优位置的Slice中发现有不兼容的复位类型，同步复位可以重新映射到寄存器的数据路径。This
+can reduce wire length and increase density where needed to allow proper fitting
+and improved
+performance.这可以减少电线长度和增加密度，以允许适当的安装和改善性能。</p>
+
+<p><a href="http://www.cnblogs.com/qiweiwang/archive/2010/11/25/1887888.html">http://www.cnblogs.com/qiweiwang/archive/2010/11/25/1887888.html</a>。</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/9ecc4a0f3b1f2d9411d110cfed9a1aa3.png" alt="" /></p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/5c3a1432e6dad3bf14739128e11fa459.png" alt="" /></p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/53238feed2674336159bb5983f776c11.png" alt="" /></p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/840dd65ab8d0794ddc56498ddcd0bbe4.png" alt="" /></p>
+
+<p>Asynchronous resets might require multicycle assertion to ensure a circuit is
+properly reset and
+stable.异步复位可能需要多循环断言，以确保电路正确复位和稳定。When properly
+timed, synchronous resets do not have this
+requirement.当适当定时时，同步复位没有这个要求。（同步复位不需要特殊的时序约束，工具可以自动做时序分析）</p>
+
+<p>Use synchronous resets if asynchronous resets have a greater probability of
+upsetting memory contents to block <strong>RAMs, LUTRAMs, and SRLs</strong> during reset
+assertion。如果异步复位更有可能在复位期间阻塞ram、LUTRAMs和SRLs，则使用同步复位。</p>
+
+<p>Some resources such as the DSP48 and block RAM have only synchronous resets for
+the register elements within the
+block.有些资源，例如DSP48和块RAM，只对块内的寄存器元素进行同步复位。When
+asynchronous resets are used on register elements associated with these
+elements, those registers may not be inferred directly into those blocks without
+impacting
+functionality.当在与这些元素关联的寄存器元素上使用异步复位时，这些寄存器可能不会在不影响功能的情况下直接推断到这些块中。</p>
+
+<h1 id="异步复位同步释放">异步复位同步释放</h1>
+
+<p>If using asynchronous reset, remember to synchronize the deassertion of the
+asynchronous
+reset.异步复位同步释放。（异步复位同步释放，在此过程中可以加pipeline，一是可以延时，二是可以综合布线时复制寄存器以降低扇出）</p>
+
+<p>下图来源：<a href="https://forums.xilinx.com/t5/Adaptable-Advantage-Blog/Demystifying-Resets-Synchronous-Asynchronous-other-Design/ba-p/882252">https://forums.xilinx.com/t5/Adaptable-Advantage-Blog/Demystifying-Resets-Synchronous-Asynchronous-other-Design/ba-p/882252</a></p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/862f6872b38ac436ffe178cd723806d1.png" alt="Fig. 1.png" /></p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/f909ed7a660746fb9675987feb1d6fcd.png" alt="Fig. 2.png" /></p>
+
+<p>(* ASYNC_REG = “true” *)是将该寄存器约束为异步复位FF。</p>
+
+<p>每个局部时钟域都需要使用上述方式来完成异步复位同步化。使用PLL或者MMCM时需要注意它们本身需要一定的时间达到稳定状态。可以将外部复位和时钟锁定信号相与后，作为新的复位信号，再去做同步化。</p>
+
+<p><img src="/media-Xilinx7SeriesFPGA复位/9bde5c28d80881e7b763713bae2e7302.jpg" alt="https://m.eet.com/media/1118131/ask_fig4.jpg" /></p>
+
+<p>另外就是，取决于SLICE结构，控制信号CE、SR只能为高有效。否则需要消耗LUT来翻转电平。</p>
+
+<h1 id="同步复位容易出现的问题">同步复位容易出现的问题</h1>
+
+<p>使用同步复位的一个前提是要有时钟，否则复位是不工作的。当系统中存在多个时钟时，尤其需要注意，保证复位时时钟是存在的。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-12-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/fpga/">FPGA</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/xilinx7seriesclb/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Xilinx 7Series CLB整理</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/verilog%E8%AF%AD%E6%B3%95/">
+            <span class="next-text nav-default">Verilog 常用语法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

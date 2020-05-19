@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Xilinx 7Series CLB整理 - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="7系列FPGA是Xilinx新推出的基于28nm工艺的FPGA，其中包含三个系列：Artix、Kintex和Virtex。因项目要使用kintex7为平台做设计，需要对其内部结构做了研究，首先从CLB（Configurable Logic Block）开始：
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/xilinx7seriesclb/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Xilinx 7Series CLB整理" />
+<meta property="og:description" content="7系列FPGA是Xilinx新推出的基于28nm工艺的FPGA，其中包含三个系列：Artix、Kintex和Virtex。因项目要使用kintex7为平台做设计，需要对其内部结构做了研究，首先从CLB（Configurable
+Logic Block）开始：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/xilinx7seriesclb/" />
+<meta property="article:published_time" content="2018-12-28T10:06:49+08:00" />
+<meta property="article:modified_time" content="2018-12-28T10:06:49+08:00" />
+<meta itemprop="name" content="Xilinx 7Series CLB整理">
+<meta itemprop="description" content="7系列FPGA是Xilinx新推出的基于28nm工艺的FPGA，其中包含三个系列：Artix、Kintex和Virtex。因项目要使用kintex7为平台做设计，需要对其内部结构做了研究，首先从CLB（Configurable
+Logic Block）开始：">
+
+
+<meta itemprop="datePublished" content="2018-12-28T10:06:49&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-28T10:06:49&#43;08:00" />
+<meta itemprop="wordCount" content="2030">
+
+
+
+<meta itemprop="keywords" content="FPGA," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Xilinx 7Series CLB整理"/>
+<meta name="twitter:description" content="7系列FPGA是Xilinx新推出的基于28nm工艺的FPGA，其中包含三个系列：Artix、Kintex和Virtex。因项目要使用kintex7为平台做设计，需要对其内部结构做了研究，首先从CLB（Configurable
+Logic Block）开始："/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Xilinx 7Series CLB整理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-28 </span>
+        <div class="post-category">
+            <a href="/categories/fpga/"> FPGA </a>
+            </div>
+          <span class="more-meta"> 约 2030 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>7系列FPGA是Xilinx新推出的基于28nm工艺的FPGA，其中包含三个系列：Artix、Kintex和Virtex。因项目要使用kintex7为平台做设计，需要对其内部结构做了研究，首先从CLB（Configurable
+Logic Block）开始：</p>
+
+<p>7系列FPGA是Xilinx新推出的基于28nm工艺的FPGA，其中包含三个系列：Artix、Kintex和Virtex。因项目要使用kintex7为平台做设计，需要对其内部结构做了研究，首先从CLB（Configurable
+Logic Block）开始：</p>
+
+<p>CLB是FPGA内部主要的逻辑资源，用来构成时序和组合电路。每个CLB都与开关矩阵相连最后接入通用布线矩阵。</p>
+
+<p><img src="/media-Xilinx7SeriesCLB/226cc55fdb1bd489467398d86c38299a.png" alt="C:\\Users\\Pejoicen\\AppData\\Local\\Temp\\enhtmlclip\\Image.png" /></p>
+
+<p>7系列的LUT可以被配置为一个6-input
+LUT，或者是有相同的地址或者逻辑输入时配制成两个5-input LUT。每个5-input
+LUT的输出可以被flip-flop寄存。每个Slice含有四个6-input
+LUT和八个flip-flop和多路复用器和进位链。每个CLB含2个Slice，每个LUT中的四个flip-flop可以被配置为latch，在这种情况下，Slice中剩下的四个flip-flop就无法使用了。在所有Slice资源中，有2/3是SLICEL，其余是SLISEM。因此一个CLB可以有2个SLICEL或者1个SLICEL、1个SLICEM组成。SLICEL为普通的Slice逻辑单元，而SLICEM在基本逻辑功能的基础上可以扩展为64bit分布式RAM或者32bit移位寄存器（或者两个16bit移位寄存器）。如图1所示为SLICEM的内部结构，其中包含4个6输入LUT（红色圈）、进位链（黄色圈）、多路复用器（蓝色圈）和8个寄存器（绿色圈）。</p>
+
+<p><img src="/media-Xilinx7SeriesCLB/7636473a5cb4b5104dd5c3e727bef3e3.jpg" alt="snap1.jpg" /></p>
+
+<p>图1</p>
+
+<p>         6-input LUT：此处LUT沿用了Xilinx 6系列FPGA的6输入LUT结构，6-input
+LUT内部是由2个5-input
+LUT组成，有两个输出分别对应O­6和O5。在设计中，如果综合后有2个5-input
+LUT需要是使用，如果在ISE将综合选项-lc(LUT
+Combining)设置成Area，综合器XST会将这2个5-input LUT合并在一个6-input
+LUT中实现，但是此选项相当于以速度换面积，随之逻辑延时将增大。</p>
+
+<p>        
+寄存器：此处Xilinx区别于Altera器件，其1个LUT对应了2个register，而Altera器件中是一一对应的。从图中可以发现，第2列的register比第1列多了FF/LAT这个选项，这表示第1列的register只能作为Flip-Flop使用，而第2列的register既能作为Flip-Flop也能作为Latch使用。另外还有INIT0、INIT1、SRLO和SRHI
+四个选项，其中INIT0和INIT1配对，表示通过GSR全局复位/置位，此复位/置位网络为异步的；而SRLO和SRHI配对，表示高电平有效信号SR驱动的复位/置位，此信号可以配置成异步或者同步，但这8个register共用一个SR信号，因此其方式必须相同，根据此特性，建议写代码时，复位/置位方式选择同步高电平有效。</p>
+
+<p>        
+下面对SLICEM做一下重点说明，其可扩展成移位寄存器，如图2所示，Slice中的每个LUT可配置成32-bit的Shift
+Register，因此1个Slice最多可扩展成128-bit的Shift
+Register。其操作模式为1个时钟周期移1为，通过D输入端输入，并且最后1位通过MC31输出，并且可以以A[6:2]作为5位地址选择O6输出32位中的某一位进行输出。</p>
+
+<p><img src="/media-Xilinx7SeriesCLB/3784bb346ca7d4da47c510d7ca7eb12a.jpg" alt="snap2.jpg" /></p>
+
+<p>图2</p>
+
+<p>         在写代码时，可以按规范写出移位寄存器的形式，如以下代码所示：</p>
+
+<p><em>always\@(posedge clk)</em></p>
+
+<p><em>         if(clk_en)</em></p>
+
+<p><em>                   srl&lt;={srl[31:0],din};</em></p>
+
+<p><em>assign dout0=srl[20];</em></p>
+
+<p>以上代码综合出的结构如图3所示，综合器只用了1个LUT和1个FF就实现了21-bit的移位寄存器，只需1个Slice。</p>
+
+<p><img src="/media-Xilinx7SeriesCLB/0b2512726ef51c551d68adea3ec5ea98.jpg" alt="snap3.jpg" /></p>
+
+<p>图3</p>
+
+<p>        
+如按一下代码进行综合后得到结构如图4所示，综合器使用了21个FF实现了这个21-bit移位寄存器，则需要21个Slice。</p>
+
+<p><em>always\@(posedge clk)</em></p>
+
+<p><em>         if(rst)</em></p>
+
+<p><em>                   srl&lt;=32’d0;</em></p>
+
+<p><em>         else</em></p>
+
+<p><em>                  if(clk_en)</em></p>
+
+<p><em>                            srl&lt;={srl[31:0],din};</em></p>
+
+<p><em>assign dout0=srl[20];</em></p>
+
+<p><img src="/media-Xilinx7SeriesCLB/8e3e061d94049c2cd0194fe8da94e42a.jpg" alt="snap4.jpg" /></p>
+
+<p>图4</p>
+
+<p>        
+为什么综合器会产生不同的结构？分析一下代码的区别，第二段代码相比于第二段代码多了一个同步复位功能，而根据SLICEM的结构，其中的LUT是没有同步复位控制输入端的，因此综合器无法将代码综合成想要的结构，因此写代码时需要根据相应的结构来编写。</p>
+
+<p>        
+观察图3可以发现，在SRLC32E输出端Q后又接入了一个FF作为同步输出，查手册后发现，此移位寄存器可以配置成两种输出模式：静态地址方式和动态地址方式，这两种模式的不同之处在于静态地址方式是同步输出，图3中结构是静态地址方式；而动态地址方式是异步输出，即没有后接FF直接从SRLC32E的Q端输出，以下代码表示动态地址方式，其中addr是一个变量。</p>
+
+<p><em>always\@(posedge clk)</em></p>
+
+<p><em>         if(rst)</em></p>
+
+<p><em>                   srl&lt;=32’d0;</em></p>
+
+<p><em>         else</em></p>
+
+<p><em>                  if(clk_en)</em></p>
+
+<p><em>                            srl&lt;={srl[31:0],din};</em></p>
+
+<p><em>assign dout0=srl[addr];</em></p>
+
+<p>        
+对上面的代码进行综合可以得到如图5所示结构，确定输出为异步输出，因此在设计中要注意此处的变化。</p>
+
+<p><img src="/media-Xilinx7SeriesCLB/64f09c86aad93238742efbed456fb721.jpg" alt="snap5.jpg" /></p>
+
+<p>图5</p>
+
+<p><img src="/media-Xilinx7SeriesCLB/f9894950036fec46df79085e358c9b7b.jpg" alt="A representation of fundamental generic FPGA programmable fabric." /></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-12-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/fpga/">FPGA</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/mfc%E5%AD%A6%E4%B9%A0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MFC学习</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/xilinx-7series-fpga%E5%A4%8D%E4%BD%8D/">
+            <span class="next-text nav-default">Xilinx 7Series FPGA复位整理</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

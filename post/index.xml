@@ -178,6 +178,25 @@ ANSI char*转CString&lt;/p&gt;</description>
     </item>
     
     <item>
+      <title>Xilinx 7Series CLB整理</title>
+      <link>https://pejoicen.github.io/post/xilinx7seriesclb/</link>
+      <pubDate>Fri, 28 Dec 2018 10:06:49 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/xilinx7seriesclb/</guid>
+      <description>&lt;p&gt;7系列FPGA是Xilinx新推出的基于28nm工艺的FPGA，其中包含三个系列：Artix、Kintex和Virtex。因项目要使用kintex7为平台做设计，需要对其内部结构做了研究，首先从CLB（Configurable
+Logic Block）开始：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Xilinx 7Series FPGA复位整理</title>
+      <link>https://pejoicen.github.io/post/xilinx-7series-fpga%E5%A4%8D%E4%BD%8D/</link>
+      <pubDate>Thu, 27 Dec 2018 10:10:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/xilinx-7series-fpga%E5%A4%8D%E4%BD%8D/</guid>
+      <description>&lt;p&gt;Xilinx 7Series FPGA复位整理&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Verilog 常用语法</title>
       <link>https://pejoicen.github.io/post/verilog%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Sat, 01 Dec 2018 23:39:32 +0800</pubDate>

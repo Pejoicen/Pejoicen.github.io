@@ -298,8 +298,28 @@
   
   <url>
     <loc>https://pejoicen.github.io/categories/fpga/</loc>
-    <lastmod>2018-12-01T23:39:32+08:00</lastmod>
+    <lastmod>2018-12-28T10:06:49+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pejoicen.github.io/tags/fpga/</loc>
+    <lastmod>2018-12-28T10:06:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pejoicen.github.io/post/xilinx7seriesclb/</loc>
+    <lastmod>2018-12-28T10:06:49+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://pejoicen.github.io/post/xilinx-7series-fpga%E5%A4%8D%E4%BD%8D/</loc>
+    <lastmod>2018-12-27T10:10:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
