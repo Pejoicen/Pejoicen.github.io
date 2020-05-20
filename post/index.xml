@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 May 2020 20:16:32 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 20 May 2020 20:00:10 +0800</lastBuildDate>
     
 	<atom:link href="https://pejoicen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Zynq中断</title>
+      <link>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</link>
+      <pubDate>Wed, 20 May 2020 20:00:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</guid>
+      <description>&lt;p&gt;整理ZYNQ中断，包括GPIO中断以及SGI（软中断）等。参考Xilinx官方的示例，理清中断配置过程。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>总结</title>
@@ -112,15 +121,6 @@ ANSI char*转CString&lt;/p&gt;</description>
       
       <guid>https://pejoicen.github.io/post/zynq-gpio/</guid>
       <description>&lt;p&gt;详细整理Zynq GPIO初始化，配置，以及中断的用法。整理的过程中，熟悉Xilinx的命名、使用习惯。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Zynq中断</title>
-      <link>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</link>
-      <pubDate>Thu, 22 Aug 2019 19:37:10 +0800</pubDate>
-      
-      <guid>https://pejoicen.github.io/post/zynq%E4%B8%AD%E6%96%AD/</guid>
-      <description>&lt;p&gt;整理Zynq中断&lt;/p&gt;</description>
     </item>
     
     <item>
