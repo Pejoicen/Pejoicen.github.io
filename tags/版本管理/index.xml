@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>版本管理 on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+    <link>https://pejoicen.github.io/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 版本管理 on Pejoicen&#39;s Blog Powered by Hugo | Theme Even</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 12 Jul 2020 10:10:10 +0800</lastBuildDate>
+    
+	<atom:link href="https://pejoicen.github.io/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git&amp;TortoiseGit使用说明</title>
+      <link>https://pejoicen.github.io/post/gittortoisegit%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
+      <pubDate>Sun, 12 Jul 2020 10:10:10 +0800</pubDate>
+      
+      <guid>https://pejoicen.github.io/post/gittortoisegit%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
+      <description>&lt;p&gt;Git和其插件TortoiseGit使用说明整理。后续计划整理vscode和git配合使用的说明&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

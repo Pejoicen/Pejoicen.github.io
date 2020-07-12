@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-08-20T09:50:32&#43;08:00" />
 <meta itemprop="dateModified" content="2019-08-20T09:50:32&#43;08:00" />
-<meta itemprop="wordCount" content="1051">
+<meta itemprop="wordCount" content="1071">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/%E8%BD%AF%E4%BB%B6/"> 软件 </a>
             </div>
-          <span class="more-meta"> 约 1051 字 </span>
+          <span class="more-meta"> 约 1071 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -145,7 +145,7 @@
 <ul>
 <li><a href="#cstring-char-数组和-数-之间的转换">CString、char[]数组和&rsquo;数&rsquo;之间的转换</a>
 <ul>
-<li><a href="#char-数组拷贝">char[]数组拷贝</a></li>
+<li><a href="#char-数组拷贝-cstring-char">char[]数组拷贝 CString&ndash;&gt;char *</a></li>
 <li><a href="#cstring和-数据-间的转换">CString和 “数据”间的转换</a>
 <ul>
 <li><a href="#cstring-int-double-float等">CString =&gt; int double float等</a></li>
@@ -165,7 +165,7 @@
 <p>涉及到字符串时需要注意编码方式：多字符集还是Unicode。字符串和CString之间的转换默认是在多字符集情况下</p>
 </blockquote>
 
-<h2 id="char-数组拷贝">char[]数组拷贝</h2>
+<h2 id="char-数组拷贝-cstring-char">char[]数组拷贝 CString&ndash;&gt;char *</h2>
 
 <p>char[]数组拷贝函数：string.h中的 **strncpy_s **函数<br />
 使用strncpy_s 可以将CString拷贝到char[]</p>
@@ -204,16 +204,16 @@
 		<span class="n">ar1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 	<span class="p">}</span>
 	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">te</span><span class="o">=</span><span class="s">&#34;this is test strncpy_s&#34;</span><span class="p">;</span>
-	<span class="n">strncpy_s</span><span class="p">(</span><span class="n">ar1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">te</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">strncpy_s</span><span class="p">(</span><span class="n">ar1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">te</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>	<span class="c1">// DstSize must &gt;= SrcSize+1 // 因为字符串结尾有\0 
+</span><span class="c1"></span>	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="n">strncpy_s</span> <span class="err">函数原型：</span>
-<span class="cp">#if __STDC_WANT_SECURE_LIB__
-</span><span class="cp"></span><span class="n">_CRTIMP_ALTERNATIVE</span> <span class="n">__checkReturn_wat</span> <span class="n">errno_t</span> <span class="kr">__cdecl</span> <span class="n">strncpy_s</span><span class="p">(</span><span class="n">__out_ecount_z</span><span class="p">(</span><span class="n">_DstSize</span><span class="p">)</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">_Dst</span><span class="p">,</span> <span class="n">__in</span> <span class="n">rsize_t</span> <span class="n">_DstSize</span><span class="p">,</span> <span class="n">__in_z_opt</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">_Src</span><span class="p">,</span> <span class="n">__in</span> <span class="n">rsize_t</span> <span class="n">_MaxCount</span><span class="p">);</span>
+<span class="c1">// strncpy_s 函数原型：
+</span><span class="c1"></span><span class="cp">#if __STDC_WANT_SECURE_LIB__
+</span><span class="cp"></span><span class="n">_CRTIMP_ALTERNATIVE</span> <span class="n">__checkReturn_wat</span> <span class="n">errno_t</span> <span class="kr">__cdecl</span> <span class="nf">strncpy_s</span><span class="p">(</span><span class="n">__out_ecount_z</span><span class="p">(</span><span class="n">_DstSize</span><span class="p">)</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">_Dst</span><span class="p">,</span> <span class="n">__in</span> <span class="n">rsize_t</span> <span class="n">_DstSize</span><span class="p">,</span> <span class="n">__in_z_opt</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">_Src</span><span class="p">,</span> <span class="n">__in</span> <span class="n">rsize_t</span> <span class="n">_MaxCount</span><span class="p">);</span>
 
 <span class="kt">char</span> <span class="o">*</span> <span class="nl">_Dst</span><span class="p">:</span><span class="err">目标</span><span class="n">buffer</span><span class="p">;</span>  <span class="n">_DstSize</span><span class="err">：</span><span class="n">buffer长度</span><span class="p">;</span>  <span class="kt">char</span> <span class="o">*</span> <span class="nl">_Src</span><span class="p">:</span><span class="err">源</span><span class="n">buffer</span><span class="p">;</span>  <span class="nl">_MaxCount</span><span class="p">:</span><span class="err">指定拷贝长度</span> 
-<span class="err">注意：</span><span class="n">strncpy_s自动比较_MaxCount和</span> <span class="n">strlen</span><span class="p">(</span><span class="n">_Src</span><span class="p">)</span> <span class="err">然后取两者中的较小值</span>
-</code></pre></td></tr></table>
+<span class="c1">// 注意：strncpy_s自动比较_MaxCount和 strlen(_Src) 然后取两者中的较小值
+</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>**<a href="https://baike.baidu.com/item/CString">CString</a></p>

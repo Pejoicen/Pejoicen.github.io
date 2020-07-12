@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git&amp;TortoiseGit使用说明 - Pejoicen&#39;s Blog Powered by Hugo | Theme Even</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Pejoicen" /><meta name="description" content="Git和其插件TortoiseGit使用说明整理。后续计划整理vscode和git配合使用的说明
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://pejoicen.github.io/post/gittortoisegit%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git&amp;TortoiseGit使用说明" />
+<meta property="og:description" content="Git和其插件TortoiseGit使用说明整理。后续计划整理vscode和git配合使用的说明" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pejoicen.github.io/post/gittortoisegit%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" />
+<meta property="article:published_time" content="2020-07-12T10:10:10+08:00" />
+<meta property="article:modified_time" content="2020-07-12T10:10:10+08:00" />
+<meta itemprop="name" content="Git&amp;TortoiseGit使用说明">
+<meta itemprop="description" content="Git和其插件TortoiseGit使用说明整理。后续计划整理vscode和git配合使用的说明">
+
+
+<meta itemprop="datePublished" content="2020-07-12T10:10:10&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-12T10:10:10&#43;08:00" />
+<meta itemprop="wordCount" content="4636">
+
+
+
+<meta itemprop="keywords" content="版本管理,Git," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git&amp;TortoiseGit使用说明"/>
+<meta name="twitter:description" content="Git和其插件TortoiseGit使用说明整理。后续计划整理vscode和git配合使用的说明"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Pejoicen&#39;s Blog Powered by Hugo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git&amp;TortoiseGit使用说明</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-12 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%B7%A5%E5%85%B7/"> 工具 </a>
+            </div>
+          <span class="more-meta"> 约 4636 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#一-git客户端-本地仓库-的一些操作">一、git客户端（本地仓库）的一些操作</a>
+<ul>
+<li><a href="#目录">目录</a></li>
+<li><a href="#1-初始化版本控制">1. 初始化版本控制：</a>
+<ul>
+<li><a href="#1-1创建本地版本库">1.1创建本地版本库</a></li>
+<li><a href="#1-2-加入版本控制方法1">1.2 加入版本控制方法1</a>
+<ul>
+<li><a href="#方法1">方法1</a></li>
+<li><a href="#方法2">方法2</a></li>
+</ul></li>
+<li><a href="#1-3排除不需要版本控制的文件或文件夹">1.3排除不需要版本控制的文件或文件夹</a></li>
+</ul></li>
+<li><a href="#2-提交">2. 提交</a>
+<ul>
+<li><a href="#2-1-比较已有修改和上一版本的区别">2.1 比较已有修改和上一版本的区别</a></li>
+<li><a href="#2-2-提交至版本库">2.2  提交至版本库</a></li>
+<li><a href="#2-3工作区-暂存区和版本库的区别">2.3工作区、暂存区和版本库的区别</a></li>
+</ul></li>
+<li><a href="#3-查看历史-版本回退">3. 查看历史&amp;版本回退：</a>
+<ul>
+<li><a href="#3-1-查看不同版本的日志和修改内容">3.1 查看不同版本的日志和修改内容</a></li>
+<li><a href="#3-2-回退版本">3.2 回退版本</a></li>
+<li><a href="#3-3-命令行方式实现">3.3 命令行方式实现：</a></li>
+</ul></li>
+<li><a href="#4-分支管理">4. 分支管理</a>
+<ul>
+<li><a href="#4-1-创建分支">4.1 创建分支</a></li>
+<li><a href="#4-2-合并分支">4.2 合并分支</a></li>
+<li><a href="#4-3-解决冲突">4.3 解决冲突</a></li>
+<li><a href="#4-4-命令行方式实现">4.4 命令行方式实现：</a></li>
+<li><a href="#创建分支">创建分支</a></li>
+<li><a href="#合并分支">合并分支</a></li>
+<li><a href="#解决冲突">解决冲突</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#二-git客户端远程管理">二、git客户端远程管理</a>
+<ul>
+<li><a href="#设置">设置</a></li>
+<li><a href="#使用">使用</a></li>
+</ul></li>
+<li><a href="#远程使用">远程使用</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Git和其插件TortoiseGit使用说明整理。后续计划整理vscode和git配合使用的说明</p>
+
+<h1 id="一-git客户端-本地仓库-的一些操作">一、git客户端（本地仓库）的一些操作</h1>
+
+<h2 id="目录">目录</h2>
+
+<ol>
+<li><p>设置账户，用户名和邮箱</p></li>
+
+<li><p>初始化版本控制：</p></li>
+</ol>
+
+<p>①创建本地仓库</p>
+
+<p>②将文件、文件夹加入版本控制</p>
+
+<p>③排除不需要被控制的文件和文件夹</p>
+
+<ol>
+<li>提交：</li>
+</ol>
+
+<p>①比较已有修改和上一版本的区别；</p>
+
+<p>②提交至版本库</p>
+
+<p>③工作区、暂存区和版本库的区别。</p>
+
+<ol>
+<li>查看历史&amp;版本回退：</li>
+</ol>
+
+<p>①查看不同版本的日志和修改内容；</p>
+
+<p>②回退版本；git reset</p>
+
+<ol>
+<li>切换分支：</li>
+</ol>
+
+<p>①查看、创建分支：branch</p>
+
+<p>②切换分支：checkout、switch</p>
+
+<ol>
+<li>版本合并：</li>
+</ol>
+
+<hr />
+
+<h2 id="1-初始化版本控制">1. 初始化版本控制：</h2>
+
+<h3 id="1-1创建本地版本库">1.1创建本地版本库</h3>
+
+<p>①右击需要管理的文件夹，选择Git在这里创建版本库</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_init.png" alt="TortoiseGit_init" /></p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_init1.png" alt="TortoiseGit_init" /></p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_init2.png" alt="TortoiseGit_init" /></p>
+
+<h3 id="1-2-加入版本控制方法1">1.2 加入版本控制方法1</h3>
+
+<h4 id="方法1">方法1</h4>
+
+<p>①右击之前创建好版本库的文件夹，选择TortoiseGit-&gt;添加</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_add.png" alt="TortoiseGit_add" /></p>
+
+<p>②勾选需要加入到版本控制的文件，点击确定。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_add2.png" alt="TortoiseGit_add2" /></p>
+
+<p>③添加完成，可以提交也可以以后提交。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_add3.png" alt="TortoiseGit_add3" /></p>
+
+<h4 id="方法2">方法2</h4>
+
+<p>①选择需要加入版本控制的文件或文件夹，右击选择，TortoiseGit-&gt;添加</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_add4.png" alt="image-TortoiseGit_add4" /></p>
+
+<p>②添加完成，可以提交也可以以后提交。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_add5.png" alt="TortoiseGit_add5" /></p>
+
+<h3 id="1-3排除不需要版本控制的文件或文件夹">1.3排除不需要版本控制的文件或文件夹</h3>
+
+<p>①右击不需要加入版本控制的文件或文件夹，选择TortoiseGit-&gt;删除并添加到忽略列表-&gt;根据实际情况选择忽略当前文件（文件夹）还是当前扩展名文件。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_ignore.png" alt="image-TortoiseGit_ignore" /></p>
+
+<p>②操作后会生成.ignore文件，选择忽略类型（需要递归忽略的就选择递归忽略），以及.gitignore文件所在的位置。我习惯放在版本库的根目录。这样方便手动去修改。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_ignore1.png" alt="image-TortoiseGit_ignore1" /></p>
+
+<h2 id="2-提交">2. 提交</h2>
+
+<p>将已经修改好的代码放入到版本库中备份。将工作区的文件放到版本库中。</p>
+
+<h3 id="2-1-比较已有修改和上一版本的区别">2.1 比较已有修改和上一版本的区别</h3>
+
+<p>①选择需要比较区别的文件夹或者版本库文件夹，右击选择TortoiseGit-&gt;比较差异（当前工作路径和最后一个提交版本的差异）、与上一版本比较差异（版本库中最后一个版本和版本库中倒数第二个版本比较差异）</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_diff1.png" alt="image-TortoiseGit_diff1" /></p>
+
+<p>②左侧为比较差异，右侧为与上一版本比较差异</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_diff2.png" alt="image-TortoiseGit_diff2" /></p>
+
+<p>③选择具体的文件双击即可查看文件内容和差异（类似beyondcompare功能，只支持文本文件），如下图</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_diff3.png" alt="" /></p>
+
+<h3 id="2-2-提交至版本库">2.2  提交至版本库</h3>
+
+<p>①右击版本库文件夹选择Git提交，箭头后面为分支名，默认为：“master”</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_commit.png" alt="image-TortoiseGit_commit" /></p>
+
+<p>②另外其他地方也有“提交”按钮，功能一致</p>
+
+<p>③ 点击提交后，出现新窗口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">窗口上有当前分支：master，可以新建分支（分支功能后续说明）。
+日志部分需要添加本次提交的说明，不填写无法提交，提交按钮不能点击。另外可以勾选“修改上次提交”，重新修改上次提交的信息。
+变更列表可以观察并选择哪些文件状态有改动，勾选的文件将会提交到版本库中。</pre></td></tr></table>
+</div>
+</div>
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_commit1.png" alt="image-TortoiseGit_commit1" /></p>
+
+<h3 id="2-3工作区-暂存区和版本库的区别">2.3工作区、暂存区和版本库的区别</h3>
+
+<ul>
+<li><strong>工作区：</strong>就是你在电脑里能看到的目录。</li>
+</ul>
+
+<p>↓(git add）</p>
+
+<ul>
+<li><strong>暂存区：</strong>英文叫stage, 或index。一般存放在 &ldquo;.git目录下&rdquo; 下的index文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）。</li>
+</ul>
+
+<p>↓(git commit）</p>
+
+<ul>
+<li><strong>版本库：</strong>工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。</li>
+</ul>
+
+<p>工作区 （git add）&ndash;&gt; 暂存区 (git commit)&ndash;&gt; 版本库</p>
+
+<h2 id="3-查看历史-版本回退">3. 查看历史&amp;版本回退：</h2>
+
+<h3 id="3-1-查看不同版本的日志和修改内容">3.1 查看不同版本的日志和修改内容</h3>
+
+<p>① 右击版本库文件夹选择TortoiseGit-&gt;显示日志。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_log1.png" alt="TortoiseGit_log" /></p>
+
+<p>② 窗口如下：
+&gt;分支为master；
+信息处显示为提交时填写的日志信息。
+默认只显示第一行，后续详细日志在下面的窗口。
+另外显示所选版本和上一版本的区别。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_log2.png" alt="TortoiseGit_log" /></p>
+
+<p>③ 双击文件会弹出窗口，显示两个版本文件的内容和区别（前文2.1已经描述）</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_diff3.png" alt="" /></p>
+
+<p>④ 显示引用记录。</p>
+
+<p>当回退版本后，旧版本再日志信息中会消失，此时需要在引用记录中查看。所有的操作内容在此均有记录，包括回退版本等操作。</p>
+
+<p>操作方法为：右击版本库文件夹选择TortoiseGit-&gt;显示引用记录。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_log3.png" alt="" /></p>
+
+<h3 id="3-2-回退版本">3.2 回退版本</h3>
+
+<p>① 当需要回退版本时首先需要找到要回退的版本，下图为在日志信息中选择版本回退。右击版本，选择 重置&rdquo;dev&rdquo;（分支名，取决于实际情况）到此版本。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_reset1.png" alt="" /></p>
+
+<p>② 根据实际情况选择重置模式，不需要保存重置前自己对文件的修改时选择硬重置。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_reset2.png" alt="" /></p>
+
+<p>③ 重置完成后，硬重置模式会把对应版本版本库中的文件取出放到当前的工作路径下</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_reset3.png" alt="" /></p>
+
+<p>④ 日志信息中无法找到重置版本后面提交的版本，需要在显示引用信息中查看</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_reset4.png" alt="" /></p>
+
+<p>下图可以看到reset之前的版本</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_log3.png" alt="" /></p>
+
+<p>也可以在此回退版本</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_reset5.png" alt="" /></p>
+
+<hr />
+
+<h3 id="3-3-命令行方式实现">3.3 命令行方式实现：</h3>
+
+<p><code>git log</code>命令显示从最近到最远的提交日志</p>
+
+<p>Git提供了一个命令<code>git reflog</code>用来记录你的每一次命令：</p>
+
+<p><code>git reset --hard +版本ID（commit_id）</code>，即可回退到某一个版本；</p>
+
+<p><code>git checkout --file</code> 当暂存区有文件时，回退到暂存区文件版本；当暂存区没有文件时回退到上一个提交的版本；总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。</p>
+
+<h2 id="4-分支管理">4. 分支管理</h2>
+
+<p>一般情况下master分支存release版本代码，开发的时候创建dev分支，解决具体问题是创建对应的分支来解决具体的问题。当问题解决后，将分支合并到dev下，测试没有问题后，再将dev分支代码合并到master分支下。</p>
+
+<h3 id="4-1-创建分支">4.1 创建分支</h3>
+
+<p>① 右击版本库文件夹选择TortoiseGit-&gt;创建分支</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_branch1.png" alt="" /></p>
+
+<p>② 设置新分支名，选择基于版本，可以创建后立即切换到新分支，填写描述信息。不选择切换到新分支时，修改、提交等操作还是在原分支上进行。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_branch2.png" alt="" /></p>
+
+<h3 id="4-2-合并分支">4.2 合并分支</h3>
+
+<p>在新分支上修改代码解决问题后，一般要将修改合并到dev分支或master分支上。</p>
+
+<p>① 由newBranch分支切换到dev分支</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_branch3.png" alt="" /></p>
+
+<p>② 将newBranch分支改动合并到dev分支</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge1.png" alt="" /></p>
+
+<p>③ 合并完成。Git自动处理不一致的文件</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge3.png" alt="" /></p>
+
+<h3 id="4-3-解决冲突">4.3 解决冲突</h3>
+
+<p>当将要合并的代码都有代码改动时（dev和newBranch中都修改了某个文件），合并会产生冲突。比如newBranch修改“新分支.txt”后提交newBranch分支，切换到dev分支，也修改了“新分支.txt”文件，提交dev分支。</p>
+
+<p>① 合并会提示冲突：</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge4.png" alt="" /></p>
+
+<p>② 点击确定后，可以点击解决冲突</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge5.png" alt="" /></p>
+
+<p>③ 选择要解决冲突的文件，双击即可</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge6.png" alt="" /></p>
+
+<p>④ 解决文件冲突。双击文件后弹出的新窗口，左上为被合并文件版本，右上为当前分支文件版本，下面为最终合并的版本。用户需要自己手动修改文件。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge7.png" alt="" /></p>
+
+<p>⑤ 修改完毕后，保存文件即可，弹出窗口选择标记为已解决</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge8.png" alt="" /></p>
+
+<p>⑥ 此时冲突列表里冲突的文件已经消失</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge9.png" alt="" /></p>
+
+<p>⑦ 最后再次提交</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge10.png" alt="" /></p>
+
+<p>⑧ 此时可以看到工作副本中的文件已经是手动修改后的版本，正常提交即可。</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge11.png" alt="" /></p>
+
+<p>⑨ 提交后再看日志信息</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/TortoiseGit_merge12.png" alt="" /></p>
+
+<hr />
+
+<h3 id="4-4-命令行方式实现">4.4 命令行方式实现：</h3>
+
+<p>查看分支：<code>git branch</code></p>
+
+<p>创建分支：<code>git branch &lt;name&gt;</code></p>
+
+<p>切换分支：<code>git checkout &lt;name&gt;</code>或者<code>git switch &lt;name&gt;</code></p>
+
+<p>创建+切换分支：<code>git checkout -b &lt;name&gt;</code>或者<code>git switch -c &lt;name&gt;</code></p>
+
+<p>合并某分支到当前分支：<code>git merge &lt;name&gt;</code></p>
+
+<p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
+
+<h3 id="创建分支">创建分支</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ git branch dev
+$ git checkout dev</code></pre></td></tr></table>
+</div>
+</div>
+<p>创建分支 dev，切换到分支 dev。<code>git checkout</code>命令加上<code>-b</code>参数表示创建并切换，相当于上面的两条命令。或者使用新的switch命令，<code>git switch -c &lt;name&gt;</code></p>
+
+<h3 id="合并分支">合并分支</h3>
+
+<p><code>git merge</code>命令用于合并指定分支到当前分支。如下，将分支切换到master，然后将dev合并到master分支。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ git checkout master
+$ git merge dev
+Updating d46f35e..b17d20e
+Fast-forward
+ readme.txt <span class="p">|</span> <span class="m">1</span> +
+ <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="解决冲突">解决冲突</h3>
+
+<h1 id="二-git客户端远程管理">二、git客户端远程管理</h1>
+
+<p>pull merge</p>
+
+<hr />
+
+<h2 id="设置">设置</h2>
+
+<ol>
+<li><p>设置账户(需要和github账户设置一致)
+git config &ndash;global user.name xxx
+git config &ndash;global user.email xxx@foxmail.com</p></li>
+
+<li><p>查看设置
+git config &ndash;list
+user.name=xxx
+user.email=xxx@foxmail.com</p></li>
+</ol>
+
+<hr />
+
+<h2 id="使用">使用</h2>
+
+<ol>
+<li><p>创建git本地仓库
+git init
+此时会出现提示 : inialized empty Git repository in d://com/liu/.git</p></li>
+
+<li><p>查看git状态
+git status
+一般来说会显示需要提交的文件（uncommited）和未追踪的文件（untracked）
+uncommited：已有的，刚被修改尚未提交的
+untracked：原先没有的，新建的尚未纳入版本管理的</p></li>
+
+<li><p>添加git文件到暂存区（需要和版本库区分）
+git add <name></p></li>
+
+<li><p>git提交文件
+git commit -m &ldquo;add a function in test.java&rdquo;
+-m表示注释，为提交时的说明，必须要有！</p></li>
+
+<li><p>git删除文件（夹）
+git rm test.txt          //删除文件
+git rm -r filebook     //删除文件夹
+git rm和直接删除的区别在于git rm会将此文件的操作记录删除，而直接删除仅仅是删除了物理文件，没有删除和此文件相关的记录。git rm后会在版本库产生区别（有操作日志），而直接删除没有。
+可以用下面两种操作在版本库中删除文件：
+git rm test.txt   =&gt;    git commit -m &lsquo;delete a file&rsquo;
+rm test.txt        =&gt;    git commit -am &lsquo;delete a file&rsquo;
+注意：命令git rm用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。</p></li>
+
+<li><p>git操作日志
+git log &ndash;decorate &ndash;graph &ndash;oneline &ndash;all       #显示当前及之前的版本号
+git log &ndash;pretty=oneline   #将版本历史显示为一行，历史版本号全部显示
+git log &ndash;pretty=oneline &ndash;abbrev-commit  #将版本历史显示为一行，历史版本号部分显示
+git log &ndash;graph      #查看分支合并图</p></li>
+
+<li><p>版本回退
+执行版本退回后，本地工作区的内容会自动和回退到的版本库版本的内容保持同步
+git reset &ndash;hard HEAD^   回退到上一个版本
+git reset &ndash;hard HEAD^^ 回退到上上个版本，以此类推，一次提交即为一个版本
+git reset &ndash;hard e9efa77  回退到 e9efa77  版本</p></li>
+
+<li><p>git还原操作
+丢弃工作区的操作，但不会丢失暂存区的操作(add操作能将更改添加到暂存区)，实际上就是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”
+git checkout &ndash; readme.txt</p></li>
+
+<li><p>git暂存区撤销操作
+工作区修改了文件，而且执行了add，但还没执行commit，暂存区还是可以撤销的
+git reset HEAD readme.txt
+备注：git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。</p></li>
+</ol>
+
+<h1 id="远程使用">远程使用</h1>
+
+<p>2.添加远程仓库
+git remote add origin <a href="https://github.com/xxx/LearnGit.git（https方式）">https://github.com/xxx/LearnGit.git（https方式）</a>
+（ssh方式）
+此处可以为https地址也可以是ssh地址，orign为设置的远程仓库的别名，强烈建议使用ssh方式，因为https方式每次都要输入用户名和密码
+如果需要修改传输协议：
+（1）git remote rm &lt;远程主机名&gt;（删除远程仓库）
+（2）设置传输方式和目标远程仓库
+（3）git push -u &lt;远程主机名&gt; &lt;本地分支名&gt;</p>
+
+<p>码云的添加远程仓库方法：
+git remote add origin git@gitee.com:xxx/LearnGit.git（ssh方式）
+如果git remote add失败，并报错：fatal: remote origin already exists.
+说明本地库已经关联了一个名叫origin的远程库，此时，可以先用git remote -v查看远程库信息：
+origin  git@github.com:xxx/LearnGit.git (fetch)
+origin  git@github.com:xxx/LearnGit.git (push)
+表示本地库已经关联了Github上的origin远程库，需要先删除已有的Github库：
+git remote remove origin
+再关联码云的远程库（注意路径中需要填写正确的用户名）：
+git remote add gitee git@gitee.com:xxx/LearnGit.git</p>
+
+<p>因为git本身是分布式版本控制系统，可以同步到另外一个远程库，当然也可以同步到另外两个远程库，所以一个本地库可以既关联GitHub，又关联码云！
+使用多个远程库时，要注意git给远程库起的默认名称是origin，如果有多个远程库，我们需要用不同的名称来标识不同的远程库。仍然以learngit本地库为例，先删除已关联的名为origin的远程库：
+git remote rm origin
+然后，先关联GitHub的远程库：
+git remote add github git@github.com:xxx/LearnGit.git
+注意，远程库的名称叫github，不叫origin了。
+接着，再关联码云的远程库：
+git remote add gitee git@gitee.com:xxx/LearnGit.git
+同样注意，远程库的名称叫gitee，不叫origin。
+现在，我们用git remote -v查看远程库信息，可以看到两个远程库：gitee   git@gitee.com:xxx/LearnGit.git (fetch)
+gitee   git@gitee.com:xxx/LearnGit.git (push)
+github  git@github.com:xxx/LearnGit.git (fetch)
+github  git@github.com:xxx/LearnGit.git (push)
+如果要推送到GitHub，使用命令：
+git push github master
+如果要推送到码云，使用命令：
+git push gitee master
+这样一来，本地库就可以同时与多个远程库互相同步：</p>
+
+<p><img src="/media-Git&amp;TortoiseGit使用说明/git_push.png" alt="git_push" /></p>
+
+<p>3.查看远程仓库及传输协议
+git remote
+git remote -v  查看名称和详细地址</p>
+
+<p>4.删除远程仓库
+git remote remove &lt;远程主机名&gt;</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Pejoicen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-07-12
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/">版本管理</a>
+          <a href="/tags/git/">Git</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/zynq%E4%B8%AD%E6%96%AD/">
+            <span class="next-text nav-default">Zynq中断</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:pejoicen@live.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Pejoicen" class="iconfont icon-github" title="github"></a>
+  <a href="https://pejoicen.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Pejoicen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
